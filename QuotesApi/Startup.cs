@@ -1,48 +1,125 @@
-using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+using System.Net.Http;
+using System.Text.Json;
 using Microsoft.AspNetCore.Builder;
+using Microsoft.AspNetCore.Diagnostics;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.HttpsPolicy;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using Microsoft.Extensions.Logging;
+using Microsoft.OpenApi.Models;
+using QuotesApi.Database;
+using QuotesApi.Extentions;
+using QuotesApi.Models;
+using QuotesApi.Services;
+using Serilog;
 
 namespace QuotesApi
 {
     public class Startup
     {
+        public IConfiguration Configuration { get; }
+
         public Startup(IConfiguration configuration)
         {
             Configuration = configuration;
         }
 
-        public IConfiguration Configuration { get; }
-
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddControllers();
+            services.AddDbContextPool<DatabaseContext>(options =>
+            {
+                options.UseMySql(Configuration.GetConnectionString("Quotes"));
+            });
+
+            services.AddControllers()
+                .AddJsonOptions(options => options.JsonSerializerOptions.PropertyNamingPolicy = JsonNamingPolicy.CamelCase);
+
+            services.AddJwtTokenAuth(Configuration["Jwt:Secret"]);
+
+            services.AddSwaggerGen(options =>
+            {
+                options.SwaggerDoc("v1", new OpenApiInfo { Title = "QuotesAPI"});
+
+                options.AddSecurityDefinition("Bearer", new OpenApiSecurityScheme
+                {
+                    Description = "JWT Authorization header using the Bearer scheme. Example: \"Bearer 12345abcdef\"",
+                    Name = "Authorization",
+                    In = ParameterLocation.Header,
+                    Type = SecuritySchemeType.ApiKey,
+                    Scheme = "Bearer"
+                });
+                
+                options.AddSecurityRequirement(new OpenApiSecurityRequirement()
+                {
+                    {
+                        new OpenApiSecurityScheme
+                        {
+                            Reference = new OpenApiReference
+                            {
+                                Type = ReferenceType.SecurityScheme,
+                                Id = "Bearer"
+                            },
+                            Scheme = "oauth2",
+                            Name = "Bearer",
+                            In = ParameterLocation.Header,
+
+                        },
+                        new List<string>()
+                    }
+                });
+            });
+
+            services.AddSingleton<HttpClient>();
+            services.DiscoverAndMakeAvailable(typeof(IDIService));
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
+        public void Configure(IApplicationBuilder app, IWebHostEnvironment env, DatabaseContext databaseContext)
         {
+            app.UseSerilogRequestLogging();
+            
+            Log.Information("Migrating Database...");
+            databaseContext.Database.Migrate();
+            Log.Information("Done.");
+
             if (env.IsDevelopment())
             {
-                app.UseDeveloperExceptionPage();
+                ApiResultSettings.ExposeExceptions = true;
             }
+            
+            app.UseExceptionHandler(errorApp =>
+            {
+                errorApp.Run(async context =>
+                {
+                    var exceptionFeature = context.Features.Get<IExceptionHandlerPathFeature>();
+                    var response = (ApiResult<object>) exceptionFeature.Error;
+                    context.Response.StatusCode = 500;
+                    context.Response.ContentType = "application/json";
+                    await context.Response.WriteAsync(JsonSerializer.Serialize(response, new JsonSerializerOptions { PropertyNamingPolicy = JsonNamingPolicy.CamelCase }));
+                });
+            });
 
-            app.UseHttpsRedirection();
+            app.UseStatusCodePages(async context =>
+            {
+                context.HttpContext.Response.ContentType = "application/json";
+                var response = (ApiResult<object>) new ObjectResult(null) { StatusCode = context.HttpContext.Response.StatusCode };
+                await context.HttpContext.Response.WriteAsync(JsonSerializer.Serialize(response, new JsonSerializerOptions { PropertyNamingPolicy = JsonNamingPolicy.CamelCase }));
+            });
 
-            app.UseRouting();
-
-            app.UseAuthorization();
-
-            app.UseEndpoints(endpoints => { endpoints.MapControllers(); });
+            app.UseRouting()
+                .UseAuthentication()
+                .UseAuthorization()
+                .UseSwagger()
+                .UseSwaggerUI(o =>
+                {
+                    o.SwaggerEndpoint("/swagger/v1/swagger.json", "Quotes API");
+                })
+                .UseEndpoints(endpoints => { endpoints.MapControllers(); });
         }
     }
 }
