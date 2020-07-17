@@ -1,3 +1,4 @@
+using System.IO;
 using System.Net.Http;
 using System.Text.Json;
 using Microsoft.AspNetCore.Builder;
@@ -44,6 +45,8 @@ namespace QuotesApi
             services.AddSwaggerGen(options =>
             {
                 options.SwaggerDoc("v1", new OpenApiInfo { Title = "QuotesAPI"});
+                
+                options.IncludeXmlComments(Path.Combine(System.AppContext.BaseDirectory, "QuotesApi.xml"));
 
                 options.AddSecurityDefinition("Bearer", new OpenApiSecurityScheme
                 {

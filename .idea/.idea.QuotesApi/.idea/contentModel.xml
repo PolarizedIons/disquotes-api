@@ -8,6 +8,7 @@
         <e p="Controllers" t="Include">
           <e p="BaseController.cs" t="Include" />
           <e p="SecurityController.cs" t="Include" />
+          <e p="UserController.cs" t="Include" />
         </e>
         <e p="Database" t="Include">
           <e p="DatabaseContext.cs" t="Include" />

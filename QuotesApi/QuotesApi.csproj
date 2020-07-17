@@ -3,7 +3,8 @@
     <PropertyGroup>
         <TargetFramework>netcoreapp3.1</TargetFramework>
         <GenerateRuntimeConfigurationFiles>True</GenerateRuntimeConfigurationFiles>
-        <Nullable>disable</Nullable>
+        <DocumentationFile>bin\Debug\netcoreapp1.1\QuotesApi.xml</DocumentationFile>
+        <NoWarn>1701;1702;1591</NoWarn>
     </PropertyGroup>
 
     <ItemGroup>
