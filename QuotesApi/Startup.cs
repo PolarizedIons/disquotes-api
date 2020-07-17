@@ -59,17 +59,20 @@ namespace QuotesApi
             });
 
             services.AddSingleton<HttpClient>();
-            services.DiscoverAndMakeAvailable(typeof(IDIService));
+            services.DiscoverAndMakeDiServicesAvailable();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IWebHostEnvironment env, DatabaseContext databaseContext)
+        public void Configure(IApplicationBuilder app, IWebHostEnvironment env, DatabaseContext databaseContext, DiscordService discordService)
         {
             app.UseSerilogRequestLogging();
             
             Log.Information("Migrating Database...");
             databaseContext.Database.Migrate();
             Log.Information("Done.");
+
+            Log.Information("Logging into Discord");
+            discordService.Login().Wait();
 
             if (env.IsDevelopment())
             {

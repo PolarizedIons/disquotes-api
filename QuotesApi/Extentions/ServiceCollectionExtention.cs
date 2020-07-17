@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Linq;
 using System.Reflection;
 using System.Text;
@@ -40,14 +41,25 @@ namespace QuotesApi.Extentions
             return services;
         }
 
-        public static IServiceCollection DiscoverAndMakeAvailable(this IServiceCollection services, Type type)
+        public static IServiceCollection DiscoverAndMakeDiServicesAvailable(this IServiceCollection services)
         {
-            var discoveredTypes = GetTypesInAssembly(type);
+            var discoveredTypes = GetTypesInAssembly(typeof(IDiService));
             if (discoveredTypes != null)
             {
                 foreach (var serviceType in discoveredTypes)
                 {
-                    services.AddScoped(serviceType);
+                    if (typeof(IScopedDiService).IsAssignableFrom(serviceType))
+                    {
+                        services.AddScoped(serviceType);
+                    }
+                    else if (typeof(ISingletonDiService).IsAssignableFrom(serviceType))
+                    {
+                        services.AddSingleton(serviceType);
+                    }
+                    else
+                    {
+                        throw new InvalidConstraintException("Unknown type of DI Service found! " + serviceType); 
+                    }
                 }
             }
 

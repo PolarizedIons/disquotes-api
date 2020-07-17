@@ -12,7 +12,7 @@ using Microsoft.Extensions.Configuration;
 
 namespace QuotesApi.Services
 {
-    public class DiscordOAuthService : IDIService
+    public class DiscordOAuthService : IScopedDiService
     {
         private static readonly string[] RequestScopes = {"identify", "guilds"};
         private const string OAuthRequestUrl = "https://discord.com/oauth2/authorize?client_id={client_id}&redirect_uri={redirect_url}&response_type=code&scope={scopes}";
@@ -74,7 +74,7 @@ namespace QuotesApi.Services
             return responseJson.AccessToken;
         }
 
-        public async Task<IUser> GetUserFromAuthToken(string token)
+        public async Task<RestSelfUser> GetUserFromAuthToken(string token)
         {
             var client = new DiscordRestClient();
             await client.LoginAsync(TokenType.Bearer, token);

@@ -8,7 +8,7 @@ using QuotesApi.Models.Users;
 
 namespace QuotesApi.Services
 {
-    public class JwtService : IDIService
+    public class JwtService : ISingletonDiService
     {
         private const int ValidForMins = 15;
         public const string Issuer = "Disquotes API";

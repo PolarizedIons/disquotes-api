@@ -1,32 +1,50 @@
 using System;
 using System.Linq;
 using System.Threading.Tasks;
+using Discord.Rest;
 using QuotesApi.Database;
+using QuotesApi.Extentions;
+using QuotesApi.Models.Guilds;
 using QuotesApi.Models.Users;
-using IUser = Discord.IUser;
 
 namespace QuotesApi.Services
 {
-    public class UserService : IDIService
+    public class UserService : IScopedDiService
     {
         private DatabaseContext _db;
+        private DiscordService _discord;
 
-        public UserService(DatabaseContext databaseContext)
+        public UserService(DatabaseContext databaseContext, DiscordService discordService)
         {
             _db = databaseContext;
+            _discord = discordService;
         }
 
-        public async Task<User> FindUser(Guid id)
+        public async Task<User> FindUser(Guid id, bool enrichWithGuilds = false)
         {
-            return _db.Users.First(x => x.Id == id && x.DeletedAt == null);
+            var user = _db.Users.FirstOrDefault(x => x.Id == id && x.DeletedAt == null);
+
+            if (user != null && enrichWithGuilds)
+            {
+                user.Guilds = (await _discord.GetGuildsFor(user.DiscordId)).Select(x => new Guild().MapProps(x));
+            }
+
+            return user;
         }
 
-        public async Task<User> FindDiscordUser(ulong id)
+        public async Task<User> FindDiscordUser(ulong id, bool enrichWithGuilds = false)
         {
-            return _db.Users.FirstOrDefault(x => x.DiscordId == id && x.DeletedAt == null);
+            var user = _db.Users.FirstOrDefault(x => x.DiscordId == id && x.DeletedAt == null);
+
+            if (user != null && enrichWithGuilds)
+            {
+                user.Guilds = (await _discord.GetGuildsFor(user.DiscordId)).Select(x => new Guild().MapProps(x));
+            }
+
+            return user;
         }
 
-        public async Task<User> CreateOrUpdateUser(IUser discordUser)
+        public async Task<User> CreateOrUpdateUser(RestUser discordUser)
         {
             var user = await FindDiscordUser(discordUser.Id);
             if (user != null)
@@ -42,7 +60,7 @@ namespace QuotesApi.Services
                     DiscordId = discordUser.Id,
                     Username = discordUser.Username,
                     Discriminator = discordUser.DiscriminatorValue,
-                    ProfileUrl = discordUser.GetAvatarUrl()
+                    ProfileUrl = discordUser.GetAvatarUrl(),
                 });
             }
 

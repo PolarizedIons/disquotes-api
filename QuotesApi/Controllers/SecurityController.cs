@@ -74,7 +74,7 @@ namespace QuotesApi.Controllers
         ]
         public async Task<ApiResult<User>> GetMe()
         {
-            return Ok(await _userService.FindUser(UserId));
+            return Ok(await _userService.FindUser(UserId, true));
         }
     }
 }

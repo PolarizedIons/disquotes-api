@@ -28,6 +28,9 @@
         <e p="Models" t="Include">
           <e p="ApiResult.cs" t="Include" />
           <e p="DbEntity.cs" t="Include" />
+          <e p="Guilds" t="Include">
+            <e p="Guild.cs" t="Include" />
+          </e>
           <e p="Users" t="Include">
             <e p="IUser.cs" t="Include" />
             <e p="User.cs" t="Include" />
@@ -40,7 +43,8 @@
         <e p="QuotesApi.csproj" t="IncludeRecursive" />
         <e p="Services" t="Include">
           <e p="DiscordOAuthService.cs" t="Include" />
-          <e p="IDIService.cs" t="Include" />
+          <e p="DiscordService.cs" t="Include" />
+          <e p="IDiService.cs" t="Include" />
           <e p="JwtService.cs" t="Include" />
           <e p="UserService.cs" t="Include" />
         </e>
