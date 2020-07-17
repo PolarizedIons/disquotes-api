@@ -46,6 +46,7 @@ namespace QuotesApi.Controllers
         [
             HttpGet("callback"),
             AllowAnonymous,
+            ProducesResponseType(301),
             ProducesResponseType(typeof(ApiResult<object>), 401),
         ]
         public async Task<ActionResult> AuthCallback([FromQuery] string code)

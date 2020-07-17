@@ -11,34 +11,12 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="1a84013b-dd73-4f1a-b9eb-6107adf3b20a" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/QuotesApi.sln.DotSettings.user" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/QuotesApi/Controllers/BaseController.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/QuotesApi/Controllers/SecurityController.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/QuotesApi/Database/DatabaseContext.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/QuotesApi/Extentions/ObjectExtention.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/QuotesApi/Extentions/ServiceCollectionExtention.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/QuotesApi/Extentions/StringExtention.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/QuotesApi/Migrations/20200715173201_InitialCreateUser.Designer.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/QuotesApi/Migrations/20200715173201_InitialCreateUser.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/QuotesApi/Migrations/DatabaseContextModelSnapshot.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/QuotesApi/Models/ApiResult.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/QuotesApi/Models/DbEntity.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/QuotesApi/Models/Users/IUser.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/QuotesApi/Models/Users/User.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/QuotesApi/Services/DiscordOAuthService.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/QuotesApi/Services/IDIService.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/QuotesApi/Services/JwtService.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/QuotesApi/Services/UserService.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/QuotesApi/Filters/AddAuthHeaderOperationFilter.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/.idea.QuotesApi/.idea/contentModel.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.QuotesApi/.idea/contentModel.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/.idea.QuotesApi/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.QuotesApi/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/QuotesApi/Controllers/WeatherForecastController.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/QuotesApi/Program.cs" beforeDir="false" afterPath="$PROJECT_DIR$/QuotesApi/Program.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/QuotesApi/Properties/launchSettings.json" beforeDir="false" afterPath="$PROJECT_DIR$/QuotesApi/Properties/launchSettings.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/QuotesApi/QuotesApi.csproj" beforeDir="false" afterPath="$PROJECT_DIR$/QuotesApi/QuotesApi.csproj" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/QuotesApi/Controllers/SecurityController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/QuotesApi/Controllers/SecurityController.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/QuotesApi/Models/DbEntity.cs" beforeDir="false" afterPath="$PROJECT_DIR$/QuotesApi/Models/DbEntity.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/QuotesApi/Startup.cs" beforeDir="false" afterPath="$PROJECT_DIR$/QuotesApi/Startup.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/QuotesApi/WeatherForecast.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/QuotesApi/appsettings.Development.json" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/QuotesApi/appsettings.json" beforeDir="false" afterPath="$PROJECT_DIR$/QuotesApi/appsettings.json" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -54,21 +32,20 @@
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/9764A487-CD89-48B4-92F1-D4A7FF00F1DE/8/ServiceProvider.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/61E32356-76BF-4FF9-BF5B-99EB80B641FF/2B/SecurityTokenDescriptor.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/3680BE5F-1887-4743-9788-D707F1CB36B7/12/DbSet.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///Dummy.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/4CF17712-9ED0-4C5D-874D-48FEBCC62BBD/3F/OpenApiSecurityRequirement.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/15FC8EE0-B149-4033-9665-7BA67955565D/a3/2c7cf7d8/UnauthorizedResult.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/6D11A612-EC1E-407B-9A66-74A2353FB9DE/ca/a17f3ce6/IServiceCollection.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/15FC8EE0-B149-4033-9665-7BA67955565D/b0/7dec3a6d/StatusCodeResult.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///Dummy.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/15FC8EE0-B149-4033-9665-7BA67955565D/23/2f5bfe6e/UnauthorizedObjectResult.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/2DBFBC25-8F2A-4D07-9DDA-AA146A0B126E/3c/80352cf0/DefaultValueAttribute.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/43F02315-C47C-4021-BE0E-9EF26643FC6B/43/6a339472/TokenValidationParameters.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///Startup.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/QuotesApi/Services/UserService.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/4CF17712-9ED0-4C5D-874D-48FEBCC62BBD/40/OpenApiSecurityScheme.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/QuotesApi/Models/DbEntity.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/43F02315-C47C-4021-BE0E-9EF26643FC6B/46/a381a293/SignatureValidator.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///Dummy.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/QuotesApi/Filters/AddAuthHeaderOperationFilter.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/43F02315-C47C-4021-BE0E-9EF26643FC6B/136/SecurityToken.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///Dummy.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/58598FB7-AF5D-42E8-A9CA-4DC1837DCF16/F/JwtBearerDefaults.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/QuotesApi/Controllers/SecurityController.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/QuotesApi/Services/DiscordOAuthService.cs" root0="FORCE_HIGHLIGHTING" />
@@ -77,15 +54,12 @@
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/2E593DFC-4324-4392-82E7-79652EBB8125/01/22a9630f/IUser.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/QuotesApi/Migrations/DatabaseContextModelSnapshot.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/QuotesApi/Migrations/20200715173201_InitialCreateUser.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="mock:///Dummy.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/QuotesApi/Migrations/20200715173201_InitialCreateUser.Designer.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/QuotesApi/Services/JwtService.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="mock:///Dummy.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/15FC8EE0-B149-4033-9665-7BA67955565D/f8/d51bdc2a/OkResult.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/15FC8EE0-B149-4033-9665-7BA67955565D/38/d4793c8e/IStatusCodeActionResult.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/QuotesApi/Database/DatabaseContext.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/15FC8EE0-B149-4033-9665-7BA67955565D/73/fa47c2ab/ActionResult.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///Program.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/53056687-9C78-46E3-9776-4920413A9984/0f/6aa33ef8/IActionResult.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/15FC8EE0-B149-4033-9665-7BA67955565D/01/adf22ccb/ControllerBase.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/53056687-9C78-46E3-9776-4920413A9984/00/b398d21f/ActionContext.cs" root0="SKIP_HIGHLIGHTING" />
@@ -96,11 +70,9 @@
     <setting file="file://$PROJECT_DIR$/QuotesApi/Startup.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/15FC8EE0-B149-4033-9665-7BA67955565D/2e/d765f892/ObjectResult.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/2DBFBC25-8F2A-4D07-9DDA-AA146A0B126E/d6/c76f36b6/BindingFlags.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///Dummy.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/QuotesApi/Models/Users/User.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/QuotesApi/Program.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/E583FA12-DD2C-45FD-92F7-472427BBDCF2/64/43877264/HttpStatusCode.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///Dummy.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/QuotesApi/Models/Users/IUser.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/QuotesApi/Extentions/StringExtention.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/3680BE5F-1887-4743-9788-D707F1CB36B7/9/EntityFrameworkServiceCollectionExtensions.cs" root0="SKIP_HIGHLIGHTING" />
@@ -110,7 +82,6 @@
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/3680BE5F-1887-4743-9788-D707F1CB36B7/37/Check.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/1DF455D4-C575-41CC-A5A9-472AB29AF746/d4/f8ee360e/IHostEnvironment.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/1DF455D4-C575-41CC-A5A9-472AB29AF746/7d/b777e55e/HostEnvironmentEnvExtensions.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///Dummy.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/QuotesApi/Extentions/ServiceCollectionExtention.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/2DBFBC25-8F2A-4D07-9DDA-AA146A0B126E/71/eb78c102/ExceptionDispatchInfo.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/B258C1A1-826F-43E1-B98A-262CDF7DA8CC/a6/3ffadc40/ConfigurationExtensions.cs" root0="SKIP_HIGHLIGHTING" />
@@ -118,9 +89,6 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/QuotesApi/Database/QuoteContext.cs" />
-        <option value="$PROJECT_DIR$/.gitignore" />
-        <option value="$PROJECT_DIR$/QuotesApi/QuotesApi.csproj" />
         <option value="$PROJECT_DIR$/QuotesApi/Models/DbQuote.cs" />
         <option value="$PROJECT_DIR$/QuotesApi/Models/QuoteBase.cs" />
         <option value="$PROJECT_DIR$/QuotesApi/Models/UnmoderatedQuoteDto.cs" />
@@ -135,7 +103,6 @@
         <option value="$PROJECT_DIR$/QuotesApi/Database/DataContext.cs" />
         <option value="$PROJECT_DIR$/QuotesApi/Controllers/QuoteController.cs" />
         <option value="$PROJECT_DIR$/QuotesApi/Database/Database.cs" />
-        <option value="$PROJECT_DIR$/QuotesApi/Models/DbEntity.cs" />
         <option value="$PROJECT_DIR$/QuotesApi/Models/users.IUser.cs" />
         <option value="$PROJECT_DIR$/QuotesApi/Extentions/IApplicationBuilderExtentions.cs" />
         <option value="$PROJECT_DIR$/QuotesApi/Extentions/String.Extention.cs" />
@@ -157,18 +124,22 @@
         <option value="$PROJECT_DIR$/QuotesApi/Database/DatabaseContext.cs" />
         <option value="$PROJECT_DIR$/QuotesApi/Services/UserService.cs" />
         <option value="$PROJECT_DIR$/QuotesApi/Models/ApiResult.cs" />
-        <option value="$PROJECT_DIR$/QuotesApi/appsettings.json" />
         <option value="$PROJECT_DIR$/QuotesApi/Controllers/AuthController.cs" />
         <option value="$PROJECT_DIR$/QuotesApi/Models/Users/LoginResponse.cs" />
         <option value="$PROJECT_DIR$/QuotesApi/Extentions/ObjectExtention.cs" />
-        <option value="$PROJECT_DIR$/QuotesApi/appsettings.Development.json" />
         <option value="$PROJECT_DIR$/QuotesApi/Controllers/BaseController.cs" />
         <option value="$PROJECT_DIR$/QuotesApi/Extentions/ServiceCollectionExtention.cs" />
         <option value="$PROJECT_DIR$/QuotesApi/Services/JwtService.cs" />
         <option value="$PROJECT_DIR$/QuotesApi/Program.cs" />
-        <option value="$PROJECT_DIR$/QuotesApi/Startup.cs" />
         <option value="$PROJECT_DIR$/QuotesApi/Services/IDIService.cs" />
+        <option value="$PROJECT_DIR$/QuotesApi/appsettings.json" />
+        <option value="$PROJECT_DIR$/QuotesApi/appsettings.Development.json" />
+        <option value="$PROJECT_DIR$/QuotesApi/filters/AddAuthHEaderOperationFilter.cs" />
+        <option value="$PROJECT_DIR$/QuotesApi/filters/AddAuthHeaderOperationFilter.cs" />
+        <option value="$PROJECT_DIR$/QuotesApi/Startup.cs" />
         <option value="$PROJECT_DIR$/QuotesApi/Controllers/SecurityController.cs" />
+        <option value="$PROJECT_DIR$/QuotesApi/Filters/AddAuthHeaderOperationFilter.cs" />
+        <option value="$PROJECT_DIR$/QuotesApi/Models/DbEntity.cs" />
       </list>
     </option>
   </component>
@@ -241,7 +212,8 @@
       <workItem from="1594657567220" duration="9610000" />
       <workItem from="1594740297010" duration="10125000" />
       <workItem from="1594826834680" duration="17157000" />
-      <workItem from="1594921077157" duration="5748000" />
+      <workItem from="1594921077157" duration="6013000" />
+      <workItem from="1595003246553" duration="1011000" />
     </task>
     <task id="LOCAL-00001" summary="initial commit!">
       <created>1594658509163</created>
@@ -250,7 +222,14 @@
       <option name="project" value="LOCAL" />
       <updated>1594658509163</updated>
     </task>
-    <option name="localTasksCounter" value="2" />
+    <task id="LOCAL-00002" summary="Got Discord login working (and other things) :party_parrot:">
+      <created>1594927517418</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1594927517418</updated>
+    </task>
+    <option name="localTasksCounter" value="3" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -272,7 +251,9 @@
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
     <option name="CLEAR_INITIAL_COMMIT_MESSAGE" value="true" />
     <MESSAGE value="initial commit!" />
-    <option name="LAST_COMMIT_MESSAGE" value="initial commit!" />
+    <MESSAGE value="Got Discord login working (and other things) :party_parrot:" />
+    <option name="LAST_COMMIT_MESSAGE" value="Got Discord login working (and other things) :party_parrot:" />
+    <option name="OPTIMIZE_IMPORTS_BEFORE_PROJECT_COMMIT" value="true" />
   </component>
   <component name="WindowStateProjectService">
     <state x="3135" y="377" key="#xdebugger.evaluate" timestamp="1594924608021">
@@ -287,98 +268,102 @@
       <screen x="1920" y="0" width="1920" height="1080" />
     </state>
     <state x="2664" y="275" key="FileChooserDialogImpl/1920.0.1920.1080/0.0.1920.1038@1920.0.1920.1080" timestamp="1594664998248" />
-    <state width="1874" height="324" key="GridCell.Tab.0.bottom" timestamp="1594927094132">
+    <state width="1874" height="325" key="GridCell.Tab.0.bottom" timestamp="1595004148180">
       <screen x="1920" y="0" width="1920" height="1080" />
     </state>
-    <state width="1874" height="324" key="GridCell.Tab.0.bottom/1920.0.1920.1080/0.0.1920.1038@1920.0.1920.1080" timestamp="1594927094132" />
-    <state width="1874" height="324" key="GridCell.Tab.0.center" timestamp="1594927094132">
+    <state width="1874" height="325" key="GridCell.Tab.0.bottom/1920.0.1920.1080/0.0.1920.1038@1920.0.1920.1080" timestamp="1595004148180" />
+    <state width="1874" height="325" key="GridCell.Tab.0.center" timestamp="1595004148179">
       <screen x="1920" y="0" width="1920" height="1080" />
     </state>
-    <state width="1874" height="324" key="GridCell.Tab.0.center/1920.0.1920.1080/0.0.1920.1038@1920.0.1920.1080" timestamp="1594927094132" />
-    <state width="1874" height="324" key="GridCell.Tab.0.left" timestamp="1594927094132">
+    <state width="1874" height="325" key="GridCell.Tab.0.center/1920.0.1920.1080/0.0.1920.1038@1920.0.1920.1080" timestamp="1595004148179" />
+    <state width="1874" height="325" key="GridCell.Tab.0.left" timestamp="1595004148179">
       <screen x="1920" y="0" width="1920" height="1080" />
     </state>
-    <state width="1874" height="324" key="GridCell.Tab.0.left/1920.0.1920.1080/0.0.1920.1038@1920.0.1920.1080" timestamp="1594927094132" />
-    <state width="1874" height="324" key="GridCell.Tab.0.right" timestamp="1594927094132">
+    <state width="1874" height="325" key="GridCell.Tab.0.left/1920.0.1920.1080/0.0.1920.1038@1920.0.1920.1080" timestamp="1595004148179" />
+    <state width="1874" height="325" key="GridCell.Tab.0.right" timestamp="1595004148180">
       <screen x="1920" y="0" width="1920" height="1080" />
     </state>
-    <state width="1874" height="324" key="GridCell.Tab.0.right/1920.0.1920.1080/0.0.1920.1038@1920.0.1920.1080" timestamp="1594927094132" />
-    <state width="1874" height="324" key="GridCell.Tab.1.bottom" timestamp="1594927093877">
+    <state width="1874" height="325" key="GridCell.Tab.0.right/1920.0.1920.1080/0.0.1920.1038@1920.0.1920.1080" timestamp="1595004148180" />
+    <state width="1874" height="325" key="GridCell.Tab.1.bottom" timestamp="1595004148073">
       <screen x="1920" y="0" width="1920" height="1080" />
     </state>
-    <state width="1874" height="324" key="GridCell.Tab.1.bottom/1920.0.1920.1080/0.0.1920.1038@1920.0.1920.1080" timestamp="1594927093877" />
-    <state width="1874" height="324" key="GridCell.Tab.1.center" timestamp="1594927093877">
+    <state width="1874" height="325" key="GridCell.Tab.1.bottom/1920.0.1920.1080/0.0.1920.1038@1920.0.1920.1080" timestamp="1595004148073" />
+    <state width="1874" height="325" key="GridCell.Tab.1.center" timestamp="1595004148073">
       <screen x="1920" y="0" width="1920" height="1080" />
     </state>
-    <state width="1874" height="324" key="GridCell.Tab.1.center/1920.0.1920.1080/0.0.1920.1038@1920.0.1920.1080" timestamp="1594927093877" />
-    <state width="1874" height="324" key="GridCell.Tab.1.left" timestamp="1594927093877">
+    <state width="1874" height="325" key="GridCell.Tab.1.center/1920.0.1920.1080/0.0.1920.1038@1920.0.1920.1080" timestamp="1595004148073" />
+    <state width="1874" height="325" key="GridCell.Tab.1.left" timestamp="1595004148073">
       <screen x="1920" y="0" width="1920" height="1080" />
     </state>
-    <state width="1874" height="324" key="GridCell.Tab.1.left/1920.0.1920.1080/0.0.1920.1038@1920.0.1920.1080" timestamp="1594927093877" />
-    <state width="1874" height="324" key="GridCell.Tab.1.right" timestamp="1594927093877">
+    <state width="1874" height="325" key="GridCell.Tab.1.left/1920.0.1920.1080/0.0.1920.1038@1920.0.1920.1080" timestamp="1595004148073" />
+    <state width="1874" height="325" key="GridCell.Tab.1.right" timestamp="1595004148073">
       <screen x="1920" y="0" width="1920" height="1080" />
     </state>
-    <state width="1874" height="324" key="GridCell.Tab.1.right/1920.0.1920.1080/0.0.1920.1038@1920.0.1920.1080" timestamp="1594927093877" />
-    <state width="1874" height="324" key="GridCell.Tab.2.bottom" timestamp="1594927093877">
+    <state width="1874" height="325" key="GridCell.Tab.1.right/1920.0.1920.1080/0.0.1920.1038@1920.0.1920.1080" timestamp="1595004148073" />
+    <state width="1874" height="325" key="GridCell.Tab.2.bottom" timestamp="1595004148074">
       <screen x="1920" y="0" width="1920" height="1080" />
     </state>
-    <state width="1874" height="324" key="GridCell.Tab.2.bottom/1920.0.1920.1080/0.0.1920.1038@1920.0.1920.1080" timestamp="1594927093877" />
-    <state width="1874" height="324" key="GridCell.Tab.2.center" timestamp="1594927093877">
+    <state width="1874" height="325" key="GridCell.Tab.2.bottom/1920.0.1920.1080/0.0.1920.1038@1920.0.1920.1080" timestamp="1595004148074" />
+    <state width="1874" height="325" key="GridCell.Tab.2.center" timestamp="1595004148074">
       <screen x="1920" y="0" width="1920" height="1080" />
     </state>
-    <state width="1874" height="324" key="GridCell.Tab.2.center/1920.0.1920.1080/0.0.1920.1038@1920.0.1920.1080" timestamp="1594927093877" />
-    <state width="1874" height="324" key="GridCell.Tab.2.left" timestamp="1594927093877">
+    <state width="1874" height="325" key="GridCell.Tab.2.center/1920.0.1920.1080/0.0.1920.1038@1920.0.1920.1080" timestamp="1595004148074" />
+    <state width="1874" height="325" key="GridCell.Tab.2.left" timestamp="1595004148074">
       <screen x="1920" y="0" width="1920" height="1080" />
     </state>
-    <state width="1874" height="324" key="GridCell.Tab.2.left/1920.0.1920.1080/0.0.1920.1038@1920.0.1920.1080" timestamp="1594927093877" />
-    <state width="1874" height="324" key="GridCell.Tab.2.right" timestamp="1594927093877">
+    <state width="1874" height="325" key="GridCell.Tab.2.left/1920.0.1920.1080/0.0.1920.1038@1920.0.1920.1080" timestamp="1595004148074" />
+    <state width="1874" height="325" key="GridCell.Tab.2.right" timestamp="1595004148074">
       <screen x="1920" y="0" width="1920" height="1080" />
     </state>
-    <state width="1874" height="324" key="GridCell.Tab.2.right/1920.0.1920.1080/0.0.1920.1038@1920.0.1920.1080" timestamp="1594927093877" />
-    <state width="1874" height="324" key="GridCell.Tab.3.bottom" timestamp="1594927093877">
+    <state width="1874" height="325" key="GridCell.Tab.2.right/1920.0.1920.1080/0.0.1920.1038@1920.0.1920.1080" timestamp="1595004148074" />
+    <state width="1874" height="325" key="GridCell.Tab.3.bottom" timestamp="1595004148074">
       <screen x="1920" y="0" width="1920" height="1080" />
     </state>
-    <state width="1874" height="324" key="GridCell.Tab.3.bottom/1920.0.1920.1080/0.0.1920.1038@1920.0.1920.1080" timestamp="1594927093877" />
-    <state width="1874" height="324" key="GridCell.Tab.3.center" timestamp="1594927093877">
+    <state width="1874" height="325" key="GridCell.Tab.3.bottom/1920.0.1920.1080/0.0.1920.1038@1920.0.1920.1080" timestamp="1595004148074" />
+    <state width="1874" height="325" key="GridCell.Tab.3.center" timestamp="1595004148074">
       <screen x="1920" y="0" width="1920" height="1080" />
     </state>
-    <state width="1874" height="324" key="GridCell.Tab.3.center/1920.0.1920.1080/0.0.1920.1038@1920.0.1920.1080" timestamp="1594927093877" />
-    <state width="1874" height="324" key="GridCell.Tab.3.left" timestamp="1594927093877">
+    <state width="1874" height="325" key="GridCell.Tab.3.center/1920.0.1920.1080/0.0.1920.1038@1920.0.1920.1080" timestamp="1595004148074" />
+    <state width="1874" height="325" key="GridCell.Tab.3.left" timestamp="1595004148074">
       <screen x="1920" y="0" width="1920" height="1080" />
     </state>
-    <state width="1874" height="324" key="GridCell.Tab.3.left/1920.0.1920.1080/0.0.1920.1038@1920.0.1920.1080" timestamp="1594927093877" />
-    <state width="1874" height="324" key="GridCell.Tab.3.right" timestamp="1594927093877">
+    <state width="1874" height="325" key="GridCell.Tab.3.left/1920.0.1920.1080/0.0.1920.1038@1920.0.1920.1080" timestamp="1595004148074" />
+    <state width="1874" height="325" key="GridCell.Tab.3.right" timestamp="1595004148074">
       <screen x="1920" y="0" width="1920" height="1080" />
     </state>
-    <state width="1874" height="324" key="GridCell.Tab.3.right/1920.0.1920.1080/0.0.1920.1038@1920.0.1920.1080" timestamp="1594927093877" />
-    <state width="1874" height="324" key="GridCell.Tab.4.bottom" timestamp="1594927093879">
+    <state width="1874" height="325" key="GridCell.Tab.3.right/1920.0.1920.1080/0.0.1920.1038@1920.0.1920.1080" timestamp="1595004148074" />
+    <state width="1874" height="325" key="GridCell.Tab.4.bottom" timestamp="1595004148074">
       <screen x="1920" y="0" width="1920" height="1080" />
     </state>
-    <state width="1874" height="324" key="GridCell.Tab.4.bottom/1920.0.1920.1080/0.0.1920.1038@1920.0.1920.1080" timestamp="1594927093879" />
-    <state width="1874" height="324" key="GridCell.Tab.4.center" timestamp="1594927093877">
+    <state width="1874" height="325" key="GridCell.Tab.4.bottom/1920.0.1920.1080/0.0.1920.1038@1920.0.1920.1080" timestamp="1595004148074" />
+    <state width="1874" height="325" key="GridCell.Tab.4.center" timestamp="1595004148074">
       <screen x="1920" y="0" width="1920" height="1080" />
     </state>
-    <state width="1874" height="324" key="GridCell.Tab.4.center/1920.0.1920.1080/0.0.1920.1038@1920.0.1920.1080" timestamp="1594927093877" />
-    <state width="1874" height="324" key="GridCell.Tab.4.left" timestamp="1594927093877">
+    <state width="1874" height="325" key="GridCell.Tab.4.center/1920.0.1920.1080/0.0.1920.1038@1920.0.1920.1080" timestamp="1595004148074" />
+    <state width="1874" height="325" key="GridCell.Tab.4.left" timestamp="1595004148074">
       <screen x="1920" y="0" width="1920" height="1080" />
     </state>
-    <state width="1874" height="324" key="GridCell.Tab.4.left/1920.0.1920.1080/0.0.1920.1038@1920.0.1920.1080" timestamp="1594927093877" />
-    <state width="1874" height="324" key="GridCell.Tab.4.right" timestamp="1594927093879">
+    <state width="1874" height="325" key="GridCell.Tab.4.left/1920.0.1920.1080/0.0.1920.1038@1920.0.1920.1080" timestamp="1595004148074" />
+    <state width="1874" height="325" key="GridCell.Tab.4.right" timestamp="1595004148074">
       <screen x="1920" y="0" width="1920" height="1080" />
     </state>
-    <state width="1874" height="324" key="GridCell.Tab.4.right/1920.0.1920.1080/0.0.1920.1038@1920.0.1920.1080" timestamp="1594927093879" />
+    <state width="1874" height="325" key="GridCell.Tab.4.right/1920.0.1920.1080/0.0.1920.1038@1920.0.1920.1080" timestamp="1595004148074" />
     <state x="2566" y="173" width="385" height="698" key="RiderGenerateDialog" timestamp="1594836038664">
       <screen x="1920" y="0" width="1920" height="1080" />
     </state>
     <state x="2566" y="173" width="385" height="698" key="RiderGenerateDialog/1920.0.1920.1080/0.0.1920.1038@1920.0.1920.1080" timestamp="1594836038664" />
+    <state x="2476" y="239" key="Vcs.Push.Dialog.v2" timestamp="1594927519954">
+      <screen x="1920" y="0" width="1920" height="1080" />
+    </state>
+    <state x="2476" y="239" key="Vcs.Push.Dialog.v2/1920.0.1920.1080/0.0.1920.1038@1920.0.1920.1080" timestamp="1594927519954" />
     <state width="960" height="519" key="XDebugger.FullValuePopup" timestamp="1594923763835">
       <screen x="1920" y="0" width="1920" height="1080" />
     </state>
     <state width="960" height="519" key="XDebugger.FullValuePopup/1920.0.1920.1080/0.0.1920.1038@1920.0.1920.1080" timestamp="1594923763834" />
-    <state x="2678" y="432" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2" timestamp="1594658468843">
+    <state x="2678" y="432" width="406" height="173" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2" timestamp="1595003839047">
       <screen x="1920" y="0" width="1920" height="1080" />
     </state>
-    <state x="2678" y="432" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2/1920.0.1920.1080/0.0.1920.1038@1920.0.1920.1080" timestamp="1594658468843" />
+    <state x="2678" y="432" width="406" height="173" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2/1920.0.1920.1080/0.0.1920.1038@1920.0.1920.1080" timestamp="1595003839047" />
     <state x="2431" y="230" key="com.intellij.xdebugger.impl.breakpoints.ui.BreakpointsDialogFactory$2" timestamp="1594923661240">
       <screen x="1920" y="0" width="1920" height="1080" />
     </state>
