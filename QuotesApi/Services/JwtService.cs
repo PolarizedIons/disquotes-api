@@ -14,6 +14,7 @@ namespace QuotesApi.Services
         public const string Issuer = "Disquotes API";
         public const string Audience = "Disquotes Client";
         public const string AccountIdField = "Account-ID";
+        public const string DiscordIdField = "Discord-ID";
 
         private readonly string _secret;
         private readonly JwtSecurityTokenHandler _tokenHandler;
@@ -23,7 +24,7 @@ namespace QuotesApi.Services
             _secret = config["Jwt:Secret"];
             _tokenHandler = new JwtSecurityTokenHandler();
         }
-        
+
         public string CreateTokenFor(User user)
         {
             var key = Encoding.UTF8.GetBytes(_secret);
@@ -32,7 +33,8 @@ namespace QuotesApi.Services
             {
                 Subject = new ClaimsIdentity(new Claim[] 
                 {
-                    new Claim(AccountIdField, user.Id.ToString())
+                    new Claim(AccountIdField, user.Id.ToString()),
+                    new Claim(DiscordIdField, user.DiscordId.ToString()), 
                 }),
                 Issuer = Issuer,
                 Audience = Audience,

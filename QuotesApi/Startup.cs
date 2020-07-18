@@ -14,6 +14,7 @@ using Microsoft.OpenApi.Models;
 using QuotesApi.Database;
 using QuotesApi.Extentions;
 using QuotesApi.Filters;
+using QuotesApi.Middlewares;
 using QuotesApi.Models;
 using QuotesApi.Services;
 using Serilog;
@@ -72,7 +73,6 @@ namespace QuotesApi
             
             Log.Information("Migrating Database...");
             databaseContext.Database.Migrate();
-            Log.Information("Done.");
 
             Log.Information("Logging into Discord");
             discordService.Login().Wait();
@@ -88,11 +88,13 @@ namespace QuotesApi
                 {
                     var exceptionFeature = context.Features.Get<IExceptionHandlerPathFeature>();
                     var response = (ApiResult<object>) exceptionFeature.Error;
-                    context.Response.StatusCode = 500;
+                    context.Response.StatusCode = response.Status;
                     context.Response.ContentType = "application/json";
                     await context.Response.WriteAsync(JsonSerializer.Serialize(response, new JsonSerializerOptions { PropertyNamingPolicy = JsonNamingPolicy.CamelCase }));
                 });
             });
+
+            app.UseMiddleware<IgnoreMyHttpExceptions>();
 
             app.UseStatusCodePages(async context =>
             {

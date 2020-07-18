@@ -9,5 +9,7 @@ namespace QuotesApi.Controllers
     public class BaseController : ControllerBase
     {
         protected Guid UserId => Guid.Parse(User.Claims.First(claim => claim.Type == JwtService.AccountIdField).Value);
+
+        protected ulong UserDiscordId => ulong.Parse(User.Claims.First(claim => claim.Type == JwtService.DiscordIdField).Value);
     }
 }

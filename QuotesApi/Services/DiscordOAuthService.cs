@@ -14,7 +14,7 @@ namespace QuotesApi.Services
 {
     public class DiscordOAuthService : IScopedDiService
     {
-        private static readonly string[] RequestScopes = {"identify", "guilds"};
+        private static readonly string[] RequestScopes = {"identify"};
         private const string OAuthRequestUrl = "https://discord.com/oauth2/authorize?client_id={client_id}&redirect_uri={redirect_url}&response_type=code&scope={scopes}";
         private const string OAuthExchangeUrl = "https://discord.com/api/oauth2/token";
         

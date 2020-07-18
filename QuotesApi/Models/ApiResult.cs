@@ -3,6 +3,7 @@ using System.Net;
 using System.Text.Json;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
+using QuotesApi.Exceptions;
 using QuotesApi.Extentions;
 
 namespace QuotesApi.Models
@@ -44,6 +45,17 @@ namespace QuotesApi.Models
 
         public static implicit operator ApiResult<T>(Exception exception)
         {
+            if (exception is HttpException e)
+            {
+                return new ApiResult<T>
+                {
+                    Status = (int)e.StatusCode,
+                    Error = e.Message,
+                    Exception = null,
+                    Data = default,
+                };
+            }
+
             return new ApiResult<T>
             {
                 Status = 500,

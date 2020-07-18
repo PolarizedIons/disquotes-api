@@ -33,7 +33,7 @@ namespace QuotesApi.Controllers
             AllowAnonymous,
             ProducesResponseType(typeof(ApiResult<string>), 200),
         ]
-        public async Task<ApiResult<string>> GetAuthUrl()
+        public ApiResult<string> GetAuthUrl()
         {
             return Ok(_discordOAuthService.GetOAuth2Url());
         }
@@ -74,7 +74,8 @@ namespace QuotesApi.Controllers
         ]
         public async Task<ApiResult<User>> GetMe()
         {
-            return Ok(await _userService.FindUser(UserId, true));
+            var user = await _userService.FindUser(UserId, true);
+            return Ok(user);
         }
     }
 }

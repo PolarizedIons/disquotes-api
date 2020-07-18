@@ -3,7 +3,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Discord.Rest;
 using QuotesApi.Database;
-using QuotesApi.Extentions;
+using QuotesApi.Exceptions;
 using QuotesApi.Models.Guilds;
 using QuotesApi.Models.Users;
 
@@ -24,9 +24,14 @@ namespace QuotesApi.Services
         {
             var user = _db.Users.FirstOrDefault(x => x.Id == id && x.DeletedAt == null);
 
-            if (user != null && enrichWithGuilds)
+            if (user == null)
             {
-                user.Guilds = (await _discord.GetGuildsFor(user.DiscordId)).Select(x => new Guild().MapProps(x));
+                throw new NotFoundException($"User with id '{id}' not found.");
+            }
+
+            if (enrichWithGuilds)
+            {
+                await SetGuids(user);
             }
 
             return user;
@@ -36,9 +41,14 @@ namespace QuotesApi.Services
         {
             var user = _db.Users.FirstOrDefault(x => x.DiscordId == id && x.DeletedAt == null);
 
-            if (user != null && enrichWithGuilds)
+            if (user == null)
             {
-                user.Guilds = (await _discord.GetGuildsFor(user.DiscordId)).Select(x => new Guild().MapProps(x));
+                throw new NotFoundException($"User with discord id '{id}' not found.");
+            }
+            
+            if (enrichWithGuilds)
+            {
+                await SetGuids(user);
             }
 
             return user;
@@ -66,6 +76,18 @@ namespace QuotesApi.Services
 
             await _db.SaveChangesAsync();
             return await FindDiscordUser(discordUser.Id);
+        }
+
+        private async Task SetGuids(User user)
+        {
+            user.Guilds = (await _discord.GetGuildsFor(user.DiscordId)).Select(x => new Guild
+            {
+                Description = x.Description,
+                Id = x.Id.ToString(),
+                Name = x.Name,
+                SystemChannelId = x.SystemChannelId.ToString(),
+                IsOwner = x.OwnerId == user.DiscordId
+            });
         }
     }
 }

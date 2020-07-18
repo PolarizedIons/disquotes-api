@@ -37,5 +37,10 @@ namespace QuotesApi.Services
 
             return userGuilds;
         }
+
+        public async Task<RestGuild> GetGuild(ulong guildId)
+        {
+            return await _client.GetGuildAsync(guildId);
+        }
     }
 }
