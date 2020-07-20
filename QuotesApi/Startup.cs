@@ -69,6 +69,19 @@ namespace QuotesApi
                 options.Providers.Add<GzipCompressionProvider>();
             });
 
+            services.AddCors(options =>
+            {
+                options.AddDefaultPolicy(
+                              builder =>
+                              {
+                                  builder.WithOrigins(Configuration["AllowedHosts"])
+                                    .SetIsOriginAllowedToAllowWildcardSubdomains()
+                                    .AllowAnyOrigin()
+                                    .AllowAnyMethod()
+                                    .AllowAnyHeader();
+                              });
+            });
+
             services.AddSingleton<HttpClient>();
             services.DiscoverAndMakeDiServicesAvailable();
         }
@@ -127,7 +140,7 @@ namespace QuotesApi
             app.UseRouting()
                 .UseAuthentication()
                 .UseAuthorization()
-                .UseCors(Configuration["AllowedHosts"])
+                .UseCors()
                 .UseResponseCompression()
                 .UseSwagger()
                 .UseSwaggerUI(o =>
