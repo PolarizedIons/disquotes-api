@@ -11,6 +11,8 @@ namespace QuotesApi.Services
 {
     public class UserService : IScopedDiService
     {
+        private static readonly TimeSpan RefreshTokenValidFor = TimeSpan.FromDays(14);
+        
         private DatabaseContext _db;
         private DiscordService _discord;
 
@@ -31,7 +33,7 @@ namespace QuotesApi.Services
 
             if (enrichWithGuilds)
             {
-                await SetGuids(user);
+                await SetGuilds(user);
             }
 
             return user;
@@ -48,13 +50,13 @@ namespace QuotesApi.Services
             
             if (enrichWithGuilds)
             {
-                await SetGuids(user);
+                await SetGuilds(user);
             }
 
             return user;
         }
 
-        public async Task<User> CreateOrUpdateUser(RestUser discordUser)
+        public async Task<User> LoginDiscordUser(RestUser discordUser)
         {
             var user = await FindDiscordUser(discordUser.Id);
             if (user != null)
@@ -62,6 +64,8 @@ namespace QuotesApi.Services
                 user.Username = discordUser.Username;
                 user.Discriminator = discordUser.DiscriminatorValue;
                 user.ProfileUrl = discordUser.GetAvatarUrl();
+                user.RefreshToken = Guid.NewGuid();
+                user.RefreshTokenExpires = DateTime.UtcNow.Add(RefreshTokenValidFor);
             }
             else
             {
@@ -71,6 +75,8 @@ namespace QuotesApi.Services
                     Username = discordUser.Username,
                     Discriminator = discordUser.DiscriminatorValue,
                     ProfileUrl = discordUser.GetAvatarUrl(),
+                    RefreshToken = Guid.NewGuid(),
+                    RefreshTokenExpires = DateTime.UtcNow.Add(RefreshTokenValidFor),
                 });
             }
 
@@ -78,16 +84,43 @@ namespace QuotesApi.Services
             return await FindDiscordUser(discordUser.Id);
         }
 
-        private async Task SetGuids(User user)
+        private async Task SetGuilds(User user)
         {
-            user.Guilds = (await _discord.GetGuildsFor(user.DiscordId)).Select(x => new Guild
+            user.Guilds = (await _discord.GetGuildsFor(user.DiscordId))
+                .Select(x => new Guild
+                    {
+                        Description = x.Description,
+                        Id = x.Id.ToString(),
+                        Name = x.Name,
+                        SystemChannelId = x.SystemChannelId.ToString(),
+                        IsOwner = x.OwnerId == user.DiscordId
+                    }
+                );
+        }
+
+        public void ValidateRefreshToken(Guid accountId, Guid refreshToken)
+        {
+            var user = _db.Users
+                .AsQueryable()
+                .FirstOrDefault(x => x.Id == accountId && x.DeletedAt == null && x.RefreshToken == refreshToken);
+            if (user == null)
             {
-                Description = x.Description,
-                Id = x.Id.ToString(),
-                Name = x.Name,
-                SystemChannelId = x.SystemChannelId.ToString(),
-                IsOwner = x.OwnerId == user.DiscordId
-            });
+                throw new UnauthorizedException("AccountID and Refresh Token combination is invalid.");
+            }
+
+            if (user.RefreshTokenExpires < DateTime.UtcNow)
+            {
+                throw new UnauthorizedException("Refresh Token has expired");
+            }
+        }
+
+        public async Task<User> UpdateRefreshToken(Guid accountId)
+        {
+            var user = await FindUser(accountId);
+            user.RefreshToken = Guid.NewGuid();
+            user.RefreshTokenExpires = DateTime.UtcNow.Add(RefreshTokenValidFor);
+            await _db.SaveChangesAsync();
+            return user;
         }
     }
 }

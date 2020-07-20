@@ -19,6 +19,7 @@
           <e p="ForbiddenException.cs" t="Include" />
           <e p="HttpException.cs" t="Include" />
           <e p="NotFoundException.cs" t="Include" />
+          <e p="UnauthorizedException.cs" t="Include" />
         </e>
         <e p="Extentions" t="Include">
           <e p="ObjectExtention.cs" t="Include" />
@@ -36,6 +37,8 @@
           <e p="20200715173201_InitialCreateUser.cs" t="Include" />
           <e p="20200718103221_AddQuotesTable.Designer.cs" t="Include" />
           <e p="20200718103221_AddQuotesTable.cs" t="Include" />
+          <e p="20200720175435_AddRefreshTokenToUser.Designer.cs" t="Include" />
+          <e p="20200720175435_AddRefreshTokenToUser.cs" t="Include" />
           <e p="DatabaseContextModelSnapshot.cs" t="Include" />
         </e>
         <e p="Models" t="Include">
@@ -52,6 +55,10 @@
             <e p="IQuote.cs" t="Include" />
             <e p="Quote.cs" t="Include" />
             <e p="QuoteDto.cs" t="Include" />
+          </e>
+          <e p="Security" t="Include">
+            <e p="RefreshTokenDto.cs" t="Include" />
+            <e p="RefreshTokenResponse.cs" t="Include" />
           </e>
           <e p="Users" t="Include">
             <e p="IUser.cs" t="Include" />

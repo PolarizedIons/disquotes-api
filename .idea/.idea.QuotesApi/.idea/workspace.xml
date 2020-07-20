@@ -10,16 +10,21 @@
     <select />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="1a84013b-dd73-4f1a-b9eb-6107adf3b20a" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/QuotesApi/Exceptions/BadRequestException.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/QuotesApi/Models/Paging/PagedResponse.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/QuotesApi/Models/Paging/PagingFilter.cs" afterDir="false" />
+    <list default="true" id="1a84013b-dd73-4f1a-b9eb-6107adf3b20a" name="Default Changelist" comment="Add paging to quotes lists and add caching &amp; compression middleware">
+      <change afterPath="$PROJECT_DIR$/QuotesApi/Exceptions/UnauthorizedException.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/QuotesApi/Migrations/20200720175435_AddRefreshTokenToUser.Designer.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/QuotesApi/Migrations/20200720175435_AddRefreshTokenToUser.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/QuotesApi/Models/Security/RefreshTokenDto.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/QuotesApi/Models/Security/RefreshTokenResponse.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/.idea.QuotesApi/.idea/contentModel.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.QuotesApi/.idea/contentModel.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/.idea.QuotesApi/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.QuotesApi/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/QuotesApi/Controllers/BaseController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/QuotesApi/Controllers/BaseController.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/QuotesApi/Controllers/QuoteController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/QuotesApi/Controllers/QuoteController.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/QuotesApi/Services/QuoteService.cs" beforeDir="false" afterPath="$PROJECT_DIR$/QuotesApi/Services/QuoteService.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/QuotesApi/Controllers/SecurityController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/QuotesApi/Controllers/SecurityController.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/QuotesApi/Migrations/DatabaseContextModelSnapshot.cs" beforeDir="false" afterPath="$PROJECT_DIR$/QuotesApi/Migrations/DatabaseContextModelSnapshot.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/QuotesApi/Models/Users/User.cs" beforeDir="false" afterPath="$PROJECT_DIR$/QuotesApi/Models/Users/User.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/QuotesApi/Services/JwtService.cs" beforeDir="false" afterPath="$PROJECT_DIR$/QuotesApi/Services/JwtService.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/QuotesApi/Services/UserService.cs" beforeDir="false" afterPath="$PROJECT_DIR$/QuotesApi/Services/UserService.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/QuotesApi/Startup.cs" beforeDir="false" afterPath="$PROJECT_DIR$/QuotesApi/Startup.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/QuotesApi/appsettings.json" beforeDir="false" afterPath="$PROJECT_DIR$/QuotesApi/appsettings.json" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -30,80 +35,45 @@
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
   <component name="HighlightingSettingsPerFile">
-    <setting file="file://$PROJECT_DIR$/QuotesApi/Models/Quotes/QuoteDto.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/QuotesApi/Models/Paging/PagedResponse.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/0A5CA1E5-288B-4648-B237-C613AAD2B0D2/a4/7674b079/Enumerable.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/15FC8EE0-B149-4033-9665-7BA67955565D/28/f59bc3fc/BadRequestResult.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/QuotesApi/Controllers/BaseController.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/2E593DFC-4324-4392-82E7-79652EBB8125/ad/a83dc084/IGuild.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/QuotesApi/Exceptions/BadRequestException.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/61E32356-76BF-4FF9-BF5B-99EB80B641FF/2B/SecurityTokenDescriptor.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/9764A487-CD89-48B4-92F1-D4A7FF00F1DE/8/ServiceProvider.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/3680BE5F-1887-4743-9788-D707F1CB36B7/12/DbSet.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/4CF17712-9ED0-4C5D-874D-48FEBCC62BBD/3F/OpenApiSecurityRequirement.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/15FC8EE0-B149-4033-9665-7BA67955565D/a3/2c7cf7d8/UnauthorizedResult.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/6D11A612-EC1E-407B-9A66-74A2353FB9DE/ca/a17f3ce6/IServiceCollection.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/15FC8EE0-B149-4033-9665-7BA67955565D/b0/7dec3a6d/StatusCodeResult.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/15FC8EE0-B149-4033-9665-7BA67955565D/23/2f5bfe6e/UnauthorizedObjectResult.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/2DBFBC25-8F2A-4D07-9DDA-AA146A0B126E/3c/80352cf0/DefaultValueAttribute.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/43F02315-C47C-4021-BE0E-9EF26643FC6B/43/6a339472/TokenValidationParameters.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/4CF17712-9ED0-4C5D-874D-48FEBCC62BBD/40/OpenApiSecurityScheme.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/QuotesApi/Services/UserService.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/QuotesApi/Models/DbEntity.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/43F02315-C47C-4021-BE0E-9EF26643FC6B/46/a381a293/SignatureValidator.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/B2D16B9D-6F0D-4930-92BE-27CBBAC121E7/b7/8a43b51e/CorsMiddlewareExtensions.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/QuotesApi/Filters/AddAuthHeaderOperationFilter.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/43F02315-C47C-4021-BE0E-9EF26643FC6B/136/SecurityToken.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/58598FB7-AF5D-42E8-A9CA-4DC1837DCF16/F/JwtBearerDefaults.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/2DBFBC25-8F2A-4D07-9DDA-AA146A0B126E/34/d2917389/TimeSpan.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/QuotesApi/Models/Security/RefreshTokenDto.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/QuotesApi/Models/Security/RefreshTokenResponse.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/QuotesApi/Controllers/SecurityController.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/QuotesApi/Exceptions/UnauthorizedException.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/QuotesApi/Services/DiscordOAuthService.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/QuotesApi/Services/IDiService.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/QuotesApi/Models/ApiResult.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/2E593DFC-4324-4392-82E7-79652EBB8125/01/22a9630f/IUser.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/QuotesApi/Migrations/DatabaseContextModelSnapshot.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/QuotesApi/Migrations/20200715173201_InitialCreateUser.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/QuotesApi/Services/DiscordService.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/QuotesApi/Migrations/20200715173201_InitialCreateUser.Designer.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/QuotesApi/Migrations/20200718103221_AddQuotesTable.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/QuotesApi/Migrations/20200718103221_AddQuotesTable.Designer.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/QuotesApi/Services/JwtService.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/15FC8EE0-B149-4033-9665-7BA67955565D/f8/d51bdc2a/OkResult.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/07748561-2722-4130-9BBF-B50D837F391E/c6/ce468bcb/BaseDiscordClient.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/15FC8EE0-B149-4033-9665-7BA67955565D/38/d4793c8e/IStatusCodeActionResult.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/QuotesApi/Exceptions/HttpException.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/QuotesApi/Database/DatabaseContext.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/QuotesApi/Migrations/20200720175435_AddRefreshTokenToUser.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/15FC8EE0-B149-4033-9665-7BA67955565D/73/fa47c2ab/ActionResult.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/QuotesApi/Exceptions/NotFoundException.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="mock:///Startup.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/53056687-9C78-46E3-9776-4920413A9984/0f/6aa33ef8/IActionResult.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/QuotesApi/Exceptions/ForbiddenException.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/QuotesApi/Migrations/20200720175435_AddRefreshTokenToUser.Designer.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/07748561-2722-4130-9BBF-B50D837F391E/42/0283e521/RestGuild.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/15FC8EE0-B149-4033-9665-7BA67955565D/01/adf22ccb/ControllerBase.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/07748561-2722-4130-9BBF-B50D837F391E/51/8777efe3/DiscordRestClient.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/53056687-9C78-46E3-9776-4920413A9984/00/b398d21f/ActionContext.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/QuotesApi/Models/Guilds/Guild.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/15FC8EE0-B149-4033-9665-7BA67955565D/3b/4dc8763e/ActionResult`1.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/QuotesApi/Middlewares/IgnoreMyHttpExceptions.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/2E593DFC-4324-4392-82E7-79652EBB8125/d7/e7374e96/IEntity`1.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/9A05716B-5376-4303-B1E4-2ABBA77C0729/b0/2932c1ae/HttpResponseHeader.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/15FC8EE0-B149-4033-9665-7BA67955565D/18/ccc14360/OkObjectResult.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/QuotesApi/Extentions/ObjectExtention.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/15FC8EE0-B149-4033-9665-7BA67955565D/2e/d765f892/ObjectResult.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/QuotesApi/Startup.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/2DBFBC25-8F2A-4D07-9DDA-AA146A0B126E/d6/c76f36b6/BindingFlags.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="mock:///BaseController.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/QuotesApi/Models/Users/User.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/QuotesApi/Program.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/E583FA12-DD2C-45FD-92F7-472427BBDCF2/64/43877264/HttpStatusCode.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/QuotesApi/Models/Users/IUser.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/QuotesApi/Extentions/StringExtention.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="mock:///QuoteService.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///DatabaseContextModelSnapshot.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/F1434CB9-D49E-4705-9D67-B7E91A6F736C/55/18ad6776/IWebHostEnvironment.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/3680BE5F-1887-4743-9788-D707F1CB36B7/9/EntityFrameworkServiceCollectionExtensions.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/3680BE5F-1887-4743-9788-D707F1CB36B7/19F/DbContextServices.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/QuotesApi/Controllers/UserController.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/9F286C10-6AE8-4025-8A8D-FA0B7CEB03DE/3/JwtTokenUtilities.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/1DF455D4-C575-41CC-A5A9-472AB29AF746/d4/f8ee360e/IHostEnvironment.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/3680BE5F-1887-4743-9788-D707F1CB36B7/37/Check.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/1DF455D4-C575-41CC-A5A9-472AB29AF746/7d/b777e55e/HostEnvironmentEnvExtensions.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/QuotesApi/Extentions/ServiceCollectionExtention.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="mock:///QuoteController.cs" root0="SKIP_HIGHLIGHTING" />
@@ -112,33 +82,75 @@
     <setting file="file://$PROJECT_DIR$/QuotesApi/Models/Quotes/IQuote.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/QuotesApi/Models/Quotes/Quote.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/QuotesApi/Services/QuoteService.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/QuotesApi/Models/Paging/PagingFilter.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/B258C1A1-826F-43E1-B98A-262CDF7DA8CC/a6/3ffadc40/ConfigurationExtensions.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/QuotesApi/Models/Quotes/QuoteDto.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="mock:///Startup.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/0A5CA1E5-288B-4648-B237-C613AAD2B0D2/a4/7674b079/Enumerable.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///JwtService.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/2E593DFC-4324-4392-82E7-79652EBB8125/ad/a83dc084/IGuild.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/9764A487-CD89-48B4-92F1-D4A7FF00F1DE/8/ServiceProvider.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/4CF17712-9ED0-4C5D-874D-48FEBCC62BBD/3F/OpenApiSecurityRequirement.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/15FC8EE0-B149-4033-9665-7BA67955565D/a3/2c7cf7d8/UnauthorizedResult.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/6D11A612-EC1E-407B-9A66-74A2353FB9DE/ca/a17f3ce6/IServiceCollection.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/15FC8EE0-B149-4033-9665-7BA67955565D/b0/7dec3a6d/StatusCodeResult.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/15FC8EE0-B149-4033-9665-7BA67955565D/23/2f5bfe6e/UnauthorizedObjectResult.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/43F02315-C47C-4021-BE0E-9EF26643FC6B/43/6a339472/TokenValidationParameters.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/QuotesApi/Services/UserService.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/43F02315-C47C-4021-BE0E-9EF26643FC6B/46/a381a293/SignatureValidator.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/43F02315-C47C-4021-BE0E-9EF26643FC6B/136/SecurityToken.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/58598FB7-AF5D-42E8-A9CA-4DC1837DCF16/F/JwtBearerDefaults.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///JwtService.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/2E593DFC-4324-4392-82E7-79652EBB8125/01/22a9630f/IUser.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/QuotesApi/Migrations/DatabaseContextModelSnapshot.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/QuotesApi/Migrations/20200715173201_InitialCreateUser.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/QuotesApi/Migrations/20200715173201_InitialCreateUser.Designer.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/QuotesApi/Migrations/20200718103221_AddQuotesTable.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/QuotesApi/Migrations/20200718103221_AddQuotesTable.Designer.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/QuotesApi/Services/JwtService.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/15FC8EE0-B149-4033-9665-7BA67955565D/38/d4793c8e/IStatusCodeActionResult.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/QuotesApi/Exceptions/HttpException.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/QuotesApi/Database/DatabaseContext.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/QuotesApi/Exceptions/NotFoundException.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="mock:///Startup.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/53056687-9C78-46E3-9776-4920413A9984/0f/6aa33ef8/IActionResult.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/QuotesApi/Exceptions/ForbiddenException.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="mock:///JwtService.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/07748561-2722-4130-9BBF-B50D837F391E/51/8777efe3/DiscordRestClient.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/53056687-9C78-46E3-9776-4920413A9984/00/b398d21f/ActionContext.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/QuotesApi/Middlewares/IgnoreMyHttpExceptions.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/9A05716B-5376-4303-B1E4-2ABBA77C0729/b0/2932c1ae/HttpResponseHeader.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/QuotesApi/Extentions/ObjectExtention.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/QuotesApi/Startup.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/2DBFBC25-8F2A-4D07-9DDA-AA146A0B126E/d6/c76f36b6/BindingFlags.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///DatabaseContextModelSnapshot.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/QuotesApi/Models/Users/User.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/QuotesApi/Program.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="mock:///SecurityController.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/QuotesApi/Models/Users/IUser.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="mock:///QuoteService.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/3680BE5F-1887-4743-9788-D707F1CB36B7/9/EntityFrameworkServiceCollectionExtensions.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/3680BE5F-1887-4743-9788-D707F1CB36B7/19F/DbContextServices.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/9F286C10-6AE8-4025-8A8D-FA0B7CEB03DE/3/JwtTokenUtilities.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/3680BE5F-1887-4743-9788-D707F1CB36B7/37/Check.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///SecurityController.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/QuotesApi/Models/Paging/PagingFilter.cs" root0="FORCE_HIGHLIGHTING" />
   </component>
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/QuotesApi/Models/Users/IUser.cs" />
-        <option value="$PROJECT_DIR$/QuotesApi/Controllers/AuthController.cs" />
-        <option value="$PROJECT_DIR$/QuotesApi/Models/Users/LoginResponse.cs" />
         <option value="$PROJECT_DIR$/QuotesApi/Extentions/ObjectExtention.cs" />
         <option value="$PROJECT_DIR$/QuotesApi/Program.cs" />
         <option value="$PROJECT_DIR$/QuotesApi/filters/AddAuthHEaderOperationFilter.cs" />
         <option value="$PROJECT_DIR$/QuotesApi/filters/AddAuthHeaderOperationFilter.cs" />
         <option value="$PROJECT_DIR$/QuotesApi/Models/DbEntity.cs" />
         <option value="$PROJECT_DIR$/QuotesApi/Filters/AddAuthHeaderOperationFilter.cs" />
-        <option value="$PROJECT_DIR$/QuotesApi/appsettings.Development.json" />
         <option value="$PROJECT_DIR$/QuotesApi/Services/IDIService.cs" />
         <option value="$PROJECT_DIR$/QuotesApi/Models/Users/DiscordUser.cs" />
         <option value="$PROJECT_DIR$/QuotesApi/Services/IDiService.cs" />
         <option value="$PROJECT_DIR$/QuotesApi/Extentions/ServiceCollectionExtention.cs" />
-        <option value="$PROJECT_DIR$/QuotesApi/Models/Users/User.cs" />
         <option value="$PROJECT_DIR$/QuotesApi/Controllers/UserController.cs" />
         <option value="$PROJECT_DIR$/QuotesApi/QuotesApi.csproj" />
-        <option value="$PROJECT_DIR$/QuotesApi/appsettings.json" />
         <option value="$PROJECT_DIR$/QuotesApi/Database/DatabaseContext.cs" />
-        <option value="$PROJECT_DIR$/QuotesApi/Services/JwtService.cs" />
-        <option value="$PROJECT_DIR$/QuotesApi/Controllers/SecurityController.cs" />
         <option value="$PROJECT_DIR$/QuotesApi/JsonConverters/IdToStringConverter.cs" />
         <option value="$PROJECT_DIR$/QuotesApi/JsonConverters/ULongToStringConverter.cs" />
         <option value="$PROJECT_DIR$/QuotesApi/Services/DiscordOAuthService.cs" />
@@ -149,7 +161,6 @@
         <option value="$PROJECT_DIR$/QuotesApi/Models/Guilds/Guild.cs" />
         <option value="$PROJECT_DIR$/QuotesApi/IHttpExcpetion.cs" />
         <option value="$PROJECT_DIR$/QuotesApi/Exceptions/IHttpExcpetion.cs" />
-        <option value="$PROJECT_DIR$/QuotesApi/Services/UserService.cs" />
         <option value="$PROJECT_DIR$/QuotesApi/Services/DiscordService.cs" />
         <option value="$PROJECT_DIR$/QuotesApi/Exceptions/HttpException.cs" />
         <option value="$PROJECT_DIR$/QuotesApi/Exceptions/NotFoundException.cs" />
@@ -168,7 +179,16 @@
         <option value="$PROJECT_DIR$/QuotesApi/Exceptions/BadRequestException.cs" />
         <option value="$PROJECT_DIR$/QuotesApi/Controllers/BaseController.cs" />
         <option value="$PROJECT_DIR$/QuotesApi/Controllers/QuoteController.cs" />
+        <option value="$PROJECT_DIR$/QuotesApi/appsettings.Development.json" />
+        <option value="$PROJECT_DIR$/QuotesApi/appsettings.json" />
+        <option value="$PROJECT_DIR$/QuotesApi/Exceptions/UnauthorizedException.cs" />
         <option value="$PROJECT_DIR$/QuotesApi/Startup.cs" />
+        <option value="$PROJECT_DIR$/QuotesApi/Services/JwtService.cs" />
+        <option value="$PROJECT_DIR$/QuotesApi/Models/Users/User.cs" />
+        <option value="$PROJECT_DIR$/QuotesApi/Services/UserService.cs" />
+        <option value="$PROJECT_DIR$/QuotesApi/Models/Security/RefreshTokenDto.cs" />
+        <option value="$PROJECT_DIR$/QuotesApi/Models/Security/RefreshTokenResponse.cs" />
+        <option value="$PROJECT_DIR$/QuotesApi/Controllers/SecurityController.cs" />
       </list>
     </option>
   </component>
@@ -245,7 +265,7 @@
       <workItem from="1594921077157" duration="6013000" />
       <workItem from="1595003246553" duration="7479000" />
       <workItem from="1595067601285" duration="10325000" />
-      <workItem from="1595259088262" duration="4536000" />
+      <workItem from="1595259088262" duration="8804000" />
     </task>
     <task id="LOCAL-00001" summary="initial commit!">
       <created>1594658509163</created>
@@ -282,7 +302,14 @@
       <option name="project" value="LOCAL" />
       <updated>1595077444276</updated>
     </task>
-    <option name="localTasksCounter" value="6" />
+    <task id="LOCAL-00006" summary="Add paging to quotes lists and add caching &amp; compression middleware">
+      <created>1595263659725</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1595263659725</updated>
+    </task>
+    <option name="localTasksCounter" value="7" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -308,7 +335,8 @@
     <MESSAGE value="misc changes" />
     <MESSAGE value="Return guilds with user" />
     <MESSAGE value="Get quotes up and running!" />
-    <option name="LAST_COMMIT_MESSAGE" value="Get quotes up and running!" />
+    <MESSAGE value="Add paging to quotes lists and add caching &amp; compression middleware" />
+    <option name="LAST_COMMIT_MESSAGE" value="Add paging to quotes lists and add caching &amp; compression middleware" />
     <option name="OPTIMIZE_IMPORTS_BEFORE_PROJECT_COMMIT" value="true" />
   </component>
   <component name="WindowStateProjectService">
@@ -328,90 +356,94 @@
       <screen x="1920" y="0" width="1920" height="1080" />
     </state>
     <state x="2664" y="275" key="FileChooserDialogImpl/1920.0.1920.1080/0.0.1920.1038@1920.0.1920.1080" timestamp="1594664998248" />
-    <state width="1874" height="306" key="GridCell.Tab.0.bottom" timestamp="1595263574865">
+    <state width="1874" height="306" key="GridCell.Tab.0.bottom" timestamp="1595268028316">
       <screen x="1920" y="0" width="1920" height="1080" />
     </state>
-    <state width="1874" height="306" key="GridCell.Tab.0.bottom/1920.0.1920.1080/0.0.1920.1038@1920.0.1920.1080" timestamp="1595263574865" />
-    <state width="1874" height="306" key="GridCell.Tab.0.center" timestamp="1595263574865">
+    <state width="1874" height="306" key="GridCell.Tab.0.bottom/1920.0.1920.1080/0.0.1920.1038@1920.0.1920.1080" timestamp="1595268028316" />
+    <state width="1874" height="306" key="GridCell.Tab.0.center" timestamp="1595268028316">
       <screen x="1920" y="0" width="1920" height="1080" />
     </state>
-    <state width="1874" height="306" key="GridCell.Tab.0.center/1920.0.1920.1080/0.0.1920.1038@1920.0.1920.1080" timestamp="1595263574865" />
-    <state width="1874" height="306" key="GridCell.Tab.0.left" timestamp="1595263574865">
+    <state width="1874" height="306" key="GridCell.Tab.0.center/1920.0.1920.1080/0.0.1920.1038@1920.0.1920.1080" timestamp="1595268028316" />
+    <state width="1874" height="306" key="GridCell.Tab.0.left" timestamp="1595268028316">
       <screen x="1920" y="0" width="1920" height="1080" />
     </state>
-    <state width="1874" height="306" key="GridCell.Tab.0.left/1920.0.1920.1080/0.0.1920.1038@1920.0.1920.1080" timestamp="1595263574865" />
-    <state width="1874" height="306" key="GridCell.Tab.0.right" timestamp="1595263574865">
+    <state width="1874" height="306" key="GridCell.Tab.0.left/1920.0.1920.1080/0.0.1920.1038@1920.0.1920.1080" timestamp="1595268028316" />
+    <state width="1874" height="306" key="GridCell.Tab.0.right" timestamp="1595268028316">
       <screen x="1920" y="0" width="1920" height="1080" />
     </state>
-    <state width="1874" height="306" key="GridCell.Tab.0.right/1920.0.1920.1080/0.0.1920.1038@1920.0.1920.1080" timestamp="1595263574865" />
-    <state width="1874" height="306" key="GridCell.Tab.1.bottom" timestamp="1595263574491">
+    <state width="1874" height="306" key="GridCell.Tab.0.right/1920.0.1920.1080/0.0.1920.1038@1920.0.1920.1080" timestamp="1595268028316" />
+    <state width="1874" height="306" key="GridCell.Tab.1.bottom" timestamp="1595268028102">
       <screen x="1920" y="0" width="1920" height="1080" />
     </state>
-    <state width="1874" height="306" key="GridCell.Tab.1.bottom/1920.0.1920.1080/0.0.1920.1038@1920.0.1920.1080" timestamp="1595263574491" />
-    <state width="1874" height="306" key="GridCell.Tab.1.center" timestamp="1595263574491">
+    <state width="1874" height="306" key="GridCell.Tab.1.bottom/1920.0.1920.1080/0.0.1920.1038@1920.0.1920.1080" timestamp="1595268028102" />
+    <state width="1874" height="306" key="GridCell.Tab.1.center" timestamp="1595268028102">
       <screen x="1920" y="0" width="1920" height="1080" />
     </state>
-    <state width="1874" height="306" key="GridCell.Tab.1.center/1920.0.1920.1080/0.0.1920.1038@1920.0.1920.1080" timestamp="1595263574491" />
-    <state width="1874" height="306" key="GridCell.Tab.1.left" timestamp="1595263574491">
+    <state width="1874" height="306" key="GridCell.Tab.1.center/1920.0.1920.1080/0.0.1920.1038@1920.0.1920.1080" timestamp="1595268028102" />
+    <state width="1874" height="306" key="GridCell.Tab.1.left" timestamp="1595268028102">
       <screen x="1920" y="0" width="1920" height="1080" />
     </state>
-    <state width="1874" height="306" key="GridCell.Tab.1.left/1920.0.1920.1080/0.0.1920.1038@1920.0.1920.1080" timestamp="1595263574491" />
-    <state width="1874" height="306" key="GridCell.Tab.1.right" timestamp="1595263574491">
+    <state width="1874" height="306" key="GridCell.Tab.1.left/1920.0.1920.1080/0.0.1920.1038@1920.0.1920.1080" timestamp="1595268028102" />
+    <state width="1874" height="306" key="GridCell.Tab.1.right" timestamp="1595268028102">
       <screen x="1920" y="0" width="1920" height="1080" />
     </state>
-    <state width="1874" height="306" key="GridCell.Tab.1.right/1920.0.1920.1080/0.0.1920.1038@1920.0.1920.1080" timestamp="1595263574491" />
-    <state width="1874" height="306" key="GridCell.Tab.2.bottom" timestamp="1595263574492">
+    <state width="1874" height="306" key="GridCell.Tab.1.right/1920.0.1920.1080/0.0.1920.1038@1920.0.1920.1080" timestamp="1595268028102" />
+    <state width="1874" height="306" key="GridCell.Tab.2.bottom" timestamp="1595268028102">
       <screen x="1920" y="0" width="1920" height="1080" />
     </state>
-    <state width="1874" height="306" key="GridCell.Tab.2.bottom/1920.0.1920.1080/0.0.1920.1038@1920.0.1920.1080" timestamp="1595263574492" />
-    <state width="1874" height="306" key="GridCell.Tab.2.center" timestamp="1595263574492">
+    <state width="1874" height="306" key="GridCell.Tab.2.bottom/1920.0.1920.1080/0.0.1920.1038@1920.0.1920.1080" timestamp="1595268028102" />
+    <state width="1874" height="306" key="GridCell.Tab.2.center" timestamp="1595268028102">
       <screen x="1920" y="0" width="1920" height="1080" />
     </state>
-    <state width="1874" height="306" key="GridCell.Tab.2.center/1920.0.1920.1080/0.0.1920.1038@1920.0.1920.1080" timestamp="1595263574492" />
-    <state width="1874" height="306" key="GridCell.Tab.2.left" timestamp="1595263574491">
+    <state width="1874" height="306" key="GridCell.Tab.2.center/1920.0.1920.1080/0.0.1920.1038@1920.0.1920.1080" timestamp="1595268028102" />
+    <state width="1874" height="306" key="GridCell.Tab.2.left" timestamp="1595268028102">
       <screen x="1920" y="0" width="1920" height="1080" />
     </state>
-    <state width="1874" height="306" key="GridCell.Tab.2.left/1920.0.1920.1080/0.0.1920.1038@1920.0.1920.1080" timestamp="1595263574491" />
-    <state width="1874" height="306" key="GridCell.Tab.2.right" timestamp="1595263574492">
+    <state width="1874" height="306" key="GridCell.Tab.2.left/1920.0.1920.1080/0.0.1920.1038@1920.0.1920.1080" timestamp="1595268028102" />
+    <state width="1874" height="306" key="GridCell.Tab.2.right" timestamp="1595268028102">
       <screen x="1920" y="0" width="1920" height="1080" />
     </state>
-    <state width="1874" height="306" key="GridCell.Tab.2.right/1920.0.1920.1080/0.0.1920.1038@1920.0.1920.1080" timestamp="1595263574492" />
-    <state width="1874" height="306" key="GridCell.Tab.3.bottom" timestamp="1595263574492">
+    <state width="1874" height="306" key="GridCell.Tab.2.right/1920.0.1920.1080/0.0.1920.1038@1920.0.1920.1080" timestamp="1595268028102" />
+    <state width="1874" height="306" key="GridCell.Tab.3.bottom" timestamp="1595268028102">
       <screen x="1920" y="0" width="1920" height="1080" />
     </state>
-    <state width="1874" height="306" key="GridCell.Tab.3.bottom/1920.0.1920.1080/0.0.1920.1038@1920.0.1920.1080" timestamp="1595263574492" />
-    <state width="1874" height="306" key="GridCell.Tab.3.center" timestamp="1595263574492">
+    <state width="1874" height="306" key="GridCell.Tab.3.bottom/1920.0.1920.1080/0.0.1920.1038@1920.0.1920.1080" timestamp="1595268028102" />
+    <state width="1874" height="306" key="GridCell.Tab.3.center" timestamp="1595268028102">
       <screen x="1920" y="0" width="1920" height="1080" />
     </state>
-    <state width="1874" height="306" key="GridCell.Tab.3.center/1920.0.1920.1080/0.0.1920.1038@1920.0.1920.1080" timestamp="1595263574492" />
-    <state width="1874" height="306" key="GridCell.Tab.3.left" timestamp="1595263574492">
+    <state width="1874" height="306" key="GridCell.Tab.3.center/1920.0.1920.1080/0.0.1920.1038@1920.0.1920.1080" timestamp="1595268028102" />
+    <state width="1874" height="306" key="GridCell.Tab.3.left" timestamp="1595268028102">
       <screen x="1920" y="0" width="1920" height="1080" />
     </state>
-    <state width="1874" height="306" key="GridCell.Tab.3.left/1920.0.1920.1080/0.0.1920.1038@1920.0.1920.1080" timestamp="1595263574492" />
-    <state width="1874" height="306" key="GridCell.Tab.3.right" timestamp="1595263574492">
+    <state width="1874" height="306" key="GridCell.Tab.3.left/1920.0.1920.1080/0.0.1920.1038@1920.0.1920.1080" timestamp="1595268028102" />
+    <state width="1874" height="306" key="GridCell.Tab.3.right" timestamp="1595268028102">
       <screen x="1920" y="0" width="1920" height="1080" />
     </state>
-    <state width="1874" height="306" key="GridCell.Tab.3.right/1920.0.1920.1080/0.0.1920.1038@1920.0.1920.1080" timestamp="1595263574492" />
-    <state width="1874" height="306" key="GridCell.Tab.4.bottom" timestamp="1595263574492">
+    <state width="1874" height="306" key="GridCell.Tab.3.right/1920.0.1920.1080/0.0.1920.1038@1920.0.1920.1080" timestamp="1595268028102" />
+    <state width="1874" height="306" key="GridCell.Tab.4.bottom" timestamp="1595268028102">
       <screen x="1920" y="0" width="1920" height="1080" />
     </state>
-    <state width="1874" height="306" key="GridCell.Tab.4.bottom/1920.0.1920.1080/0.0.1920.1038@1920.0.1920.1080" timestamp="1595263574492" />
-    <state width="1874" height="306" key="GridCell.Tab.4.center" timestamp="1595263574492">
+    <state width="1874" height="306" key="GridCell.Tab.4.bottom/1920.0.1920.1080/0.0.1920.1038@1920.0.1920.1080" timestamp="1595268028102" />
+    <state width="1874" height="306" key="GridCell.Tab.4.center" timestamp="1595268028102">
       <screen x="1920" y="0" width="1920" height="1080" />
     </state>
-    <state width="1874" height="306" key="GridCell.Tab.4.center/1920.0.1920.1080/0.0.1920.1038@1920.0.1920.1080" timestamp="1595263574492" />
-    <state width="1874" height="306" key="GridCell.Tab.4.left" timestamp="1595263574492">
+    <state width="1874" height="306" key="GridCell.Tab.4.center/1920.0.1920.1080/0.0.1920.1038@1920.0.1920.1080" timestamp="1595268028102" />
+    <state width="1874" height="306" key="GridCell.Tab.4.left" timestamp="1595268028102">
       <screen x="1920" y="0" width="1920" height="1080" />
     </state>
-    <state width="1874" height="306" key="GridCell.Tab.4.left/1920.0.1920.1080/0.0.1920.1038@1920.0.1920.1080" timestamp="1595263574492" />
-    <state width="1874" height="306" key="GridCell.Tab.4.right" timestamp="1595263574492">
+    <state width="1874" height="306" key="GridCell.Tab.4.left/1920.0.1920.1080/0.0.1920.1038@1920.0.1920.1080" timestamp="1595268028102" />
+    <state width="1874" height="306" key="GridCell.Tab.4.right" timestamp="1595268028102">
       <screen x="1920" y="0" width="1920" height="1080" />
     </state>
-    <state width="1874" height="306" key="GridCell.Tab.4.right/1920.0.1920.1080/0.0.1920.1038@1920.0.1920.1080" timestamp="1595263574492" />
+    <state width="1874" height="306" key="GridCell.Tab.4.right/1920.0.1920.1080/0.0.1920.1038@1920.0.1920.1080" timestamp="1595268028102" />
     <state x="2566" y="173" width="385" height="698" key="RiderGenerateDialog" timestamp="1595018460939">
       <screen x="1920" y="0" width="1920" height="1080" />
     </state>
     <state x="2566" y="173" width="385" height="698" key="RiderGenerateDialog/1920.0.1920.1080/0.0.1920.1038@1920.0.1920.1080" timestamp="1595018460939" />
+    <state x="2629" y="208" key="RollbackChangesDialog" timestamp="1595267578523">
+      <screen x="1920" y="0" width="1920" height="1080" />
+    </state>
+    <state x="2629" y="208" key="RollbackChangesDialog/1920.0.1920.1080/0.0.1920.1038@1920.0.1920.1080" timestamp="1595267578523" />
     <state x="2377" y="152" key="SettingsEditor" timestamp="1595010718893">
       <screen x="1920" y="0" width="1920" height="1080" />
     </state>
@@ -420,10 +452,10 @@
       <screen x="1920" y="0" width="1920" height="1080" />
     </state>
     <state x="2020" y="100" width="1720" height="838" key="VCS.FileHistoryDialog/1920.0.1920.1080/0.0.1920.1038@1920.0.1920.1080" timestamp="1595259502845" />
-    <state x="2476" y="239" key="Vcs.Push.Dialog.v2" timestamp="1595077448314">
+    <state x="2476" y="239" key="Vcs.Push.Dialog.v2" timestamp="1595263662021">
       <screen x="1920" y="0" width="1920" height="1080" />
     </state>
-    <state x="2476" y="239" key="Vcs.Push.Dialog.v2/1920.0.1920.1080/0.0.1920.1038@1920.0.1920.1080" timestamp="1595077448314" />
+    <state x="2476" y="239" key="Vcs.Push.Dialog.v2/1920.0.1920.1080/0.0.1920.1038@1920.0.1920.1080" timestamp="1595263662021" />
     <state width="960" height="519" key="XDebugger.FullValuePopup" timestamp="1594923763835">
       <screen x="1920" y="0" width="1920" height="1080" />
     </state>

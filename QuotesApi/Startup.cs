@@ -49,7 +49,7 @@ namespace QuotesApi
             {
                 options.SwaggerDoc("v1", new OpenApiInfo { Title = "QuotesAPI"});
                 
-                options.IncludeXmlComments(Path.Combine(System.AppContext.BaseDirectory, "QuotesApi.xml"));
+                options.IncludeXmlComments(Path.Combine(AppContext.BaseDirectory, "QuotesApi.xml"));
 
                 options.AddSecurityDefinition("Bearer", new OpenApiSecurityScheme
                 {
@@ -88,7 +88,7 @@ namespace QuotesApi
             {
                 ApiResultSettings.ExposeExceptions = true;
             }
-            
+
             app.UseExceptionHandler(errorApp =>
             {
                 errorApp.Run(async context =>
@@ -127,7 +127,7 @@ namespace QuotesApi
             app.UseRouting()
                 .UseAuthentication()
                 .UseAuthorization()
-                .UseCors()
+                .UseCors(Configuration["AllowedHosts"])
                 .UseResponseCompression()
                 .UseSwagger()
                 .UseSwaggerUI(o =>

@@ -10,36 +10,35 @@ namespace QuotesApi.Services
 {
     public class JwtService : ISingletonDiService
     {
-        private const int ValidForMins = 15;
         public const string Issuer = "Disquotes API";
         public const string Audience = "Disquotes Client";
         public const string AccountIdField = "Account-ID";
         public const string DiscordIdField = "Discord-ID";
 
-        private readonly string _secret;
+        private static readonly TimeSpan AccessTokenValidFor = TimeSpan.FromMinutes(15);
+
         private readonly JwtSecurityTokenHandler _tokenHandler;
-        
+        private byte[] _key;
+
         public JwtService(IConfiguration config)
         {
-            _secret = config["Jwt:Secret"];
+            _key = Encoding.UTF8.GetBytes(config["Jwt:Secret"]);
             _tokenHandler = new JwtSecurityTokenHandler();
         }
 
-        public string CreateTokenFor(User user)
+        public string CreateAccessTokenFor(User user)
         {
-            var key = Encoding.UTF8.GetBytes(_secret);
-
             var tokenDescriptor = new SecurityTokenDescriptor
             {
-                Subject = new ClaimsIdentity(new Claim[] 
+                Subject = new ClaimsIdentity(new[] 
                 {
                     new Claim(AccountIdField, user.Id.ToString()),
                     new Claim(DiscordIdField, user.DiscordId.ToString()), 
                 }),
                 Issuer = Issuer,
                 Audience = Audience,
-                Expires = DateTime.UtcNow.AddMinutes(ValidForMins),
-                SigningCredentials = new SigningCredentials(new SymmetricSecurityKey(key), SecurityAlgorithms.HmacSha256Signature)
+                Expires = DateTime.UtcNow.Add(AccessTokenValidFor),
+                SigningCredentials = new SigningCredentials(new SymmetricSecurityKey(_key), SecurityAlgorithms.HmacSha256Signature)
             };
 
             var token = _tokenHandler.CreateToken(tokenDescriptor);

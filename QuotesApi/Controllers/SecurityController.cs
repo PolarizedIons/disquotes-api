@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using QuotesApi.Models;
+using QuotesApi.Models.Security;
 using QuotesApi.Models.Users;
 using QuotesApi.Services;
 
@@ -58,9 +59,12 @@ namespace QuotesApi.Controllers
             }
 
             var discordUser = await _discordOAuthService.GetUserFromAuthToken(discordAuthToken);
-            var user = await _userService.CreateOrUpdateUser(discordUser);
-            var jwtToken = _jwtService.CreateTokenFor(user);
-            return Redirect(_config["Discord:FrontendUrl"].Replace("{token}", jwtToken));
+            var user = await _userService.LoginDiscordUser(discordUser);
+            var accessToken = _jwtService.CreateAccessTokenFor(user);
+            return Redirect(_config["Discord:FrontendUrl"]
+                .Replace("{access_token}", accessToken)
+                .Replace("{refresh_token}", user.RefreshToken.ToString())
+            );
         }
 
         /// <summary>
@@ -76,6 +80,28 @@ namespace QuotesApi.Controllers
         {
             var user = await _userService.FindUser(UserId, true);
             return Ok(user);
+        }
+
+        /// <summary>
+        /// Get a new Access and Refresh token from a valid Refresh Token.
+        /// </summary>
+        /// <param name="refreshTokenDto"></param>
+        [
+            HttpPost("refresh"),
+            AllowAnonymous,
+            ProducesResponseType(typeof(ApiResult<RefreshTokenResponse>), 200),
+            ProducesResponseType(typeof(ApiResult<object>), 401)
+        ]
+        public async Task<ApiResult<RefreshTokenResponse>> RefreshToken([FromBody] RefreshTokenDto refreshTokenDto)
+        {
+            _userService.ValidateRefreshToken(refreshTokenDto.AccountId, refreshTokenDto.RefreshToken);
+            var user = await _userService.UpdateRefreshToken(refreshTokenDto.AccountId);
+            return Ok(new RefreshTokenResponse
+            {
+                AccessToken = _jwtService.CreateAccessTokenFor(user),
+                RefreshToken = user.RefreshToken.Value.ToString(),
+                RefreshTokenExpires = user.RefreshTokenExpires.Value,
+            });
         }
     }
 }
