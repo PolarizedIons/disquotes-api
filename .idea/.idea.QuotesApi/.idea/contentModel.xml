@@ -15,6 +15,7 @@
           <e p="DatabaseContext.cs" t="Include" />
         </e>
         <e p="Exceptions" t="Include">
+          <e p="BadRequestException.cs" t="Include" />
           <e p="ForbiddenException.cs" t="Include" />
           <e p="HttpException.cs" t="Include" />
           <e p="NotFoundException.cs" t="Include" />
@@ -42,6 +43,10 @@
           <e p="DbEntity.cs" t="Include" />
           <e p="Guilds" t="Include">
             <e p="Guild.cs" t="Include" />
+          </e>
+          <e p="Paging" t="Include">
+            <e p="PagedResponse.cs" t="Include" />
+            <e p="PagingFilter.cs" t="Include" />
           </e>
           <e p="Quotes" t="Include">
             <e p="IQuote.cs" t="Include" />

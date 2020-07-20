@@ -1,3 +1,4 @@
+using System;
 using System.IO;
 using System.Net.Http;
 using System.Text.Json;
@@ -6,6 +7,7 @@ using Microsoft.AspNetCore.Diagnostics;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.ResponseCompression;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -62,6 +64,11 @@ namespace QuotesApi
                 options.OperationFilter<AddAuthHeaderOperationFilter>();
             });
 
+            services.AddResponseCompression(options =>
+            {
+                options.Providers.Add<GzipCompressionProvider>();
+            });
+
             services.AddSingleton<HttpClient>();
             services.DiscoverAndMakeDiServicesAvailable();
         }
@@ -102,11 +109,26 @@ namespace QuotesApi
                 var response = (ApiResult<object>) new ObjectResult(null) { StatusCode = context.HttpContext.Response.StatusCode };
                 await context.HttpContext.Response.WriteAsync(JsonSerializer.Serialize(response, new JsonSerializerOptions { PropertyNamingPolicy = JsonNamingPolicy.CamelCase }));
             });
+            
+            // Caching
+            app.Use(async (context, next) =>
+            {
+                context.Response.GetTypedHeaders().CacheControl = 
+                    new Microsoft.Net.Http.Headers.CacheControlHeaderValue()
+                    {
+                        Public = true,
+                        MaxAge = TimeSpan.FromSeconds(30)
+                    };
+                context.Response.Headers[Microsoft.Net.Http.Headers.HeaderNames.Vary] = new[] { "Accept-Encoding" };
+
+                await next();
+            });
 
             app.UseRouting()
                 .UseAuthentication()
                 .UseAuthorization()
                 .UseCors()
+                .UseResponseCompression()
                 .UseSwagger()
                 .UseSwaggerUI(o =>
                 {

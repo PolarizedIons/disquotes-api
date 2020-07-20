@@ -1,11 +1,11 @@
 using System;
-using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using QuotesApi.Exceptions;
 using QuotesApi.Models;
+using QuotesApi.Models.Paging;
 using QuotesApi.Models.Quotes;
 using QuotesApi.Services;
 
@@ -28,33 +28,37 @@ namespace QuotesApi.Controllers
         /// </summary>
         /// <param name="guildsFilter">(Optional) Comma separated list of guilds to retrieve.
         /// Defaults to, and is limited to, the authorized user's guilds</param>
+        /// <param name="pagingFilter">Paging</param>
         [
             HttpGet,
-            ProducesResponseType(typeof(ApiResult<IEnumerable<Quote>>), 200),
+            ProducesResponseType(typeof(ApiResult<PagedResponse<Quote>>), 200),
             Authorize
         ]
-        public async Task<ApiResult<IEnumerable<Quote>>> GetApprovedQuotes([FromQuery] string? guildsFilter)
+        public async Task<ApiResult<PagedResponse<Quote>>> GetApprovedQuotes([FromQuery] string? guildsFilter, [FromQuery] PagingFilter pagingFilter)
         {
+            ValidatePagingFilter(pagingFilter);
             var userGuilds = (await _discordService.GetGuildsFor(UserDiscordId)).Select(x => x.Id.ToString());
             var filter = guildsFilter?.Split(",").Where(x => userGuilds.Contains(x)) ?? userGuilds;
-            return Ok(_quoteService.FindApproved(filter));
+            return Ok(_quoteService.FindApproved(filter, pagingFilter));
         }
-        
+
         /// <summary>
         /// Gets unapproved quotes. Limited to quotes in guilds the authorized user is admin in.
         /// </summary>
         /// <param name="guildsFilter">(Optional) Comma separated list of guilds to retrieve.
         /// Defaults to, and is limuted to, the authorized user's guilds where they are the owener</param>
+        /// <param name="pagingFilter">Paging</param>
         [
             HttpGet("unmoderated"),
-            ProducesResponseType(typeof(ApiResult<IEnumerable<Quote>>), 200),
+            ProducesResponseType(typeof(ApiResult<PagedResponse<Quote>>), 200),
             Authorize
         ]
-        public async Task<ApiResult<IEnumerable<Quote>>> GetUnapprovedQuotes([FromQuery] string? guildsFilter)
+        public async Task<ApiResult<PagedResponse<Quote>>> GetUnapprovedQuotes([FromQuery] string? guildsFilter, [FromQuery] PagingFilter pagingFilter)
         {
+            ValidatePagingFilter(pagingFilter);
             var userGuilds = (await _discordService.GetGuildsFor(UserDiscordId)).Where(x => x.OwnerId == UserDiscordId).Select(x => x.Id.ToString());
             var filter = guildsFilter?.Split(",").Where(x => userGuilds.Contains(x)) ?? userGuilds;
-            return Ok(_quoteService.FindUnapproved(filter));
+            return Ok(_quoteService.FindUnapproved(filter, pagingFilter));
         }
 
         /// <summary>

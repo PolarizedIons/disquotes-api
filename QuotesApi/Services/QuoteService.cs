@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using QuotesApi.Database;
 using QuotesApi.Exceptions;
+using QuotesApi.Models.Paging;
 using QuotesApi.Models.Quotes;
 
 namespace QuotesApi.Services
@@ -35,22 +36,49 @@ namespace QuotesApi.Services
             return quote;
         }
 
-        public IEnumerable<Quote> FindApproved(IEnumerable<string> guildFilter)
+        public PagedResponse<Quote> FindApproved(IEnumerable<string> guildFilter, PagingFilter pagingFilter)
         {
             var query = _db.Quotes.AsQueryable()
-                .Where(x => x.Approved && x.DeletedAt == null)
+                .Where(x => x.Approved)
+                .Where(x => x.DeletedAt == null)
                 .Where(x => guildFilter.Contains(x.GuildId));
-
-            return query;
+                
+            var data = query
+                .Skip((pagingFilter.PageNumber - 1) * pagingFilter.PageSize)
+                .Take(pagingFilter.PageSize);
+            var totalCount = query.Count();
+            
+            return new PagedResponse<Quote>
+            {
+                Items = data,
+                TotalRows = totalCount,
+                HasNext = (pagingFilter.PageNumber * pagingFilter.PageSize) < totalCount,
+                HasPrevious = pagingFilter.PageNumber > 1,
+                PageNumber = pagingFilter.PageNumber,
+                PageSize = pagingFilter.PageSize,
+            };
         }
 
-        public IEnumerable<Quote> FindUnapproved(IEnumerable<string> guildFilter)
+        public PagedResponse<Quote> FindUnapproved(IEnumerable<string> guildFilter, PagingFilter pagingFilter)
         {
             var query = _db.Quotes.AsQueryable()
                 .Where(x => !x.Approved && x.DeletedAt == null)
                 .Where(x => guildFilter.Contains(x.GuildId));
           
-            return query;
+            var data = query
+                .Skip((pagingFilter.PageNumber - 1) * pagingFilter.PageSize)
+                .Take(pagingFilter.PageSize);
+            var totalCount = query.Count();
+
+            return new PagedResponse<Quote>
+            {
+                Items = data,
+                TotalRows = totalCount,
+                HasNext = (pagingFilter.PageNumber * pagingFilter.PageSize) < totalCount,
+                HasPrevious = pagingFilter.PageNumber > 1,
+                PageNumber = pagingFilter.PageNumber,
+                PageSize = pagingFilter.PageSize,
+            };
         }
 
         public async Task<Quote> ApproveQuote(Guid quoteId)
