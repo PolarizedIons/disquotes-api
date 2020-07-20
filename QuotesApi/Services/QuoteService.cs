@@ -11,11 +11,15 @@ namespace QuotesApi.Services
 {
     public class QuoteService : IScopedDiService
     {
-        private DatabaseContext _db;
+        private readonly DatabaseContext _db;
+        private readonly DiscordService _discordService;
+        private readonly UserService _userService;
 
-        public QuoteService(DatabaseContext db)
+        public QuoteService(DatabaseContext db, UserService userService, DiscordService discordService)
         {
             _db = db;
+            _userService = userService;
+            _discordService = discordService;
         }
 
         public Quote FindById(Guid quoteId, bool onlyApproved = true)
@@ -95,6 +99,9 @@ namespace QuotesApi.Services
             quote.QuoteNumber = maxQuoteNumber + 1;
             await _db.SaveChangesAsync();
 
+            var user = await _userService.FindUser(quote.UserId);
+            await _discordService.SendQuoteNotification(ulong.Parse(quote.GuildId), user.DiscordId, quote);
+
             return quote;
         }
 
@@ -103,13 +110,18 @@ namespace QuotesApi.Services
             var newQuote = new Quote
             {
                 Approved = false,
+                Title = quote.Title,
                 Text = quote.Text,
                 GuildId = quote.GuildId,
                 UserId = userId,
             };
-            
+
             await _db.Quotes.AddAsync(newQuote);
             await _db.SaveChangesAsync();
+
+            var user = await _userService.FindUser(userId);
+            await _discordService.SendQuoteNotification(ulong.Parse(quote.GuildId), user.DiscordId, newQuote);
+            
             return newQuote;
         }
     }

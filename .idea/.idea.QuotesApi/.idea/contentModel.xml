@@ -39,6 +39,8 @@
           <e p="20200718103221_AddQuotesTable.cs" t="Include" />
           <e p="20200720175435_AddRefreshTokenToUser.Designer.cs" t="Include" />
           <e p="20200720175435_AddRefreshTokenToUser.cs" t="Include" />
+          <e p="20200720184054_AddQuoteTitle.Designer.cs" t="Include" />
+          <e p="20200720184054_AddQuoteTitle.cs" t="Include" />
           <e p="DatabaseContextModelSnapshot.cs" t="Include" />
         </e>
         <e p="Models" t="Include">

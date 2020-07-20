@@ -8,6 +8,7 @@ namespace QuotesApi.Models.Quotes
         public string GuildId { get; set; }
         public bool Approved { get; set; }
         public int? QuoteNumber { get; set; }
+        public string Title { get; set; }
         public string Text { get; set; }
     }
 }

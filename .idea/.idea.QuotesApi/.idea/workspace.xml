@@ -10,20 +10,17 @@
     <select />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="1a84013b-dd73-4f1a-b9eb-6107adf3b20a" name="Default Changelist" comment="Add paging to quotes lists and add caching &amp; compression middleware">
-      <change afterPath="$PROJECT_DIR$/QuotesApi/Exceptions/UnauthorizedException.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/QuotesApi/Migrations/20200720175435_AddRefreshTokenToUser.Designer.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/QuotesApi/Migrations/20200720175435_AddRefreshTokenToUser.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/QuotesApi/Models/Security/RefreshTokenDto.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/QuotesApi/Models/Security/RefreshTokenResponse.cs" afterDir="false" />
+    <list default="true" id="1a84013b-dd73-4f1a-b9eb-6107adf3b20a" name="Default Changelist" comment="Add Refresh Token to extend login session">
+      <change afterPath="$PROJECT_DIR$/QuotesApi/Migrations/20200720184054_AddQuoteTitle.Designer.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/QuotesApi/Migrations/20200720184054_AddQuoteTitle.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/.idea.QuotesApi/.idea/contentModel.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.QuotesApi/.idea/contentModel.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/.idea.QuotesApi/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.QuotesApi/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/QuotesApi/Controllers/SecurityController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/QuotesApi/Controllers/SecurityController.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/QuotesApi/Migrations/DatabaseContextModelSnapshot.cs" beforeDir="false" afterPath="$PROJECT_DIR$/QuotesApi/Migrations/DatabaseContextModelSnapshot.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/QuotesApi/Models/Users/User.cs" beforeDir="false" afterPath="$PROJECT_DIR$/QuotesApi/Models/Users/User.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/QuotesApi/Services/JwtService.cs" beforeDir="false" afterPath="$PROJECT_DIR$/QuotesApi/Services/JwtService.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/QuotesApi/Services/UserService.cs" beforeDir="false" afterPath="$PROJECT_DIR$/QuotesApi/Services/UserService.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/QuotesApi/Startup.cs" beforeDir="false" afterPath="$PROJECT_DIR$/QuotesApi/Startup.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/QuotesApi/Models/Quotes/IQuote.cs" beforeDir="false" afterPath="$PROJECT_DIR$/QuotesApi/Models/Quotes/IQuote.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/QuotesApi/Models/Quotes/Quote.cs" beforeDir="false" afterPath="$PROJECT_DIR$/QuotesApi/Models/Quotes/Quote.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/QuotesApi/Models/Quotes/QuoteDto.cs" beforeDir="false" afterPath="$PROJECT_DIR$/QuotesApi/Models/Quotes/QuoteDto.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/QuotesApi/Services/DiscordService.cs" beforeDir="false" afterPath="$PROJECT_DIR$/QuotesApi/Services/DiscordService.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/QuotesApi/Services/QuoteService.cs" beforeDir="false" afterPath="$PROJECT_DIR$/QuotesApi/Services/QuoteService.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/QuotesApi/appsettings.json" beforeDir="false" afterPath="$PROJECT_DIR$/QuotesApi/appsettings.json" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -68,13 +65,19 @@
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/15FC8EE0-B149-4033-9665-7BA67955565D/18/ccc14360/OkObjectResult.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/15FC8EE0-B149-4033-9665-7BA67955565D/2e/d765f892/ObjectResult.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="mock:///BaseController.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/QuotesApi/Migrations/20200720184054_AddQuoteTitle.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/E583FA12-DD2C-45FD-92F7-472427BBDCF2/64/43877264/HttpStatusCode.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///Dummy.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/QuotesApi/Extentions/StringExtention.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="mock:///DatabaseContextModelSnapshot.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/07748561-2722-4130-9BBF-B50D837F391E/e0/f7a9ca10/RestTextChannel.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/F1434CB9-D49E-4705-9D67-B7E91A6F736C/55/18ad6776/IWebHostEnvironment.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/07748561-2722-4130-9BBF-B50D837F391E/4e/e26d86b8/ChannelHelper.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/QuotesApi/Controllers/UserController.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/1DF455D4-C575-41CC-A5A9-472AB29AF746/d4/f8ee360e/IHostEnvironment.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/07748561-2722-4130-9BBF-B50D837F391E/56/aed449e4/RestUserMessage.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/1DF455D4-C575-41CC-A5A9-472AB29AF746/7d/b777e55e/HostEnvironmentEnvExtensions.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/07748561-2722-4130-9BBF-B50D837F391E/ac/f6463a3f/DiscordRestApiClient.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/QuotesApi/Extentions/ServiceCollectionExtention.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="mock:///QuoteController.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/QuotesApi/Controllers/QuoteController.cs" root0="FORCE_HIGHLIGHTING" />
@@ -89,6 +92,7 @@
     <setting file="mock:///JwtService.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/2E593DFC-4324-4392-82E7-79652EBB8125/ad/a83dc084/IGuild.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/9764A487-CD89-48B4-92F1-D4A7FF00F1DE/8/ServiceProvider.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///User.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/4CF17712-9ED0-4C5D-874D-48FEBCC62BBD/3F/OpenApiSecurityRequirement.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/15FC8EE0-B149-4033-9665-7BA67955565D/a3/2c7cf7d8/UnauthorizedResult.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/6D11A612-EC1E-407B-9A66-74A2353FB9DE/ca/a17f3ce6/IServiceCollection.cs" root0="SKIP_HIGHLIGHTING" />
@@ -97,6 +101,7 @@
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/43F02315-C47C-4021-BE0E-9EF26643FC6B/43/6a339472/TokenValidationParameters.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/QuotesApi/Services/UserService.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/43F02315-C47C-4021-BE0E-9EF26643FC6B/46/a381a293/SignatureValidator.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///UserService.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/43F02315-C47C-4021-BE0E-9EF26643FC6B/136/SecurityToken.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/58598FB7-AF5D-42E8-A9CA-4DC1837DCF16/F/JwtBearerDefaults.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="mock:///JwtService.cs" root0="SKIP_HIGHLIGHTING" />
@@ -154,21 +159,16 @@
         <option value="$PROJECT_DIR$/QuotesApi/JsonConverters/IdToStringConverter.cs" />
         <option value="$PROJECT_DIR$/QuotesApi/JsonConverters/ULongToStringConverter.cs" />
         <option value="$PROJECT_DIR$/QuotesApi/Services/DiscordOAuthService.cs" />
-        <option value="$PROJECT_DIR$/QuotesApi/Models/Quotes/QuoteDto.cs" />
-        <option value="$PROJECT_DIR$/QuotesApi/Models/Quotes/IQuote.cs" />
         <option value="$PROJECT_DIR$/QuotesApi/Migrations/DatabaseContextModelSnapshot.cs" />
-        <option value="$PROJECT_DIR$/QuotesApi/Models/Quotes/Quote.cs" />
         <option value="$PROJECT_DIR$/QuotesApi/Models/Guilds/Guild.cs" />
         <option value="$PROJECT_DIR$/QuotesApi/IHttpExcpetion.cs" />
         <option value="$PROJECT_DIR$/QuotesApi/Exceptions/IHttpExcpetion.cs" />
-        <option value="$PROJECT_DIR$/QuotesApi/Services/DiscordService.cs" />
         <option value="$PROJECT_DIR$/QuotesApi/Exceptions/HttpException.cs" />
         <option value="$PROJECT_DIR$/QuotesApi/Exceptions/NotFoundException.cs" />
         <option value="$PROJECT_DIR$/QuotesApi/Exceptions/ForbiddenException.cs" />
         <option value="$PROJECT_DIR$/QuotesApi/Middlewares/IgnoreMyHttpExcpetions.cs" />
         <option value="$PROJECT_DIR$/QuotesApi/Validators/MaxValueAttribute.cs" />
         <option value="$PROJECT_DIR$/QuotesApi/Validators/MinValueAttribute.cs" />
-        <option value="$PROJECT_DIR$/QuotesApi/Services/QuoteService.cs" />
         <option value="$PROJECT_DIR$/QuotesApi/Models/Paging/PagedResponse.cs" />
         <option value="$PROJECT_DIR$/QuotesApi/Models/ApiResult.cs" />
         <option value="$PROJECT_DIR$/QuotesApi/Filters/CustomValidationResultFilter.cs" />
@@ -179,8 +179,6 @@
         <option value="$PROJECT_DIR$/QuotesApi/Exceptions/BadRequestException.cs" />
         <option value="$PROJECT_DIR$/QuotesApi/Controllers/BaseController.cs" />
         <option value="$PROJECT_DIR$/QuotesApi/Controllers/QuoteController.cs" />
-        <option value="$PROJECT_DIR$/QuotesApi/appsettings.Development.json" />
-        <option value="$PROJECT_DIR$/QuotesApi/appsettings.json" />
         <option value="$PROJECT_DIR$/QuotesApi/Exceptions/UnauthorizedException.cs" />
         <option value="$PROJECT_DIR$/QuotesApi/Startup.cs" />
         <option value="$PROJECT_DIR$/QuotesApi/Services/JwtService.cs" />
@@ -189,6 +187,13 @@
         <option value="$PROJECT_DIR$/QuotesApi/Models/Security/RefreshTokenDto.cs" />
         <option value="$PROJECT_DIR$/QuotesApi/Models/Security/RefreshTokenResponse.cs" />
         <option value="$PROJECT_DIR$/QuotesApi/Controllers/SecurityController.cs" />
+        <option value="$PROJECT_DIR$/QuotesApi/Models/Quotes/Quote.cs" />
+        <option value="$PROJECT_DIR$/QuotesApi/appsettings.json" />
+        <option value="$PROJECT_DIR$/QuotesApi/appsettings.Development.json" />
+        <option value="$PROJECT_DIR$/QuotesApi/Models/Quotes/IQuote.cs" />
+        <option value="$PROJECT_DIR$/QuotesApi/Models/Quotes/QuoteDto.cs" />
+        <option value="$PROJECT_DIR$/QuotesApi/Services/QuoteService.cs" />
+        <option value="$PROJECT_DIR$/QuotesApi/Services/DiscordService.cs" />
       </list>
     </option>
   </component>
@@ -265,7 +270,7 @@
       <workItem from="1594921077157" duration="6013000" />
       <workItem from="1595003246553" duration="7479000" />
       <workItem from="1595067601285" duration="10325000" />
-      <workItem from="1595259088262" duration="8804000" />
+      <workItem from="1595259088262" duration="13735000" />
     </task>
     <task id="LOCAL-00001" summary="initial commit!">
       <created>1594658509163</created>
@@ -309,7 +314,14 @@
       <option name="project" value="LOCAL" />
       <updated>1595263659725</updated>
     </task>
-    <option name="localTasksCounter" value="7" />
+    <task id="LOCAL-00007" summary="Add Refresh Token to extend login session">
+      <created>1595268260576</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1595268260576</updated>
+    </task>
+    <option name="localTasksCounter" value="8" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -336,14 +348,15 @@
     <MESSAGE value="Return guilds with user" />
     <MESSAGE value="Get quotes up and running!" />
     <MESSAGE value="Add paging to quotes lists and add caching &amp; compression middleware" />
-    <option name="LAST_COMMIT_MESSAGE" value="Add paging to quotes lists and add caching &amp; compression middleware" />
+    <MESSAGE value="Add Refresh Token to extend login session" />
+    <option name="LAST_COMMIT_MESSAGE" value="Add Refresh Token to extend login session" />
     <option name="OPTIMIZE_IMPORTS_BEFORE_PROJECT_COMMIT" value="true" />
   </component>
   <component name="WindowStateProjectService">
-    <state x="3135" y="377" key="#xdebugger.evaluate" timestamp="1595075446958">
+    <state x="3135" y="377" key="#xdebugger.evaluate" timestamp="1595271403449">
       <screen x="1920" y="0" width="1920" height="1080" />
     </state>
-    <state x="3135" y="377" key="#xdebugger.evaluate/1920.0.1920.1080/0.0.1920.1038@1920.0.1920.1080" timestamp="1595075446958" />
+    <state x="3135" y="377" key="#xdebugger.evaluate/1920.0.1920.1080/0.0.1920.1038@1920.0.1920.1080" timestamp="1595271403449" />
     <state width="479" height="505" key="DebuggerActiveHint" timestamp="1595075246699">
       <screen x="1920" y="0" width="1920" height="1080" />
     </state>
@@ -356,86 +369,90 @@
       <screen x="1920" y="0" width="1920" height="1080" />
     </state>
     <state x="2664" y="275" key="FileChooserDialogImpl/1920.0.1920.1080/0.0.1920.1038@1920.0.1920.1080" timestamp="1594664998248" />
-    <state width="1874" height="306" key="GridCell.Tab.0.bottom" timestamp="1595268028316">
+    <state width="1874" height="297" key="GridCell.Tab.0.bottom" timestamp="1595273420769">
       <screen x="1920" y="0" width="1920" height="1080" />
     </state>
-    <state width="1874" height="306" key="GridCell.Tab.0.bottom/1920.0.1920.1080/0.0.1920.1038@1920.0.1920.1080" timestamp="1595268028316" />
-    <state width="1874" height="306" key="GridCell.Tab.0.center" timestamp="1595268028316">
+    <state width="1874" height="297" key="GridCell.Tab.0.bottom/1920.0.1920.1080/0.0.1920.1038@1920.0.1920.1080" timestamp="1595273420769" />
+    <state width="1874" height="297" key="GridCell.Tab.0.center" timestamp="1595273420769">
       <screen x="1920" y="0" width="1920" height="1080" />
     </state>
-    <state width="1874" height="306" key="GridCell.Tab.0.center/1920.0.1920.1080/0.0.1920.1038@1920.0.1920.1080" timestamp="1595268028316" />
-    <state width="1874" height="306" key="GridCell.Tab.0.left" timestamp="1595268028316">
+    <state width="1874" height="297" key="GridCell.Tab.0.center/1920.0.1920.1080/0.0.1920.1038@1920.0.1920.1080" timestamp="1595273420769" />
+    <state width="1874" height="297" key="GridCell.Tab.0.left" timestamp="1595273420768">
       <screen x="1920" y="0" width="1920" height="1080" />
     </state>
-    <state width="1874" height="306" key="GridCell.Tab.0.left/1920.0.1920.1080/0.0.1920.1038@1920.0.1920.1080" timestamp="1595268028316" />
-    <state width="1874" height="306" key="GridCell.Tab.0.right" timestamp="1595268028316">
+    <state width="1874" height="297" key="GridCell.Tab.0.left/1920.0.1920.1080/0.0.1920.1038@1920.0.1920.1080" timestamp="1595273420768" />
+    <state width="1874" height="297" key="GridCell.Tab.0.right" timestamp="1595273420769">
       <screen x="1920" y="0" width="1920" height="1080" />
     </state>
-    <state width="1874" height="306" key="GridCell.Tab.0.right/1920.0.1920.1080/0.0.1920.1038@1920.0.1920.1080" timestamp="1595268028316" />
-    <state width="1874" height="306" key="GridCell.Tab.1.bottom" timestamp="1595268028102">
+    <state width="1874" height="297" key="GridCell.Tab.0.right/1920.0.1920.1080/0.0.1920.1038@1920.0.1920.1080" timestamp="1595273420769" />
+    <state width="1874" height="297" key="GridCell.Tab.1.bottom" timestamp="1595273420635">
       <screen x="1920" y="0" width="1920" height="1080" />
     </state>
-    <state width="1874" height="306" key="GridCell.Tab.1.bottom/1920.0.1920.1080/0.0.1920.1038@1920.0.1920.1080" timestamp="1595268028102" />
-    <state width="1874" height="306" key="GridCell.Tab.1.center" timestamp="1595268028102">
+    <state width="1874" height="297" key="GridCell.Tab.1.bottom/1920.0.1920.1080/0.0.1920.1038@1920.0.1920.1080" timestamp="1595273420635" />
+    <state width="1874" height="297" key="GridCell.Tab.1.center" timestamp="1595273420635">
       <screen x="1920" y="0" width="1920" height="1080" />
     </state>
-    <state width="1874" height="306" key="GridCell.Tab.1.center/1920.0.1920.1080/0.0.1920.1038@1920.0.1920.1080" timestamp="1595268028102" />
-    <state width="1874" height="306" key="GridCell.Tab.1.left" timestamp="1595268028102">
+    <state width="1874" height="297" key="GridCell.Tab.1.center/1920.0.1920.1080/0.0.1920.1038@1920.0.1920.1080" timestamp="1595273420635" />
+    <state width="1874" height="297" key="GridCell.Tab.1.left" timestamp="1595273420635">
       <screen x="1920" y="0" width="1920" height="1080" />
     </state>
-    <state width="1874" height="306" key="GridCell.Tab.1.left/1920.0.1920.1080/0.0.1920.1038@1920.0.1920.1080" timestamp="1595268028102" />
-    <state width="1874" height="306" key="GridCell.Tab.1.right" timestamp="1595268028102">
+    <state width="1874" height="297" key="GridCell.Tab.1.left/1920.0.1920.1080/0.0.1920.1038@1920.0.1920.1080" timestamp="1595273420635" />
+    <state width="1874" height="297" key="GridCell.Tab.1.right" timestamp="1595273420635">
       <screen x="1920" y="0" width="1920" height="1080" />
     </state>
-    <state width="1874" height="306" key="GridCell.Tab.1.right/1920.0.1920.1080/0.0.1920.1038@1920.0.1920.1080" timestamp="1595268028102" />
-    <state width="1874" height="306" key="GridCell.Tab.2.bottom" timestamp="1595268028102">
+    <state width="1874" height="297" key="GridCell.Tab.1.right/1920.0.1920.1080/0.0.1920.1038@1920.0.1920.1080" timestamp="1595273420635" />
+    <state width="1874" height="297" key="GridCell.Tab.2.bottom" timestamp="1595273420635">
       <screen x="1920" y="0" width="1920" height="1080" />
     </state>
-    <state width="1874" height="306" key="GridCell.Tab.2.bottom/1920.0.1920.1080/0.0.1920.1038@1920.0.1920.1080" timestamp="1595268028102" />
-    <state width="1874" height="306" key="GridCell.Tab.2.center" timestamp="1595268028102">
+    <state width="1874" height="297" key="GridCell.Tab.2.bottom/1920.0.1920.1080/0.0.1920.1038@1920.0.1920.1080" timestamp="1595273420635" />
+    <state width="1874" height="297" key="GridCell.Tab.2.center" timestamp="1595273420635">
       <screen x="1920" y="0" width="1920" height="1080" />
     </state>
-    <state width="1874" height="306" key="GridCell.Tab.2.center/1920.0.1920.1080/0.0.1920.1038@1920.0.1920.1080" timestamp="1595268028102" />
-    <state width="1874" height="306" key="GridCell.Tab.2.left" timestamp="1595268028102">
+    <state width="1874" height="297" key="GridCell.Tab.2.center/1920.0.1920.1080/0.0.1920.1038@1920.0.1920.1080" timestamp="1595273420635" />
+    <state width="1874" height="297" key="GridCell.Tab.2.left" timestamp="1595273420635">
       <screen x="1920" y="0" width="1920" height="1080" />
     </state>
-    <state width="1874" height="306" key="GridCell.Tab.2.left/1920.0.1920.1080/0.0.1920.1038@1920.0.1920.1080" timestamp="1595268028102" />
-    <state width="1874" height="306" key="GridCell.Tab.2.right" timestamp="1595268028102">
+    <state width="1874" height="297" key="GridCell.Tab.2.left/1920.0.1920.1080/0.0.1920.1038@1920.0.1920.1080" timestamp="1595273420635" />
+    <state width="1874" height="297" key="GridCell.Tab.2.right" timestamp="1595273420635">
       <screen x="1920" y="0" width="1920" height="1080" />
     </state>
-    <state width="1874" height="306" key="GridCell.Tab.2.right/1920.0.1920.1080/0.0.1920.1038@1920.0.1920.1080" timestamp="1595268028102" />
-    <state width="1874" height="306" key="GridCell.Tab.3.bottom" timestamp="1595268028102">
+    <state width="1874" height="297" key="GridCell.Tab.2.right/1920.0.1920.1080/0.0.1920.1038@1920.0.1920.1080" timestamp="1595273420635" />
+    <state width="1874" height="297" key="GridCell.Tab.3.bottom" timestamp="1595273420635">
       <screen x="1920" y="0" width="1920" height="1080" />
     </state>
-    <state width="1874" height="306" key="GridCell.Tab.3.bottom/1920.0.1920.1080/0.0.1920.1038@1920.0.1920.1080" timestamp="1595268028102" />
-    <state width="1874" height="306" key="GridCell.Tab.3.center" timestamp="1595268028102">
+    <state width="1874" height="297" key="GridCell.Tab.3.bottom/1920.0.1920.1080/0.0.1920.1038@1920.0.1920.1080" timestamp="1595273420635" />
+    <state width="1874" height="297" key="GridCell.Tab.3.center" timestamp="1595273420635">
       <screen x="1920" y="0" width="1920" height="1080" />
     </state>
-    <state width="1874" height="306" key="GridCell.Tab.3.center/1920.0.1920.1080/0.0.1920.1038@1920.0.1920.1080" timestamp="1595268028102" />
-    <state width="1874" height="306" key="GridCell.Tab.3.left" timestamp="1595268028102">
+    <state width="1874" height="297" key="GridCell.Tab.3.center/1920.0.1920.1080/0.0.1920.1038@1920.0.1920.1080" timestamp="1595273420635" />
+    <state width="1874" height="297" key="GridCell.Tab.3.left" timestamp="1595273420635">
       <screen x="1920" y="0" width="1920" height="1080" />
     </state>
-    <state width="1874" height="306" key="GridCell.Tab.3.left/1920.0.1920.1080/0.0.1920.1038@1920.0.1920.1080" timestamp="1595268028102" />
-    <state width="1874" height="306" key="GridCell.Tab.3.right" timestamp="1595268028102">
+    <state width="1874" height="297" key="GridCell.Tab.3.left/1920.0.1920.1080/0.0.1920.1038@1920.0.1920.1080" timestamp="1595273420635" />
+    <state width="1874" height="297" key="GridCell.Tab.3.right" timestamp="1595273420635">
       <screen x="1920" y="0" width="1920" height="1080" />
     </state>
-    <state width="1874" height="306" key="GridCell.Tab.3.right/1920.0.1920.1080/0.0.1920.1038@1920.0.1920.1080" timestamp="1595268028102" />
-    <state width="1874" height="306" key="GridCell.Tab.4.bottom" timestamp="1595268028102">
+    <state width="1874" height="297" key="GridCell.Tab.3.right/1920.0.1920.1080/0.0.1920.1038@1920.0.1920.1080" timestamp="1595273420635" />
+    <state width="1874" height="297" key="GridCell.Tab.4.bottom" timestamp="1595273420635">
       <screen x="1920" y="0" width="1920" height="1080" />
     </state>
-    <state width="1874" height="306" key="GridCell.Tab.4.bottom/1920.0.1920.1080/0.0.1920.1038@1920.0.1920.1080" timestamp="1595268028102" />
-    <state width="1874" height="306" key="GridCell.Tab.4.center" timestamp="1595268028102">
+    <state width="1874" height="297" key="GridCell.Tab.4.bottom/1920.0.1920.1080/0.0.1920.1038@1920.0.1920.1080" timestamp="1595273420635" />
+    <state width="1874" height="297" key="GridCell.Tab.4.center" timestamp="1595273420635">
       <screen x="1920" y="0" width="1920" height="1080" />
     </state>
-    <state width="1874" height="306" key="GridCell.Tab.4.center/1920.0.1920.1080/0.0.1920.1038@1920.0.1920.1080" timestamp="1595268028102" />
-    <state width="1874" height="306" key="GridCell.Tab.4.left" timestamp="1595268028102">
+    <state width="1874" height="297" key="GridCell.Tab.4.center/1920.0.1920.1080/0.0.1920.1038@1920.0.1920.1080" timestamp="1595273420635" />
+    <state width="1874" height="297" key="GridCell.Tab.4.left" timestamp="1595273420635">
       <screen x="1920" y="0" width="1920" height="1080" />
     </state>
-    <state width="1874" height="306" key="GridCell.Tab.4.left/1920.0.1920.1080/0.0.1920.1038@1920.0.1920.1080" timestamp="1595268028102" />
-    <state width="1874" height="306" key="GridCell.Tab.4.right" timestamp="1595268028102">
+    <state width="1874" height="297" key="GridCell.Tab.4.left/1920.0.1920.1080/0.0.1920.1038@1920.0.1920.1080" timestamp="1595273420635" />
+    <state width="1874" height="297" key="GridCell.Tab.4.right" timestamp="1595273420635">
       <screen x="1920" y="0" width="1920" height="1080" />
     </state>
-    <state width="1874" height="306" key="GridCell.Tab.4.right/1920.0.1920.1080/0.0.1920.1038@1920.0.1920.1080" timestamp="1595268028102" />
+    <state width="1874" height="297" key="GridCell.Tab.4.right/1920.0.1920.1080/0.0.1920.1038@1920.0.1920.1080" timestamp="1595273420635" />
+    <state x="2476" y="252" key="Rider.ProjectTemplateDialog.Size" timestamp="1595272253329">
+      <screen x="1920" y="0" width="1920" height="1080" />
+    </state>
+    <state x="2476" y="252" key="Rider.ProjectTemplateDialog.Size/1920.0.1920.1080/0.0.1920.1038@1920.0.1920.1080" timestamp="1595272253329" />
     <state x="2566" y="173" width="385" height="698" key="RiderGenerateDialog" timestamp="1595018460939">
       <screen x="1920" y="0" width="1920" height="1080" />
     </state>
@@ -452,10 +469,10 @@
       <screen x="1920" y="0" width="1920" height="1080" />
     </state>
     <state x="2020" y="100" width="1720" height="838" key="VCS.FileHistoryDialog/1920.0.1920.1080/0.0.1920.1038@1920.0.1920.1080" timestamp="1595259502845" />
-    <state x="2476" y="239" key="Vcs.Push.Dialog.v2" timestamp="1595263662021">
+    <state x="2476" y="239" key="Vcs.Push.Dialog.v2" timestamp="1595268265894">
       <screen x="1920" y="0" width="1920" height="1080" />
     </state>
-    <state x="2476" y="239" key="Vcs.Push.Dialog.v2/1920.0.1920.1080/0.0.1920.1038@1920.0.1920.1080" timestamp="1595263662021" />
+    <state x="2476" y="239" key="Vcs.Push.Dialog.v2/1920.0.1920.1080/0.0.1920.1038@1920.0.1920.1080" timestamp="1595268265894" />
     <state width="960" height="519" key="XDebugger.FullValuePopup" timestamp="1594923763835">
       <screen x="1920" y="0" width="1920" height="1080" />
     </state>
