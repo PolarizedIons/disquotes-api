@@ -22,11 +22,11 @@ namespace QuotesApi.Services
             _discord = discordService;
         }
 
-        public async Task<User> FindUser(Guid id, bool enrichWithGuilds = false)
+        public async Task<User> FindUser(Guid id, bool enrichWithGuilds = false, bool throwNotfound = true)
         {
             var user = _db.Users.FirstOrDefault(x => x.Id == id && x.DeletedAt == null);
 
-            if (user == null)
+            if (user == null && throwNotfound)
             {
                 throw new NotFoundException($"User with id '{id}' not found.");
             }
@@ -39,11 +39,11 @@ namespace QuotesApi.Services
             return user;
         }
 
-        public async Task<User> FindDiscordUser(ulong id, bool enrichWithGuilds = false)
+        public async Task<User> FindDiscordUser(ulong id, bool enrichWithGuilds = false, bool throwNotfound = true)
         {
             var user = _db.Users.FirstOrDefault(x => x.DiscordId == id && x.DeletedAt == null);
 
-            if (user == null)
+            if (user == null && throwNotfound)
             {
                 throw new NotFoundException($"User with discord id '{id}' not found.");
             }
@@ -58,7 +58,7 @@ namespace QuotesApi.Services
 
         public async Task<User> LoginDiscordUser(RestUser discordUser)
         {
-            var user = await FindDiscordUser(discordUser.Id);
+            var user = await FindDiscordUser(discordUser.Id, throwNotfound: false);
             if (user != null)
             {
                 user.Username = discordUser.Username;
