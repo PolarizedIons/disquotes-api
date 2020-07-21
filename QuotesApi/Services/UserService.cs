@@ -39,7 +39,7 @@ namespace QuotesApi.Services
             return user;
         }
 
-        public async Task<User> FindDiscordUser(ulong id, bool enrichWithGuilds = false, bool throwNotfound = true)
+        public async Task<User> FindDiscordUser(string id, bool enrichWithGuilds = false, bool throwNotfound = true)
         {
             var user = _db.Users.FirstOrDefault(x => x.DiscordId == id && x.DeletedAt == null);
 
@@ -58,7 +58,7 @@ namespace QuotesApi.Services
 
         public async Task<User> LoginDiscordUser(RestUser discordUser)
         {
-            var user = await FindDiscordUser(discordUser.Id, throwNotfound: false);
+            var user = await FindDiscordUser(discordUser.Id.ToString(), throwNotfound: false);
             if (user != null)
             {
                 user.Username = discordUser.Username;
@@ -71,7 +71,7 @@ namespace QuotesApi.Services
             {
                 await _db.Users.AddAsync(new User
                 {
-                    DiscordId = discordUser.Id,
+                    DiscordId = discordUser.Id.ToString(),
                     Username = discordUser.Username,
                     Discriminator = discordUser.DiscriminatorValue,
                     ProfileUrl = discordUser.GetAvatarUrl(),
@@ -81,19 +81,19 @@ namespace QuotesApi.Services
             }
 
             await _db.SaveChangesAsync();
-            return await FindDiscordUser(discordUser.Id);
+            return await FindDiscordUser(discordUser.Id.ToString());
         }
 
         private async Task SetGuildsOn(User user)
         {
-            user.Guilds = (await _discord.GetGuildsFor(user.DiscordId))
+            user.Guilds = (await _discord.GetGuildsFor(ulong.Parse(user.DiscordId)))
                 .Select(x => new Guild
                     {
                         Description = x.Description,
                         Id = x.Id.ToString(),
                         Name = x.Name,
                         SystemChannelId = x.SystemChannelId.ToString(),
-                        IsOwner = x.OwnerId == user.DiscordId,
+                        IsOwner = x.OwnerId.ToString() == user.DiscordId,
                         IconUrl = x.IconUrl,
                     }
                 );

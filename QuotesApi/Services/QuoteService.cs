@@ -100,7 +100,7 @@ namespace QuotesApi.Services
             await _db.SaveChangesAsync();
 
             var user = await _userService.FindUser(quote.UserId);
-            await _discordService.SendQuoteNotification(ulong.Parse(quote.GuildId), user.DiscordId, quote);
+            await _discordService.SendQuoteNotification(ulong.Parse(quote.GuildId), ulong.Parse(user.DiscordId), quote);
 
             return quote;
         }
@@ -120,7 +120,7 @@ namespace QuotesApi.Services
             await _db.SaveChangesAsync();
 
             var user = await _userService.FindUser(userId);
-            await _discordService.SendQuoteNotification(ulong.Parse(quote.GuildId), user.DiscordId, newQuote);
+            await _discordService.SendQuoteNotification(ulong.Parse(quote.GuildId), ulong.Parse(user.DiscordId), newQuote);
             
             return newQuote;
         }
