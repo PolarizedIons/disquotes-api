@@ -33,7 +33,7 @@ namespace QuotesApi.Services
 
             if (enrichWithGuilds)
             {
-                await SetGuilds(user);
+                await SetGuildsOn(user);
             }
 
             return user;
@@ -50,7 +50,7 @@ namespace QuotesApi.Services
             
             if (enrichWithGuilds)
             {
-                await SetGuilds(user);
+                await SetGuildsOn(user);
             }
 
             return user;
@@ -84,7 +84,7 @@ namespace QuotesApi.Services
             return await FindDiscordUser(discordUser.Id);
         }
 
-        private async Task SetGuilds(User user)
+        private async Task SetGuildsOn(User user)
         {
             user.Guilds = (await _discord.GetGuildsFor(user.DiscordId))
                 .Select(x => new Guild
@@ -93,7 +93,8 @@ namespace QuotesApi.Services
                         Id = x.Id.ToString(),
                         Name = x.Name,
                         SystemChannelId = x.SystemChannelId.ToString(),
-                        IsOwner = x.OwnerId == user.DiscordId
+                        IsOwner = x.OwnerId == user.DiscordId,
+                        IconUrl = x.IconUrl,
                     }
                 );
         }

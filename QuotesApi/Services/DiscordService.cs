@@ -67,7 +67,7 @@ namespace QuotesApi.Services
                 }
                 catch (Discord.Net.HttpException e)
                 {
-                    Log.Debug("Could not send notification to guild id {guildId}, {exceptionMessage}", guildId, e.Message);
+                    Log.Debug("Could not send notification to guild id {guildId} ({channelId}): {exceptionMessage}", guildId, channel.Id, e.Message);
                 }
             }
         }

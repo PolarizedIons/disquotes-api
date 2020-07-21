@@ -7,6 +7,7 @@
       <e p="QuotesApi" t="IncludeRecursive">
         <e p="Controllers" t="Include">
           <e p="BaseController.cs" t="Include" />
+          <e p="GuildController.cs" t="Include" />
           <e p="QuoteController.cs" t="Include" />
           <e p="SecurityController.cs" t="Include" />
           <e p="UserController.cs" t="Include" />
