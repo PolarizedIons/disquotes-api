@@ -75,6 +75,11 @@ namespace QuotesApi.Services
 
         public void ValidateRefreshToken(Guid accountId, Guid refreshToken)
         {
+            if (accountId == Guid.Empty || refreshToken == Guid.Empty)
+            {
+                throw new UnauthorizedException("You must provide both a accountId and refreshToken.");
+            }
+
             var user = _db.Users
                 .AsQueryable()
                 .FirstOrDefault(x => x.Id == accountId && x.DeletedAt == null && x.RefreshToken == refreshToken);
