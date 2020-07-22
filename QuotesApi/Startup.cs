@@ -82,6 +82,11 @@ namespace QuotesApi
                               });
             });
 
+            services.Configure<ApiBehaviorOptions>(options =>
+            {
+                options.InvalidModelStateResponseFactory = ctx => new ValidationProblemMiddleware();
+            });
+
             services.AddSingleton<HttpClient>();
             services.DiscoverAndMakeDiServicesAvailable();
         }
@@ -138,10 +143,10 @@ namespace QuotesApi
             });
 
             app.UseRouting()
-                .UseAuthentication()
-                .UseAuthorization()
                 .UseCors()
                 .UseResponseCompression()
+                .UseAuthentication()
+                .UseAuthorization()
                 .UseSwagger()
                 .UseSwaggerUI(o =>
                 {

@@ -33,6 +33,7 @@
         </e>
         <e p="Middlewares" t="Include">
           <e p="IgnoreMyHttpExceptions.cs" t="Include" />
+          <e p="ValidationProblemMiddleware.cs" t="Include" />
         </e>
         <e p="Migrations" t="Include">
           <e p="20200715173201_InitialCreateUser.Designer.cs" t="Include" />
