@@ -1,8 +1,5 @@
 using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations.Schema;
 using System.Text.Json.Serialization;
-using QuotesApi.Models.Guilds;
 
 namespace QuotesApi.Models.Users
 {
@@ -18,8 +15,5 @@ namespace QuotesApi.Models.Users
 
         [JsonIgnore]
         public DateTime? RefreshTokenExpires { get; set; }
-
-        [NotMapped]
-        public IEnumerable<Guild> Guilds { get; set; }
     }
 }
