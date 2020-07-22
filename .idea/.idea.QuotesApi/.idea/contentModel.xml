@@ -44,6 +44,8 @@
           <e p="20200720184054_AddQuoteTitle.cs" t="Include" />
           <e p="20200721154929_UserDiscordIdToString.Designer.cs" t="Include" />
           <e p="20200721154929_UserDiscordIdToString.cs" t="Include" />
+          <e p="20200722162922_UserDiscordDiscrimitatorIntToString.Designer.cs" t="Include" />
+          <e p="20200722162922_UserDiscordDiscrimitatorIntToString.cs" t="Include" />
           <e p="DatabaseContextModelSnapshot.cs" t="Include" />
         </e>
         <e p="Models" t="Include">

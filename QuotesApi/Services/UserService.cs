@@ -62,7 +62,7 @@ namespace QuotesApi.Services
             if (user != null)
             {
                 user.Username = discordUser.Username;
-                user.Discriminator = discordUser.DiscriminatorValue;
+                user.Discriminator = discordUser.Discriminator;
                 user.ProfileUrl = discordUser.GetAvatarUrl();
                 user.RefreshToken = Guid.NewGuid();
                 user.RefreshTokenExpires = DateTime.UtcNow.Add(RefreshTokenValidFor);
@@ -73,7 +73,7 @@ namespace QuotesApi.Services
                 {
                     DiscordId = discordUser.Id.ToString(),
                     Username = discordUser.Username,
-                    Discriminator = discordUser.DiscriminatorValue,
+                    Discriminator = discordUser.Discriminator,
                     ProfileUrl = discordUser.GetAvatarUrl(),
                     RefreshToken = Guid.NewGuid(),
                     RefreshTokenExpires = DateTime.UtcNow.Add(RefreshTokenValidFor),

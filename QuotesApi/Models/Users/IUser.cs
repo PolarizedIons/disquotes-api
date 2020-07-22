@@ -4,7 +4,7 @@ namespace QuotesApi.Models.Users
     {
         string DiscordId { get; }
         string Username { get; }
-        int Discriminator { get; }
+        string Discriminator { get; }
         string ProfileUrl { get; }
     }
 }
