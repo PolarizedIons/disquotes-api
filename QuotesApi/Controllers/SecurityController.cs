@@ -76,9 +76,9 @@ namespace QuotesApi.Controllers
             Authorize,
             ProducesResponseType(typeof(ApiResult<User>), 200)
         ]
-        public async Task<ApiResult<User>> GetMe()
+        public ApiResult<User> GetMe()
         {
-            var user = await _userService.FindUser(UserId, true);
+            var user = _userService.FindUser(UserId);
             return Ok(user);
         }
 
@@ -99,8 +99,8 @@ namespace QuotesApi.Controllers
             return Ok(new RefreshTokenResponse
             {
                 AccessToken = _jwtService.CreateAccessTokenFor(user),
-                RefreshToken = user.RefreshToken.Value.ToString(),
-                RefreshTokenExpires = user.RefreshTokenExpires.Value,
+                RefreshToken = user.RefreshToken!.Value.ToString(),
+                RefreshTokenExpires = user.RefreshTokenExpires!.Value,
             });
         }
     }

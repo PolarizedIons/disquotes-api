@@ -1,5 +1,4 @@
 using System;
-using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using QuotesApi.Models;
@@ -28,14 +27,9 @@ namespace QuotesApi.Controllers
             ProducesResponseType(typeof(ApiResult<User>), 200),
             Authorize,
         ]
-        public async Task<ApiResult<User>> GetUserById([FromRoute] Guid userId)
+        public ApiResult<User> GetUserById([FromRoute] Guid userId)
         {
-            var user = await _userService.FindUser(userId);
-            if (user == null)
-            {
-                return NotFound("User not found");
-            }
-
+            var user = _userService.FindUser(userId);
             return Ok(user);
         }
     }

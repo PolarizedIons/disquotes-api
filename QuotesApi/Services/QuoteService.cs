@@ -101,7 +101,7 @@ namespace QuotesApi.Services
             quote.QuoteNumber = maxQuoteNumber + 1;
             await _db.SaveChangesAsync();
 
-            var user = await _userService.FindUser(quote.UserId);
+            var user = _userService.FindUser(quote.UserId);
             await _discordService.SendQuoteNotification(ulong.Parse(quote.GuildId), ulong.Parse(user.DiscordId), quote);
 
             return quote;
@@ -121,7 +121,7 @@ namespace QuotesApi.Services
             await _db.Quotes.AddAsync(newQuote);
             await _db.SaveChangesAsync();
 
-            var user = await _userService.FindUser(userId);
+            var user = _userService.FindUser(userId);
             await _discordService.SendQuoteNotification(ulong.Parse(quote.GuildId), ulong.Parse(user.DiscordId), newQuote);
             
             return newQuote;
