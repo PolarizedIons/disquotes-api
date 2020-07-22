@@ -11,16 +11,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="1a84013b-dd73-4f1a-b9eb-6107adf3b20a" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/.idea.QuotesApi/.idea/dataSources.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/.idea.QuotesApi/.idea/sqldialects.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/QuotesApi/Migrations/20200722162922_UserDiscordDiscrimitatorIntToString.Designer.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/QuotesApi/Migrations/20200722162922_UserDiscordDiscrimitatorIntToString.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/.idea.QuotesApi/.idea/contentModel.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.QuotesApi/.idea/contentModel.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/.idea.QuotesApi/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.QuotesApi/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/QuotesApi/Migrations/DatabaseContextModelSnapshot.cs" beforeDir="false" afterPath="$PROJECT_DIR$/QuotesApi/Migrations/DatabaseContextModelSnapshot.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/QuotesApi/Models/Users/IUser.cs" beforeDir="false" afterPath="$PROJECT_DIR$/QuotesApi/Models/Users/IUser.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/QuotesApi/Models/Users/User.cs" beforeDir="false" afterPath="$PROJECT_DIR$/QuotesApi/Models/Users/User.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/QuotesApi/Services/UserService.cs" beforeDir="false" afterPath="$PROJECT_DIR$/QuotesApi/Services/UserService.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/QuotesApi/Services/QuoteService.cs" beforeDir="false" afterPath="$PROJECT_DIR$/QuotesApi/Services/QuoteService.cs" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -35,7 +26,9 @@
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/15FC8EE0-B149-4033-9665-7BA67955565D/28/f59bc3fc/BadRequestResult.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/QuotesApi/Controllers/BaseController.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/QuotesApi/Exceptions/BadRequestException.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="mock:///UserService.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/61E32356-76BF-4FF9-BF5B-99EB80B641FF/2B/SecurityTokenDescriptor.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///User.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/3680BE5F-1887-4743-9788-D707F1CB36B7/12/DbSet.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/2DBFBC25-8F2A-4D07-9DDA-AA146A0B126E/3c/80352cf0/DefaultValueAttribute.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/4CF17712-9ED0-4C5D-874D-48FEBCC62BBD/40/OpenApiSecurityScheme.cs" root0="SKIP_HIGHLIGHTING" />
@@ -95,6 +88,7 @@
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/15FC8EE0-B149-4033-9665-7BA67955565D/b0/7dec3a6d/StatusCodeResult.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/15FC8EE0-B149-4033-9665-7BA67955565D/23/2f5bfe6e/UnauthorizedObjectResult.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/43F02315-C47C-4021-BE0E-9EF26643FC6B/43/6a339472/TokenValidationParameters.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///QuoteService.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/QuotesApi/Services/UserService.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/43F02315-C47C-4021-BE0E-9EF26643FC6B/46/a381a293/SignatureValidator.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/43F02315-C47C-4021-BE0E-9EF26643FC6B/136/SecurityToken.cs" root0="SKIP_HIGHLIGHTING" />
@@ -180,12 +174,12 @@
         <option value="$PROJECT_DIR$/QuotesApi/Controllers/GuildController.cs" />
         <option value="$PROJECT_DIR$/QuotesApi/Models/Guilds/Guild.cs" />
         <option value="$PROJECT_DIR$/QuotesApi/Services/DiscordService.cs" />
-        <option value="$PROJECT_DIR$/QuotesApi/Services/QuoteService.cs" />
         <option value="$PROJECT_DIR$/QuotesApi/Models/Users/IUser.cs" />
         <option value="$PROJECT_DIR$/QuotesApi/Models/Users/User.cs" />
         <option value="$PROJECT_DIR$/QuotesApi/Services/UserService.cs" />
         <option value="$PROJECT_DIR$/QuotesApi/Migrations/20200722162922_UserDiscordDiscrimitatorIntToString.cs" />
         <option value="$PROJECT_DIR$/.idea/.idea.QuotesApi/.idea/sqldialects.xml" />
+        <option value="$PROJECT_DIR$/QuotesApi/Services/QuoteService.cs" />
       </list>
     </option>
   </component>
@@ -265,7 +259,7 @@
       <workItem from="1595067601285" duration="10325000" />
       <workItem from="1595259088262" duration="14071000" />
       <workItem from="1595345186239" duration="1570000" />
-      <workItem from="1595435280595" duration="1079000" />
+      <workItem from="1595435280595" duration="1175000" />
     </task>
     <task id="LOCAL-00001" summary="initial commit!">
       <created>1594658509163</created>
@@ -344,7 +338,14 @@
       <option name="project" value="LOCAL" />
       <updated>1595346742725</updated>
     </task>
-    <option name="localTasksCounter" value="12" />
+    <task id="LOCAL-00012" summary="Change User#Discriminator to a string">
+      <created>1595436413898</created>
+      <option name="number" value="00012" />
+      <option name="presentableId" value="LOCAL-00012" />
+      <option name="project" value="LOCAL" />
+      <updated>1595436413898</updated>
+    </task>
+    <option name="localTasksCounter" value="13" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -376,7 +377,8 @@
     <MESSAGE value="Add guilds controller exposing mutual guilds, as well as adding icon url to guild object &amp; other small tweaks" />
     <MESSAGE value="Migrate User#DiscordId to a string so it can be serialized to the front-end correctly" />
     <MESSAGE value="I don't know what this file does" />
-    <option name="LAST_COMMIT_MESSAGE" value="I don't know what this file does" />
+    <MESSAGE value="Change User#Discriminator to a string" />
+    <option name="LAST_COMMIT_MESSAGE" value="Change User#Discriminator to a string" />
     <option name="OPTIMIZE_IMPORTS_BEFORE_PROJECT_COMMIT" value="true" />
   </component>
   <component name="WindowStateProjectService">

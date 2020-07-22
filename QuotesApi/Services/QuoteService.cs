@@ -45,7 +45,8 @@ namespace QuotesApi.Services
             var query = _db.Quotes.AsQueryable()
                 .Where(x => x.Approved)
                 .Where(x => x.DeletedAt == null)
-                .Where(x => guildFilter.Contains(x.GuildId));
+                .Where(x => guildFilter.Contains(x.GuildId))
+                .OrderByDescending(x => x.LastModifiedAt);
                 
             var data = query
                 .Skip((pagingFilter.PageNumber - 1) * pagingFilter.PageSize)
@@ -67,7 +68,8 @@ namespace QuotesApi.Services
         {
             var query = _db.Quotes.AsQueryable()
                 .Where(x => !x.Approved && x.DeletedAt == null)
-                .Where(x => guildFilter.Contains(x.GuildId));
+                .Where(x => guildFilter.Contains(x.GuildId))
+                .OrderByDescending(x => x.LastModifiedAt);
           
             var data = query
                 .Skip((pagingFilter.PageNumber - 1) * pagingFilter.PageSize)
