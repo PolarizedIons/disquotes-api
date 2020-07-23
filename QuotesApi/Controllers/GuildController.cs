@@ -1,10 +1,10 @@
+using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using QuotesApi.Models;
 using QuotesApi.Models.Guilds;
-using QuotesApi.Models.Paging;
 using QuotesApi.Services;
 
 namespace QuotesApi.Controllers
@@ -21,17 +21,14 @@ namespace QuotesApi.Controllers
         
         [
             HttpGet,
-            ProducesResponseType(typeof(ApiResult<PagedResponse<Guild>>), 200),
+            ProducesResponseType(typeof(ApiResult<IEnumerable<Guild>>), 200),
             Authorize,
         ]
-        public async Task<ApiResult<PagedResponse<Guild>>> GetGuilds([FromQuery] PagingFilter pagingFilter)
+        public async Task<ApiResult<IEnumerable<Guild>>> GetGuilds()
         {
-            ValidatePagingFilter(pagingFilter);
 
             var mutualGuilds = await _discordService.GetGuildsFor(UserDiscordId);
             var guilds = mutualGuilds
-                .Skip((pagingFilter.PageNumber - 1) * pagingFilter.PageSize)
-                .Take(pagingFilter.PageSize)
                 .Select(x => new Guild
                 {
                     Id = x.Id.ToString(),
@@ -42,17 +39,28 @@ namespace QuotesApi.Controllers
                     IconUrl = x.IconUrl,
                 });
 
-            var data = new PagedResponse<Guild>
+            return Ok(guilds);
+        }
+
+        [
+            HttpGet("{guildId:ulong}"),
+            ProducesResponseType(typeof(ApiResult<Guild>), 200),
+            Authorize,
+        ]
+        public async Task<ApiResult<Guild>> GetGuildById([FromRoute] ulong guildId)
+        {
+            var discordGuild = await _discordService.GetGuild(guildId);
+            var guild = new Guild
             {
-                Items = guilds,
-                HasNext = (pagingFilter.PageNumber * pagingFilter.PageSize) < mutualGuilds.Count,
-                HasPrevious = pagingFilter.PageNumber > 1,
-                PageNumber = pagingFilter.PageNumber,
-                PageSize = pagingFilter.PageSize,
-                TotalRows = mutualGuilds.Count,
+                Description = discordGuild.Description,
+                Id = discordGuild.Id.ToString(),
+                Name = discordGuild.Name,
+                IconUrl = discordGuild.IconUrl,
+                IsOwner = UserDiscordId == discordGuild.OwnerId,
+                SystemChannelId = discordGuild.SystemChannelId.ToString(),
             };
-            
-            return Ok(data);
+
+            return Ok(guild);
         }
     }
 }

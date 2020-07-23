@@ -8,6 +8,7 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.ResponseCompression;
+using Microsoft.AspNetCore.Routing;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -18,6 +19,7 @@ using QuotesApi.Extentions;
 using QuotesApi.Filters;
 using QuotesApi.Middlewares;
 using QuotesApi.Models;
+using QuotesApi.RouteConstraints;
 using QuotesApi.Services;
 using Serilog;
 
@@ -40,6 +42,11 @@ namespace QuotesApi
                 options.UseMySql(Configuration.GetConnectionString("Quotes"));
             });
 
+            services.Configure<RouteOptions>(options =>
+            {
+                options.ConstraintMap.Add(ULongConstraint.Name, typeof(ULongConstraint));
+            });
+            
             services.AddControllers()
                 .AddJsonOptions(options => options.JsonSerializerOptions.PropertyNamingPolicy = JsonNamingPolicy.CamelCase);
 

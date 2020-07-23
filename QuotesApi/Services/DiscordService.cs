@@ -3,6 +3,7 @@ using System.Threading.Tasks;
 using Discord;
 using Discord.Rest;
 using Microsoft.Extensions.Configuration;
+using QuotesApi.Exceptions;
 using QuotesApi.Models.Quotes;
 using Serilog;
 
@@ -42,7 +43,14 @@ namespace QuotesApi.Services
 
         public async Task<RestGuild> GetGuild(ulong guildId)
         {
-            return await _client.GetGuildAsync(guildId);
+            try
+            {
+                return await _client.GetGuildAsync(guildId);
+            }
+            catch (Discord.Net.HttpException)
+            {
+                throw new NotFoundException($"Discord server '{guildId}' not found, make sure the bot has access!");
+            }
         }
 
         public async Task SendQuoteNotification(ulong guildId, ulong discordUserId, Quote quote)
