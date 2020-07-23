@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using QuotesApi.Database;
 using QuotesApi.Exceptions;
+using QuotesApi.Extentions;
 using QuotesApi.Models.Paging;
 using QuotesApi.Models.Quotes;
 
@@ -22,12 +23,21 @@ namespace QuotesApi.Services
             _discordService = discordService;
         }
 
-        public Quote FindById(Guid quoteId, bool onlyApproved = true)
+        public Quote FindById(Guid quoteId, bool onlyApproved = true, bool enrichWithUser = true)
         {
             var query = _db.Quotes.AsQueryable().Where(x => x.Id == quoteId && x.DeletedAt == null);
             if (onlyApproved)
             {
                 query = query.Where(x => x.Approved);
+            }
+
+            if (enrichWithUser)
+            {
+                query = query.Join(_db.Users, 
+                    q => q.UserId, 
+                    u => u.Id, 
+                    (q, u) => new Quote().MapProps(q).MapProps(new {User = u})
+                );
             }
 
             var quote = query.FirstOrDefault();
@@ -50,7 +60,12 @@ namespace QuotesApi.Services
                 
             var data = query
                 .Skip((pagingFilter.PageNumber - 1) * pagingFilter.PageSize)
-                .Take(pagingFilter.PageSize);
+                .Take(pagingFilter.PageSize)
+                .Join(_db.Users,
+                    q => q.UserId,
+                    u => u.Id,
+                    (q, u) => new Quote().MapProps(q).MapProps(new {User = u})
+                );
             var totalCount = query.Count();
             
             return new PagedResponse<Quote>
@@ -73,7 +88,12 @@ namespace QuotesApi.Services
           
             var data = query
                 .Skip((pagingFilter.PageNumber - 1) * pagingFilter.PageSize)
-                .Take(pagingFilter.PageSize);
+                .Take(pagingFilter.PageSize)
+                .Join(_db.Users, 
+                    q => q.UserId, 
+                    u => u.Id, 
+                    (q, u) => new Quote().MapProps(q).MapProps(new {User = u})
+                );
             var totalCount = query.Count();
 
             return new PagedResponse<Quote>
