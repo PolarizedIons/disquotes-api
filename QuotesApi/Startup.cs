@@ -14,12 +14,14 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.OpenApi.Models;
+using Quartz;
 using QuotesApi.Database;
 using QuotesApi.Extentions;
 using QuotesApi.Filters;
 using QuotesApi.Middlewares;
 using QuotesApi.Models;
 using QuotesApi.RouteConstraints;
+using QuotesApi.Schedules;
 using QuotesApi.Services;
 using Serilog;
 
@@ -96,6 +98,43 @@ namespace QuotesApi
 
             services.AddSingleton<HttpClient>();
             services.DiscoverAndMakeDiServicesAvailable();
+
+            services.AddQuartz(q =>
+            {
+                q.SchedulerName = "QuotesApi - Quartz Scheduler";
+                
+                q.UseMicrosoftDependencyInjectionScopedJobFactory(options =>
+                {
+                    // if we don't have the job in DI, allow fallback to configure via default constructor
+                    options.AllowDefaultConstructor = true;
+                });
+
+                q.UseSimpleTypeLoader();
+                q.UseInMemoryStore();
+                q.UseDefaultThreadPool(tp =>
+                {
+                    tp.MaxConcurrency = 10;
+                });
+                
+                var updateDiscordUserJobKey = new JobKey("UpdateDiscordUsers", "discord");
+                q.AddJob<UpdateDiscordUsers>(j => j
+                    .WithIdentity(updateDiscordUserJobKey)
+                    .WithDescription("Updates Discord users in the database")
+                );
+
+                q.AddTrigger(t => t
+                    .WithIdentity("Discord user update trigger")    
+                    .ForJob(updateDiscordUserJobKey)
+                    .StartNow()
+                    .WithSimpleSchedule(x => x.WithInterval(TimeSpan.FromMinutes(int.Parse(Configuration["Scheduler:DiscordUserUpdateInterval"]))).RepeatForever())
+                    .WithDescription("Trigger for Discord user updates")
+                );
+            });
+            
+            services.AddQuartzServer(options =>
+            {
+                options.WaitForJobsToComplete = true;
+            });
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -106,13 +145,15 @@ namespace QuotesApi
             Log.Information("Migrating Database...");
             databaseContext.Database.Migrate();
 
-            Log.Information("Logging into Discord");
+            Log.Information("Logging into Discord...");
             discordService.Login().Wait();
 
             if (env.IsDevelopment())
             {
                 ApiResultSettings.ExposeExceptions = true;
             }
+            
+            Log.Information("Starting Web API...");
 
             app.UseExceptionHandler(errorApp =>
             {

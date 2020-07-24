@@ -25,6 +25,8 @@ namespace QuotesApi.Services
             await _client.LoginAsync(TokenType.Bot, _config["Discord:BotToken"]);
         }
 
+        public bool IsLoggedIn => _client.LoginState == LoginState.LoggedIn;
+
         public async Task<List<RestGuild>> GetGuildsFor(ulong userId)
         {
             var userGuilds = new List<RestGuild>();
@@ -50,6 +52,18 @@ namespace QuotesApi.Services
             catch (Discord.Net.HttpException)
             {
                 throw new NotFoundException($"Discord server '{guildId}' not found, make sure the bot has access!");
+            }
+        }
+
+        public async Task<RestUser> GetUser(ulong userId)
+        {
+            try
+            {
+                return await _client.GetUserAsync(userId);
+            }
+            catch (Discord.Net.HttpException)
+            {
+                throw new NotFoundException($"Discord user '{userId}' not found, make sure the bot shares a server!");
             }
         }
 

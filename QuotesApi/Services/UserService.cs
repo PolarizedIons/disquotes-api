@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Discord.Rest;
@@ -13,12 +14,15 @@ namespace QuotesApi.Services
         private static readonly TimeSpan RefreshTokenValidFor = TimeSpan.FromDays(14);
         
         private DatabaseContext _db;
-        private DiscordService _discord;
 
-        public UserService(DatabaseContext databaseContext, DiscordService discordService)
+        public UserService(DatabaseContext databaseContext)
         {
             _db = databaseContext;
-            _discord = discordService;
+        }
+
+        public IEnumerable<User> FindAllUsers()
+        {
+            return _db.Users.AsQueryable().Where(x => x.DeletedAt == null);
         }
 
         public User FindUser(Guid id, bool throwNotfound = true)
@@ -101,6 +105,14 @@ namespace QuotesApi.Services
             user.RefreshTokenExpires = DateTime.UtcNow.Add(RefreshTokenValidFor);
             await _db.SaveChangesAsync();
             return user;
+        }
+
+        public async Task UpdateUser(User user, RestUser discordUser)
+        {
+            user.Username = discordUser.Username;
+            user.Discriminator = discordUser.Discriminator;
+            user.ProfileUrl = discordUser.GetAvatarUrl();
+            await _db.SaveChangesAsync();
         }
     }
 }
