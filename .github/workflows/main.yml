@@ -20,3 +20,4 @@ jobs:
           password: ${{ secrets.GITHUB_TOKEN }} 
           registry: docker.pkg.github.com
           tags: "latest,${{ github.run_number }}"
+          workdir: QuotesApi
