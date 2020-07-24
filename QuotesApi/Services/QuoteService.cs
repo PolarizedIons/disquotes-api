@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.EntityFrameworkCore;
 using QuotesApi.Database;
 using QuotesApi.Exceptions;
 using QuotesApi.Extentions;
@@ -33,11 +34,13 @@ namespace QuotesApi.Services
 
             if (enrichWithUser)
             {
-                query = query.Join(_db.Users, 
-                    q => q.UserId, 
-                    u => u.Id, 
-                    (q, u) => _db.Attach(new Quote().MapProps(q).MapProps(new {User = u})).Entity
-                );
+                query = query
+                    .AsNoTracking()
+                    .Join(_db.Users, 
+                        q => q.UserId, 
+                        u => u.Id, 
+                        (q, u) => new Quote().MapProps(q).MapProps(new {User = u})
+                    );
             }
 
             var quote = query.FirstOrDefault();
@@ -45,6 +48,11 @@ namespace QuotesApi.Services
             if (quote == null)
             {
                 throw new NotFoundException($"Quote with id '{quoteId}' not found.");
+            }
+
+            if (enrichWithUser)
+            {
+                _db.Attach(quote);
             }
 
             return quote;
