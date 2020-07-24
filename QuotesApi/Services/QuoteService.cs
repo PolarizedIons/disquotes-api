@@ -23,7 +23,7 @@ namespace QuotesApi.Services
             _discordService = discordService;
         }
 
-        public Quote FindById(Guid quoteId, bool onlyApproved = true, bool enrichWithUser = true)
+        public Quote FindById(Guid quoteId, bool onlyApproved = true, bool enrichWithUser = false)
         {
             var query = _db.Quotes.AsQueryable().Where(x => x.Id == quoteId && x.DeletedAt == null);
             if (onlyApproved)
@@ -36,7 +36,7 @@ namespace QuotesApi.Services
                 query = query.Join(_db.Users, 
                     q => q.UserId, 
                     u => u.Id, 
-                    (q, u) => new Quote().MapProps(q).MapProps(new {User = u})
+                    (q, u) => _db.Attach(new Quote().MapProps(q).MapProps(new {User = u})).Entity
                 );
             }
 
@@ -111,6 +111,11 @@ namespace QuotesApi.Services
         {
             var quote = FindById(quoteId, false);
 
+            if (quote.Approved)
+            {
+                throw new BadRequestException("Cannot approve quote that is already approved.");
+            }
+
             var maxQuoteNumber = _db.Quotes.AsQueryable()
                                      .Where(x => x.Approved && x.DeletedAt == null)
                                      .OrderBy(x => x.QuoteNumber)
@@ -145,6 +150,14 @@ namespace QuotesApi.Services
             await _discordService.SendQuoteNotification(ulong.Parse(quote.GuildId), ulong.Parse(user.DiscordId), newQuote);
             
             return newQuote;
+        }
+
+        public async Task<bool> DeleteQuote(Guid quoteId)
+        {
+            var quote = FindById(quoteId, false);
+            quote.DeletedAt = DateTime.UtcNow;
+            var result = await _db.SaveChangesAsync();
+            return result > 0;
         }
     }
 }

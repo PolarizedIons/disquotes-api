@@ -95,7 +95,7 @@ namespace QuotesApi.Controllers
         ]
         public ApiResult<Quote> GetQuote([FromRoute] Guid quoteId)
         {
-            return Ok(_quoteService.FindById(quoteId));
+            return Ok(_quoteService.FindById(quoteId, enrichWithUser: true));
         }
         
         /// <summary>
@@ -120,6 +120,24 @@ namespace QuotesApi.Controllers
             }
 
             return Ok(await _quoteService.ApproveQuote(quoteId));
+        }
+
+        [
+            HttpDelete("{quoteId:guid}"),
+            ProducesResponseType(typeof(ApiResult<bool>), 200),
+            Authorize
+        ]
+        public async Task<ApiResult<bool>> DeleteQuote([FromRoute] Guid quoteId)
+        {
+            var guildId = _quoteService.FindById(quoteId, false).GuildId;
+            var guild = await _discordService.GetGuild(ulong.Parse(guildId));
+
+            if (UserDiscordId != guild.OwnerId)
+            {
+                throw new ForbiddenException("Only the owner of a guild can delete quotes submitted to it.");
+            }
+
+            return Ok(await _quoteService.DeleteQuote(quoteId));
         }
     }
 }
