@@ -15,13 +15,24 @@ namespace QuotesApi.Database
         public DatabaseContext(DbContextOptions<DatabaseContext> options) : base(options)
         {
             ChangeTracker.StateChanged += OnEntityStateChanged;
+            ChangeTracker.Tracked += OnEntityTracked;
         }
 
-        private void OnEntityStateChanged(object sender, EntityStateChangedEventArgs e)
+        private void OnEntityTracked(object sender, EntityTrackedEventArgs e)
+        {
+            if (e.Entry.State == EntityState.Added && e.Entry.Entity is DbEntity entity)
+            {
+                entity.Id = Guid.NewGuid();
+                entity.CreatedAt = DateTime.UtcNow;
+                entity.LastModifiedAt = DateTime.UtcNow;
+            }
+        }
+
+        private static void OnEntityStateChanged(object sender, EntityStateChangedEventArgs e)
         {
             if (e.NewState == EntityState.Modified && e.Entry.Entity is DbEntity entity)
             {
-                entity.LastModifiedAt = DateTime.Now;   
+                entity.LastModifiedAt = DateTime.UtcNow;
             }
         }
     }

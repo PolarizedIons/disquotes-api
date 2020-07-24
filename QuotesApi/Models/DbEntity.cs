@@ -14,11 +14,5 @@ namespace QuotesApi.Models
         
         [JsonIgnore]
         public DateTime? DeletedAt { get; set; }
-
-        protected DbEntity()
-        {
-            Id = Guid.NewGuid();
-            CreatedAt = LastModifiedAt = DateTime.UtcNow;
-        }
     }
 }
