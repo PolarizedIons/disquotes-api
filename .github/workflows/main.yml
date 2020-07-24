@@ -19,4 +19,4 @@ jobs:
           username: ${{ github.actor }}
           password: ${{ secrets.GITHUB_TOKEN }} 
           registry: docker.pkg.github.com
-          tags: "latest,${{ GITHUB_RUN_NUMBER }}"
+          tags: "latest,$GITHUB_RUN_NUMBER"
