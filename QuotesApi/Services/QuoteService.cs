@@ -118,7 +118,7 @@ namespace QuotesApi.Services
 
             var maxQuoteNumber = _db.Quotes.AsQueryable()
                                      .Where(x => x.Approved && x.DeletedAt == null)
-                                     .OrderBy(x => x.QuoteNumber)
+                                     .OrderByDescending(x => x.QuoteNumber)
                                      .Select(x => x.QuoteNumber)
                                      .FirstOrDefault() ?? 0;
 
