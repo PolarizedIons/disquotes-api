@@ -64,7 +64,8 @@ namespace QuotesApi.Services
                 .Where(x => x.Approved)
                 .Where(x => x.DeletedAt == null)
                 .Where(x => guildFilter.Contains(x.GuildId))
-                .OrderByDescending(x => x.LastModifiedAt);
+                .OrderByDescending(x => x.LastModifiedAt)
+                .ThenByDescending(x => x.QuoteNumber);
                 
             var data = query
                 .Skip((pagingFilter.PageNumber - 1) * pagingFilter.PageSize)
