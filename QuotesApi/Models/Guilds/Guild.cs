@@ -10,7 +10,7 @@ namespace QuotesApi.Models.Guilds
         
         public string? SystemChannelId { get; set; }
 
-        public bool IsOwner { get; set; }
+        public bool IsModerator { get; set; }
 
         public string IconUrl { get; set; }
     }

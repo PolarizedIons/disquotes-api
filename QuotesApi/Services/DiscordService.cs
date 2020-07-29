@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 using Discord;
 using Discord.Rest;
@@ -27,7 +28,7 @@ namespace QuotesApi.Services
 
         public bool IsLoggedIn => _client.LoginState == LoginState.LoggedIn;
 
-        public async Task<List<RestGuild>> GetGuildsFor(ulong userId)
+        public async Task<List<RestGuild>> GetMutualGuildsFor(ulong userId)
         {
             var userGuilds = new List<RestGuild>();
             var botGuilds = await _client.GetGuildsAsync();
@@ -67,19 +68,19 @@ namespace QuotesApi.Services
             }
         }
 
-        public async Task SendQuoteNotification(ulong guildId, ulong discordUserId, Quote quote)
+        public async Task SendQuoteNotification(ulong guildId, Quote quote, ulong submitterId, ulong? approverId)
         {
             var guild = await GetGuild(guildId);
             var channel = await guild.GetSystemChannelAsync();
 
             if (channel != null)
             {
-                var user = await guild.GetUserAsync(discordUserId);
-                var owner = await guild.GetOwnerAsync();
+                var user = await guild.GetUserAsync(submitterId);
+                var approver = approverId.HasValue ? await guild.GetUserAsync(approverId.Value) : null;
 
                 var text = quote.Approved ? _config["Notification:Approved"] : _config["Notification:New"];
                 text = text
-                    .Replace("{owner}", owner.Mention)
+                    .Replace("{approver}", approver?.Mention)
                     .Replace("{submitter}", user.Mention)
                     .Replace("{title}", quote.Title);
 
@@ -92,6 +93,23 @@ namespace QuotesApi.Services
                     Log.Debug("Could not send notification to guild id {guildId} ({channelId}): {exceptionMessage}", guildId, channel.Id, e.Message);
                 }
             }
+        }
+
+        public async Task<bool> IsModeratorInGuild(ulong userId, ulong guildId)
+        {
+            var guild = await GetGuild(guildId);
+
+            if (guild.OwnerId == userId)
+            {
+                return true;
+            }
+
+            var user = await guild.GetUserAsync(userId);
+
+            var roles = user.RoleIds
+                .Select(userRole => guild.Roles.First(x => x.Id == userRole));
+
+            return roles.Any(role => role.Permissions.Administrator || role.Permissions.ManageGuild);
         }
     }
 }

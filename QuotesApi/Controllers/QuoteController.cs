@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authorization;
@@ -37,7 +38,7 @@ namespace QuotesApi.Controllers
         public async Task<ApiResult<PagedResponse<Quote>>> GetApprovedQuotes([FromQuery] string? guildsFilter, [FromQuery] PagingFilter pagingFilter)
         {
             ValidatePagingFilter(pagingFilter);
-            var userGuilds = (await _discordService.GetGuildsFor(UserDiscordId)).Select(x => x.Id.ToString());
+            var userGuilds = (await _discordService.GetMutualGuildsFor(UserDiscordId)).Select(x => x.Id.ToString());
             var filter = guildsFilter?.Split(",").Where(x => userGuilds.Contains(x)) ?? userGuilds;
             return Ok(_quoteService.FindApproved(filter, pagingFilter));
         }
@@ -56,8 +57,19 @@ namespace QuotesApi.Controllers
         public async Task<ApiResult<PagedResponse<Quote>>> GetUnapprovedQuotes([FromQuery] string? guildsFilter, [FromQuery] PagingFilter pagingFilter)
         {
             ValidatePagingFilter(pagingFilter);
-            var userGuilds = (await _discordService.GetGuildsFor(UserDiscordId)).Where(x => x.OwnerId == UserDiscordId).Select(x => x.Id.ToString());
-            var filter = guildsFilter?.Split(",").Where(x => userGuilds.Contains(x)) ?? userGuilds;
+            var userGuilds = await _discordService.GetMutualGuildsFor(UserDiscordId);
+            var filteredUserGuilds = new List<string>();
+
+            foreach (var guild in userGuilds)
+            {
+                var isMod = await _discordService.IsModeratorInGuild(UserDiscordId, guild.Id);
+                if (isMod)
+                {
+                    filteredUserGuilds.Add(guild.Id.ToString());
+                }
+            }
+
+            var filter = guildsFilter?.Split(",").Where(x => filteredUserGuilds.Contains(x)) ?? filteredUserGuilds;
             return Ok(_quoteService.FindUnapproved(filter, pagingFilter));
         }
 
@@ -73,7 +85,7 @@ namespace QuotesApi.Controllers
         ]
         public async Task<ApiResult<Quote>> CreateQuote([FromBody] QuoteDto quote)
         {
-            var userGuilds = (await _discordService.GetGuildsFor(UserDiscordId)).Select(x => x.Id.ToString());
+            var userGuilds = (await _discordService.GetMutualGuildsFor(UserDiscordId)).Select(x => x.Id.ToString());
             if (!userGuilds.Contains(quote.GuildId))
             {
                 throw new ForbiddenException("You cannot submit a quote for a guild you and the bot are not in.");
@@ -111,15 +123,15 @@ namespace QuotesApi.Controllers
         ]
         public async Task<ApiResult<Quote>> ApproveQuote([FromRoute] Guid quoteId)
         {
-            var guildId = _quoteService.FindById(quoteId, false).GuildId;
-            var guild = await _discordService.GetGuild(ulong.Parse(guildId));
+            var guildId = ulong.Parse(_quoteService.FindById(quoteId, false).GuildId);
+            var isMod = await _discordService.IsModeratorInGuild(UserDiscordId, guildId);
 
-            if (UserDiscordId != guild.OwnerId)
+            if (!isMod)
             {
-                throw new ForbiddenException("Only the owner of a guild can approve quotes submitted to it.");
+                throw new ForbiddenException("Only the moderators of a guild can approve quotes submitted to it.");
             }
 
-            return Ok(await _quoteService.ApproveQuote(quoteId));
+            return Ok(await _quoteService.ApproveQuote(quoteId, UserId));
         }
 
         [
@@ -129,12 +141,12 @@ namespace QuotesApi.Controllers
         ]
         public async Task<ApiResult<bool>> DeleteQuote([FromRoute] Guid quoteId)
         {
-            var guildId = _quoteService.FindById(quoteId, false).GuildId;
-            var guild = await _discordService.GetGuild(ulong.Parse(guildId));
+            var guildId = ulong.Parse(_quoteService.FindById(quoteId, false).GuildId);
+            var isMod = await _discordService.IsModeratorInGuild(UserDiscordId, guildId);
 
-            if (UserDiscordId != guild.OwnerId)
+            if (!isMod)
             {
-                throw new ForbiddenException("Only the owner of a guild can delete quotes submitted to it.");
+                throw new ForbiddenException("Only the moderators of a guild can delete quotes submitted to it.");
             }
 
             return Ok(await _quoteService.DeleteQuote(quoteId));

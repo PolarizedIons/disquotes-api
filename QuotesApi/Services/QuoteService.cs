@@ -116,7 +116,7 @@ namespace QuotesApi.Services
             };
         }
 
-        public async Task<Quote> ApproveQuote(Guid quoteId)
+        public async Task<Quote> ApproveQuote(Guid quoteId, Guid approverId)
         {
             var quote = FindById(quoteId, false);
 
@@ -136,7 +136,8 @@ namespace QuotesApi.Services
             await _db.SaveChangesAsync();
 
             var user = _userService.FindUser(quote.UserId);
-            await _discordService.SendQuoteNotification(ulong.Parse(quote.GuildId), ulong.Parse(user.DiscordId), quote);
+            var approver = _userService.FindUser(approverId);
+            await _discordService.SendQuoteNotification(ulong.Parse(quote.GuildId), quote, ulong.Parse(user.DiscordId), ulong.Parse(approver.DiscordId));
 
             return quote;
         }
@@ -156,7 +157,7 @@ namespace QuotesApi.Services
             await _db.SaveChangesAsync();
 
             var user = _userService.FindUser(userId);
-            await _discordService.SendQuoteNotification(ulong.Parse(quote.GuildId), ulong.Parse(user.DiscordId), newQuote);
+            await _discordService.SendQuoteNotification(ulong.Parse(quote.GuildId), newQuote, ulong.Parse(user.DiscordId), null);
             
             return newQuote;
         }

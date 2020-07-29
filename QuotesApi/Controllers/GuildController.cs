@@ -1,5 +1,4 @@
 using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -27,17 +26,23 @@ namespace QuotesApi.Controllers
         public async Task<ApiResult<IEnumerable<Guild>>> GetGuilds()
         {
 
-            var mutualGuilds = await _discordService.GetGuildsFor(UserDiscordId);
-            var guilds = mutualGuilds
-                .Select(x => new Guild
+            var mutualGuilds = await _discordService.GetMutualGuildsFor(UserDiscordId);
+            var guilds = new List<Guild>();
+
+            foreach (var guild in mutualGuilds)
+            {
+                var isMod = await _discordService.IsModeratorInGuild(UserDiscordId, guild.Id);
+
+                guilds.Add(new Guild
                 {
-                    Id = x.Id.ToString(),
-                    Description = x.Description,
-                    Name = x.Name,
-                    IsOwner = UserDiscordId == x.OwnerId,
-                    SystemChannelId = x.SystemChannelId.ToString(),
-                    IconUrl = x.IconUrl,
+                    Id = guild.Id.ToString(),
+                    Description = guild.Description,
+                    Name = guild.Name,
+                    IsModerator = isMod,
+                    SystemChannelId = guild.SystemChannelId.ToString(),
+                    IconUrl = guild.IconUrl,
                 });
+            }
 
             return Ok(guilds);
         }
@@ -56,7 +61,7 @@ namespace QuotesApi.Controllers
                 Id = discordGuild.Id.ToString(),
                 Name = discordGuild.Name,
                 IconUrl = discordGuild.IconUrl,
-                IsOwner = UserDiscordId == discordGuild.OwnerId,
+                IsModerator = await _discordService.IsModeratorInGuild(UserDiscordId, guildId),
                 SystemChannelId = discordGuild.SystemChannelId.ToString(),
             };
 
