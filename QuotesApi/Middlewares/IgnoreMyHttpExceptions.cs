@@ -2,7 +2,7 @@ using System.Text.Json;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using QuotesApi.Exceptions;
-using QuotesApi.Models;
+using QuotesLib.Models;
 
 namespace QuotesApi.Middlewares
 {

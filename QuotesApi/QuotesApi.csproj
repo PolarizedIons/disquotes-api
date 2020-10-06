@@ -8,22 +8,15 @@
     </PropertyGroup>
 
     <ItemGroup>
-      <PackageReference Include="Discord.Net.Core" Version="2.2.0" />
-      <PackageReference Include="Discord.Net.Rest" Version="2.2.0" />
       <PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="3.1.6" />
-      <PackageReference Include="Microsoft.EntityFrameworkCore" Version="3.1.6" />
-      <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="3.1.6" />
-      <PackageReference Include="Pomelo.EntityFrameworkCore.MySql" Version="3.1.1" />
-      <PackageReference Include="Pomelo.EntityFrameworkCore.MySql.Design" Version="1.1.2" />
-      <PackageReference Include="Quartz" Version="3.1.0" />
-      <PackageReference Include="Quartz.AspNetCore" Version="3.1.0" />
-      <PackageReference Include="Serilog.AspNetCore" Version="3.2.0" />
+      <PackageReference Include="Serilog" Version="2.9.0" />
+      <PackageReference Include="Serilog.AspNetCore" Version="3.4.0" />
+      <PackageReference Include="Serilog.Sinks.Console" Version="3.1.1" />
       <PackageReference Include="Swashbuckle.AspNetCore" Version="5.5.1" />
     </ItemGroup>
 
     <ItemGroup>
-      <Folder Include="Migrations" />
-      <Folder Include="Scheduler" />
+      <ProjectReference Include="..\QuotesLib\QuotesLib.csproj" />
     </ItemGroup>
 
 

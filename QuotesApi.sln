@@ -2,6 +2,14 @@
 Microsoft Visual Studio Solution File, Format Version 12.00
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "QuotesApi", "QuotesApi\QuotesApi.csproj", "{0911794D-5CCD-4525-A6DB-C9D6B2D7710F}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "QuotesLib", "QuotesLib\QuotesLib.csproj", "{A1E1906B-B168-412E-82EC-D825ECEE633C}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "QuotesCore", "QuotesCore\QuotesCore.csproj", "{6EF130A2-60C0-4613-A1DB-FA463F2E6601}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "QuotesScheduler", "QuotesScheduler\QuotesScheduler.csproj", "{2699918F-DE2F-4B42-A196-E38D04BA00F9}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "QuotesBot", "QuotesBot\QuotesBot.csproj", "{7F645A9F-280C-4A48-8FDA-DBD781CB8FC7}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -12,5 +20,21 @@ Global
 		{0911794D-5CCD-4525-A6DB-C9D6B2D7710F}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{0911794D-5CCD-4525-A6DB-C9D6B2D7710F}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{0911794D-5CCD-4525-A6DB-C9D6B2D7710F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A1E1906B-B168-412E-82EC-D825ECEE633C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A1E1906B-B168-412E-82EC-D825ECEE633C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A1E1906B-B168-412E-82EC-D825ECEE633C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A1E1906B-B168-412E-82EC-D825ECEE633C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6EF130A2-60C0-4613-A1DB-FA463F2E6601}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6EF130A2-60C0-4613-A1DB-FA463F2E6601}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6EF130A2-60C0-4613-A1DB-FA463F2E6601}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6EF130A2-60C0-4613-A1DB-FA463F2E6601}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2699918F-DE2F-4B42-A196-E38D04BA00F9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2699918F-DE2F-4B42-A196-E38D04BA00F9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2699918F-DE2F-4B42-A196-E38D04BA00F9}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2699918F-DE2F-4B42-A196-E38D04BA00F9}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7F645A9F-280C-4A48-8FDA-DBD781CB8FC7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7F645A9F-280C-4A48-8FDA-DBD781CB8FC7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7F645A9F-280C-4A48-8FDA-DBD781CB8FC7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7F645A9F-280C-4A48-8FDA-DBD781CB8FC7}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal

@@ -2,25 +2,30 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
-using QuotesApi.Models;
+using QuotesApi.Exceptions;
 using QuotesApi.Models.Security;
 using QuotesApi.Models.Users;
 using QuotesApi.Services;
+using QuotesLib.Models;
+using QuotesLib.Models.Security;
+using QuotesLib.Services;
 
 namespace QuotesApi.Controllers
 {
     [Route("security")]
     public class SecurityController : BaseController
     {
-        private readonly UserService _userService;
+        private readonly NatsUserService _natsUserService;
         private readonly DiscordOAuthService _discordOAuthService;
         private readonly JwtService _jwtService;
         private readonly IConfiguration _config;
+        private readonly NatsDiscordService _natsDiscordService;
 
-        public SecurityController(UserService userService, DiscordOAuthService discordOAuthService, JwtService jwtService, IConfiguration config)
+        public SecurityController(NatsUserService natsUserService, DiscordOAuthService discordOAuthService, NatsDiscordService natsDiscordService, JwtService jwtService, IConfiguration config)
         {
-            _userService = userService;
+            _natsUserService = natsUserService;
             _discordOAuthService = discordOAuthService;
+            _natsDiscordService = natsDiscordService;
             _jwtService = jwtService;
             _config = config;
         }
@@ -58,8 +63,8 @@ namespace QuotesApi.Controllers
                 return (ApiResult<string>) Unauthorized("Unable to get access token!");
             }
 
-            var discordUser = await _discordOAuthService.GetUserFromAuthToken(discordAuthToken);
-            var user = await _userService.LoginDiscordUser(discordUser);
+            var discordUser = await _natsDiscordService.GetUserFromAuthToken(discordAuthToken);
+            var user = await _natsUserService.LoginDiscordUser(discordUser);
             var accessToken = _jwtService.CreateAccessTokenFor(user);
             return Redirect(_config["Discord:FrontendUrl"]
                 .Replace("{access_token}", accessToken)
@@ -78,7 +83,7 @@ namespace QuotesApi.Controllers
         ]
         public ApiResult<User> GetMe()
         {
-            var user = _userService.FindUser(UserId);
+            var user = _natsUserService.FindUser(UserId);
             return Ok(user);
         }
 
@@ -94,8 +99,13 @@ namespace QuotesApi.Controllers
         ]
         public async Task<ApiResult<RefreshTokenResponse>> RefreshToken([FromBody] RefreshTokenDto refreshTokenDto)
         {
-            _userService.ValidateRefreshToken(refreshTokenDto.AccountId, refreshTokenDto.RefreshToken);
-            var user = await _userService.UpdateRefreshToken(refreshTokenDto.AccountId);
+            var status = await _natsUserService.ValidateRefreshToken(refreshTokenDto.AccountId, refreshTokenDto.RefreshToken);
+            if (status != RefreshTokenStatus.VALID)
+            {
+                throw new UnauthorizedException("Refresh token: " + status);
+            }
+
+            var user = await _natsUserService.UpdateRefreshToken(refreshTokenDto.AccountId);
             return Ok(new RefreshTokenResponse
             {
                 AccessToken = _jwtService.CreateAccessTokenFor(user),
