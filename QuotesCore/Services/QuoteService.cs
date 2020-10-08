@@ -2,11 +2,11 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using Microsoft.EntityFrameworkCore;
+using Mapster;
 using QuotesApi.Exceptions;
-using QuotesApi.Extentions;
 using QuotesApi.Models.Paging;
 using QuotesApi.Models.Quotes;
+using QuotesApi.Models.Users;
 using QuotesCore.Database;
 using QuotesLib.Models;
 using QuotesLib.Services;
@@ -37,27 +37,14 @@ namespace QuotesCore.Services
             if (enrichWithUser)
             {
                 query = query
-                    .AsNoTracking()
                     .Join(_db.Users, 
                         q => q.UserId, 
                         u => u.Id, 
-                        (q, u) => new Quote().MapProps(q).MapProps(new {User = u})
+                        (q, u) => Quote.Merge(q, u.Adapt<UserDto>())
                     );
             }
 
-            var quote = query.FirstOrDefault();
-
-            if (quote == null)
-            {
-                throw new NotFoundException($"Quote with id '{quoteId}' not found.");
-            }
-
-            if (enrichWithUser)
-            {
-                _db.Attach(quote);
-            }
-
-            return Task.FromResult(quote);
+            return Task.FromResult(query.FirstOrDefault());
         }
 
         public Task<PagedResponse<Quote>> FindApproved(IEnumerable<string> guildFilter, PagingFilter pagingFilter)
@@ -75,13 +62,13 @@ namespace QuotesCore.Services
                 .Join(_db.Users,
                     q => q.UserId,
                     u => u.Id,
-                    (q, u) => new Quote().MapProps(q).MapProps(new {User = u})
+                    (q, u) => Quote.Merge(q, u.Adapt<UserDto>())
                 );
             var totalCount = query.Count();
-            
+
             return Task.FromResult(new PagedResponse<Quote>
             {
-                Items = data,
+                Items = data.ToList(),
                 TotalRows = totalCount,
                 HasNext = (pagingFilter.PageNumber * pagingFilter.PageSize) < totalCount,
                 HasPrevious = pagingFilter.PageNumber > 1,
@@ -103,13 +90,13 @@ namespace QuotesCore.Services
                 .Join(_db.Users, 
                     q => q.UserId, 
                     u => u.Id, 
-                    (q, u) => new Quote().MapProps(q).MapProps(new {User = u})
+                    (q, u) => Quote.Merge(q, u.Adapt<UserDto>())
                 );
             var totalCount = query.Count();
 
             return Task.FromResult(new PagedResponse<Quote>
             {
-                Items = data,
+                Items = data.ToList(),
                 TotalRows = totalCount,
                 HasNext = (pagingFilter.PageNumber * pagingFilter.PageSize) < totalCount,
                 HasPrevious = pagingFilter.PageNumber > 1,
@@ -159,6 +146,7 @@ namespace QuotesCore.Services
             await _db.SaveChangesAsync();
 
             var user = await _userService.FindUser(userId);
+            newQuote.User = user.Adapt<UserDto>();
             await _natsDiscordService.SendQuoteNotification(ulong.Parse(quote.GuildId), newQuote, ulong.Parse(user.DiscordId), null);
             
             return newQuote;

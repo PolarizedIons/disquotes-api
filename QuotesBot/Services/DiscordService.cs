@@ -4,9 +4,11 @@ using System.Threading.Tasks;
 using Discord;
 using Discord.Rest;
 using Discord.WebSocket;
+using Mapster;
 using Microsoft.Extensions.Configuration;
 using QuotesApi.Models.Quotes;
 using QuotesLib.Models;
+using QuotesLib.Models.Discord;
 using QuotesLib.Services;
 using Serilog;
 
@@ -34,31 +36,30 @@ namespace QuotesBot.Services
             return Task.FromResult(_client.LoginState == LoginState.LoggedIn);
         }
 
-        public Task<IEnumerable<IGuild>> GetMutualGuildsFor(ulong userId)
+        public async Task<IEnumerable<MyIGuild>> GetMutualGuildsFor(ulong userId)
         {
             var user = _client.GetUser(userId);
-            return Task.FromResult<IEnumerable<IGuild>>(user.MutualGuilds);
+            return user == null ? new MyIGuild[0] : user.MutualGuilds.Select(x => x.Adapt<MyIGuild>());
         }
 
-        public Task<IGuild> GetGuild(ulong guildId)
+        public Task<MyIGuild> GetGuild(ulong guildId)
         {
-            return Task.FromResult<IGuild>(_client.GetGuild(guildId));
+            return Task.FromResult(_client.GetGuild(guildId).Adapt<MyIGuild>());
         }
 
-        public Task<IUser> GetUser(ulong userId)
+        public Task<MyIUser> GetUser(ulong userId)
         {
-            return Task.FromResult<IUser>(_client.GetUser(userId));
+            return Task.FromResult(_client.GetUser(userId).Adapt<MyIUser>());
         }
 
         public async Task SendQuoteNotification(ulong guildId, Quote quote, ulong submitterId, ulong? approverId)
         {
-            var guild = await GetGuild(guildId);
-            var channel = await guild.GetSystemChannelAsync();
+            var guild = _client.GetGuild(guildId);
 
-            if (channel != null)
+            if (guild.SystemChannel != null)
             {
-                var user = await guild.GetUserAsync(submitterId);
-                var approver = approverId.HasValue ? await guild.GetUserAsync(approverId.Value) : null;
+                var user = guild.GetUser(submitterId);
+                var approver = approverId.HasValue ? guild.GetUser(approverId.Value) : null;
 
                 var text = quote.Approved ? _config["Notification:Approved"] : _config["Notification:New"];
                 text = text
@@ -68,18 +69,19 @@ namespace QuotesBot.Services
 
                 try
                 {
-                    await channel.SendMessageAsync(text);
+                    Log.Debug("Sending {message} to {guild}/#{channel}", text, guild, guild.SystemChannel);
+                    await guild.SystemChannel.SendMessageAsync(text);
                 }
                 catch (Discord.Net.HttpException e)
                 {
-                    Log.Debug("Could not send notification to guild id {guildId} ({channelId}): {exceptionMessage}", guildId, channel.Id, e.Message);
+                    Log.Debug("Could not send notification to guild id {guildId} ({channelId}): {exceptionMessage}", guildId, guild.SystemChannel.Id, e.Message);
                 }
             }
         }
 
         public async Task<bool> IsModeratorInGuild(ulong userId, ulong guildId)
         {
-            var guild = await GetGuild(guildId) as SocketGuild;
+            var guild = _client.GetGuild(guildId);
             if (guild == null)
             {
                 return false;
@@ -94,11 +96,11 @@ namespace QuotesBot.Services
             return user.Roles.Any(role => role.Permissions.Administrator || role.Permissions.ManageGuild);
         }
 
-        public async Task<ISelfUser> GetUserFromAuthToken(string token)
+        public async Task<MyISelfUser> GetUserFromAuthToken(string token)
         {
             var myClient = new DiscordRestClient();
             await myClient.LoginAsync(TokenType.Bearer, token);
-            return myClient.CurrentUser;
+            return myClient.CurrentUser.Adapt<MyISelfUser>();
         }
 
         public async Task Logout()

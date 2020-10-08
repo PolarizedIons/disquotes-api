@@ -55,6 +55,11 @@ namespace QuotesApi.Controllers
         public async Task<ApiResult<Guild>> GetGuildById([FromRoute] ulong guildId)
         {
             var discordGuild = await _natsDiscordService.GetGuild(guildId);
+            if (discordGuild == null)
+            {
+                return NotFound("The bot cannot access that guild.");
+            }
+
             var guild = new Guild
             {
                 Description = discordGuild.Description,

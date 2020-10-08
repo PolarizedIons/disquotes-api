@@ -2,4 +2,5 @@
 	<s:String x:Key="/Default/Environment/AssemblyExplorer/XmlDocument/@EntryValue">&lt;AssemblyExplorer&gt;
   &lt;Assembly Path="/usr/share/dotnet/packs/Microsoft.NETCore.App.Ref/3.1.0/ref/netcoreapp3.1/System.ComponentModel.Annotations.dll" /&gt;
   &lt;Assembly Path="/usr/share/dotnet/shared/Microsoft.NETCore.App/3.1.3/System.ComponentModel.Annotations.dll" /&gt;
-&lt;/AssemblyExplorer&gt;</s:String></wpf:ResourceDictionary>
+&lt;/AssemblyExplorer&gt;</s:String>
+	<s:Boolean x:Key="/Default/UnloadedProject/UnloadedProjects/=2699918f_002Dde2f_002D4b42_002Da196_002De38d04ba00f9_0023QuotesScheduler/@EntryIndexedValue">True</s:Boolean></wpf:ResourceDictionary>

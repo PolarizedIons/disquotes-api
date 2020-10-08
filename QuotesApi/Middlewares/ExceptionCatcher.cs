@@ -1,6 +1,8 @@
+using System;
 using System.Text.Json;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
+using NATS.Client;
 using QuotesApi.Exceptions;
 using QuotesLib.Models;
 
@@ -21,12 +23,18 @@ namespace QuotesApi.Middlewares
             {
                 await _next(context);
             }
-            catch (HttpException e)
-            {
+            catch (Exception e)
+            { 
                 var response = (ApiResult<object>) e;
+                if (! (e is HttpException || e is NATSTimeoutException))
+                {
+                    response.Error = "Internal Server Error";
+                    response.Status = 500;
+                }
+
                 context.Response.StatusCode = response.Status;
                 context.Response.ContentType = "application/json";
-                await context.Response.WriteAsync(JsonSerializer.Serialize(response, new JsonSerializerOptions { PropertyNamingPolicy = JsonNamingPolicy.CamelCase }));
+                await context.Response.WriteAsync(JsonSerializer.Serialize(response, new JsonSerializerOptions {PropertyNamingPolicy = JsonNamingPolicy.CamelCase}));
             }
         }
     }

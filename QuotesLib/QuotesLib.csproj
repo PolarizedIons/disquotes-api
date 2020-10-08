@@ -6,6 +6,7 @@
     </PropertyGroup>
 
     <ItemGroup>
+      <PackageReference Include="Discord.Net" Version="2.2.0" />
       <PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="3.1.6" />
       <PackageReference Include="NATS.Client" Version="0.10.1" />
       <PackageReference Include="Serilog" Version="2.9.0" />

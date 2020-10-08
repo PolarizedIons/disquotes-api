@@ -32,7 +32,7 @@ namespace QuotesCore
             Log.Information("Activating NATS responders");
             _natsResponders = NatsResponder.ActivateAll(_serviceProvider);
             // We need to access the IEnumerable for them to actually activate :(
-            Log.Debug("Found {count} responders", _natsResponders.Count());
+            Log.Debug("Found {count} responders: {@names}", _natsResponders.Count(), _natsResponders.Select(x => x.GetType().Name));
             
             Log.Information("Ready :)");
 

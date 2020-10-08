@@ -1,7 +1,5 @@
 using System;
-using System.Collections.Generic;
 using System.Data;
-using System.Linq;
 using System.Text;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.Extensions.DependencyInjection;
@@ -42,17 +40,7 @@ namespace QuotesLib.Extentions
 
         public static IServiceCollection DiscoverAndMakeDiServicesAvailable(this IServiceCollection services)
         {
-            // services.Scan(scan =>
-            //     scan.FromApplicationDependencies()
-            //         .AddClasses(classes => classes.AssignableTo<IScopedDiService>())
-            //         .AsSelf()
-            //         .WithScopedLifetime()
-            //         .AddClasses(classes => classes.AssignableTo<ISingletonDiService>())
-            //         .AsSelf()
-            //         .WithSingletonLifetime()
-            // );
-            
-            var discoveredTypes = GetTypesInAssembly(typeof(IDiService));
+            var discoveredTypes = typeof(IDiService).FindAllInAssembly();
             if (discoveredTypes != null)
             {
                 foreach (var serviceType in discoveredTypes)
@@ -73,13 +61,6 @@ namespace QuotesLib.Extentions
             }
 
             return services;
-        }
-
-        private static IEnumerable<Type> GetTypesInAssembly(Type type)
-        {
-            return AppDomain.CurrentDomain.GetAssemblies()
-                .SelectMany(x => x.GetTypes())
-                .Where(x => type.IsAssignableFrom(x) && !x.IsInterface && !x.IsAbstract);
         }
     }
 }

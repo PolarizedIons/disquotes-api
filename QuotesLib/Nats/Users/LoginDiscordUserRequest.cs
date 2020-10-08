@@ -1,7 +1,9 @@
+using QuotesLib.Models.Discord;
+
 namespace QuotesLib.Nats.Users
 {
     public class LoginDiscordUserRequest : INatsRequest
     {
-        public IUser User { get; set; }
+        public MyIUser User { get; set; }
     }
 }

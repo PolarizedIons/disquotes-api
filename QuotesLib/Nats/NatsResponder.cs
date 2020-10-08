@@ -1,8 +1,8 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Reflection;
 using Microsoft.Extensions.DependencyInjection;
+using QuotesLib.Extentions;
 using QuotesLib.Services;
 
 namespace QuotesLib.Nats
@@ -34,8 +34,7 @@ namespace QuotesLib.Nats
 
         public static IEnumerable<NatsResponder> ActivateAll(IServiceProvider serviceProvider)
         {
-            return Assembly.GetEntryAssembly()?.GetExportedTypes()
-                .Where(x => typeof(NatsResponder).IsAssignableFrom(x))
+            return typeof(NatsResponder).FindAllInAssembly()
                 .Select(x => (NatsResponder)serviceProvider.GetRequiredService(x));
         }
     }

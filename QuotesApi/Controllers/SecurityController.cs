@@ -1,4 +1,5 @@
 using System.Threading.Tasks;
+using Mapster;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
@@ -7,6 +8,7 @@ using QuotesApi.Models.Security;
 using QuotesApi.Models.Users;
 using QuotesApi.Services;
 using QuotesLib.Models;
+using QuotesLib.Models.Discord;
 using QuotesLib.Models.Security;
 using QuotesLib.Services;
 
@@ -64,7 +66,7 @@ namespace QuotesApi.Controllers
             }
 
             var discordUser = await _natsDiscordService.GetUserFromAuthToken(discordAuthToken);
-            var user = await _natsUserService.LoginDiscordUser(discordUser);
+            var user = await _natsUserService.LoginDiscordUser(discordUser.Adapt<MyIUser>());
             var accessToken = _jwtService.CreateAccessTokenFor(user);
             return Redirect(_config["Discord:FrontendUrl"]
                 .Replace("{access_token}", accessToken)
@@ -79,12 +81,12 @@ namespace QuotesApi.Controllers
         [
             HttpGet("me"),
             Authorize,
-            ProducesResponseType(typeof(ApiResult<User>), 200)
+            ProducesResponseType(typeof(ApiResult<UserDto>), 200)
         ]
-        public ApiResult<User> GetMe()
+        public async Task<ApiResult<UserDto>> GetMe()
         {
-            var user = _natsUserService.FindUser(UserId);
-            return Ok(user);
+            var user = await _natsUserService.FindUser(UserId);
+            return Ok(user.Adapt<UserDto>());
         }
 
         /// <summary>

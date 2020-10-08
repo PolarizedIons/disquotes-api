@@ -1,5 +1,6 @@
 using System;
 using System.Threading.Tasks;
+using Mapster;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using QuotesApi.Models.Users;
@@ -25,13 +26,18 @@ namespace QuotesApi.Controllers
         /// <returns></returns>
         [
             HttpGet("{userId:guid}"),
-            ProducesResponseType(typeof(ApiResult<User>), 200),
+            ProducesResponseType(typeof(ApiResult<UserDto>), 200),
             Authorize,
         ]
-        public async Task<ApiResult<User>> GetUserById([FromRoute] Guid userId)
+        public async Task<ApiResult<UserDto>> GetUserById([FromRoute] Guid userId)
         {
             var user = await _natsUserService.FindUser(userId);
-            return Ok(user);
+            if (user == null)
+            {
+                return NotFound("User not found");
+            }
+
+            return Ok(user.Adapt<UserDto>());
         }
     }
 }

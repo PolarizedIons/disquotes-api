@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using QuotesApi.Models.Users;
 using QuotesCore.Database;
 using QuotesLib.Models;
+using QuotesLib.Models.Discord;
 using QuotesLib.Models.Security;
 using QuotesLib.Services;
 
@@ -36,7 +37,7 @@ namespace QuotesCore.Services
             return Task.FromResult(_db.Users.FirstOrDefault(x => x.DiscordId == discordId.ToString() && x.DeletedAt == null));
         }
 
-        public async Task<User> LoginDiscordUser(Discord.IUser discordUser)
+        public async Task<User> LoginDiscordUser(MyIUser discordUser)
         {
             var user = await FindDiscordUser(discordUser.Id);
             if (user != null)
@@ -96,7 +97,7 @@ namespace QuotesCore.Services
             return user;
         }
 
-        public async Task UpdateUser(User user, Discord.IUser discordUser)
+        public async Task UpdateUser(User user, MyIUser discordUser)
         {
             user.Username = discordUser.Username;
             user.Discriminator = discordUser.Discriminator;

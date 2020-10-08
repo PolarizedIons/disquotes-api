@@ -4,6 +4,7 @@ using System.Threading.Tasks;
 using QuotesApi.Models.Users;
 using QuotesLib.Extentions;
 using QuotesLib.Models;
+using QuotesLib.Models.Discord;
 using QuotesLib.Models.Security;
 using QuotesLib.Nats.Users;
 
@@ -36,7 +37,7 @@ namespace QuotesLib.Services
             return msg.GetData<User>();
         }
 
-        public async Task<User> LoginDiscordUser(Discord.IUser discordUser)
+        public async Task<User> LoginDiscordUser(MyIUser discordUser)
         {
             var msg = await _natsService.RequestAsync(new LoginDiscordUserRequest { User = discordUser });
             return msg.GetData<User>();
@@ -54,7 +55,7 @@ namespace QuotesLib.Services
             return msg.GetData<User>();
         }
 
-        public async Task UpdateUser(User platformUser, Discord.IUser discordUser)
+        public async Task UpdateUser(User platformUser, MyIUser discordUser)
         {
             await _natsService.RequestAsync(new UpdateUserRequest { PlatformUser = platformUser, DiscordUser = discordUser });
         }

@@ -40,7 +40,7 @@ namespace QuotesApi.Controllers
             ValidatePagingFilter(pagingFilter);
             var userGuilds = (await _natsDiscordService.GetMutualGuildsFor(UserDiscordId)).Select(x => x.Id.ToString());
             var filter = guildsFilter?.Split(",").Where(x => userGuilds.Contains(x)) ?? userGuilds;
-            return Ok(_natsQuoteService.FindApproved(filter, pagingFilter));
+            return Ok(await _natsQuoteService.FindApproved(filter, pagingFilter));
         }
 
         /// <summary>
@@ -70,7 +70,7 @@ namespace QuotesApi.Controllers
             }
 
             var filter = guildsFilter?.Split(",").Where(x => filteredUserGuilds.Contains(x)) ?? filteredUserGuilds;
-            return Ok(_natsQuoteService.FindUnapproved(filter, pagingFilter));
+            return Ok(await _natsQuoteService.FindUnapproved(filter, pagingFilter));
         }
 
         /// <summary>
@@ -105,9 +105,16 @@ namespace QuotesApi.Controllers
             ProducesResponseType(typeof(ApiResult<object>), 404),
             Authorize,
         ]
-        public ApiResult<Quote> GetQuote([FromRoute] Guid quoteId)
+        public async Task<ApiResult<Quote>> GetQuote([FromRoute] Guid quoteId)
         {
-            return Ok(_natsQuoteService.FindById(quoteId, enrichWithUser: true));
+            var quote = await _natsQuoteService.FindById(quoteId, enrichWithUser: true);
+            
+            if (quote == null)
+            {
+                return NotFound("Quote not found.");
+            }
+            
+            return Ok(quote);
         }
         
         /// <summary>

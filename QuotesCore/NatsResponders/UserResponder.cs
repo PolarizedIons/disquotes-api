@@ -1,7 +1,9 @@
+using System.Collections.Generic;
 using System.Threading.Tasks;
 using QuotesApi.Models.Users;
 using QuotesCore.Services;
 using QuotesLib.Models;
+using QuotesLib.Models.Security;
 using QuotesLib.Nats;
 using QuotesLib.Nats.Users;
 using QuotesLib.Services;
@@ -16,10 +18,40 @@ namespace QuotesCore.NatsResponders
         {
             _userService = userService;
         }
-        
-        public Task<User> OnFindUser(FindUserRequest findUserRequest)
+
+        public Task<IEnumerable<User>> OnFindAllUsers(FindAllUsersRequest req)
         {
-            return _userService.FindUser(findUserRequest.UserId);
+            return _userService.FindAllUsers();
+        }
+        
+        public Task<User> OnFindUser(FindUserRequest req)
+        {
+            return _userService.FindUser(req.UserId);
+        }
+
+        public Task<User> OnFindDiscordUser(FindDiscordUserRequest req)
+        {
+            return _userService.FindDiscordUser(req.UserId);
+        }
+
+        public Task<User> OnLoginDiscordUser(LoginDiscordUserRequest req)
+        {
+            return _userService.LoginDiscordUser(req.User);
+        }
+
+        public Task<RefreshTokenStatus> OnValidateRefreshToken(ValidateRefreshTokenRequest req)
+        {
+            return _userService.ValidateRefreshToken(req.AccountId, req.RefreshToken);
+        }
+
+        public Task<User> OnUpdateRefreshToken(UpdateRefreshTokenRequest req)
+        {
+            return _userService.UpdateRefreshToken(req.UserId);
+        }
+
+        public Task OnUpdateUser(UpdateUserRequest req)
+        {
+            return _userService.UpdateUser(req.PlatformUser, req.DiscordUser);
         }
     }
 }

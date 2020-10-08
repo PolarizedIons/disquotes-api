@@ -10,11 +10,18 @@ namespace QuotesApi.Models.Quotes
         [JsonIgnore]
         public Guid UserId { get; set; }
         [NotMapped]
-        public User User { get; set; }
+        public UserDto User { get; set; }
+
         public string GuildId { get; set; }
         public bool Approved { get; set; }
         public int? QuoteNumber { get; set; }
         public string Title { get; set; }
         public string Text { get; set; }
+
+        public static Quote Merge(Quote quote, UserDto user)
+        {
+            quote.User = user;
+            return quote;
+        }
     }
 }

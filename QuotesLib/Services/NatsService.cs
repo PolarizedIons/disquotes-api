@@ -36,11 +36,18 @@ namespace QuotesLib.Services
             _connection.SubscribeAsync(eventName, async (sender, args) =>
             {
                 var arg = JsonSerializer.Deserialize(args.Message.Data, parseType);
+                Log.Debug("[Nats Request] {EventName}, {@data}", eventName, arg);
                 var reply = methodInfo.Invoke(responder, new[] {arg});
-                if (reply?.GetType().GetGenericTypeDefinition() == typeof(Task<>))
+                if ((methodInfo.ReturnParameter?.ParameterType.IsGenericType ?? false) && methodInfo.ReturnParameter?.ParameterType.GetGenericTypeDefinition() == typeof(Task<>))
                 {
-                    reply = reply.GetType().GetProperty("Result")?.GetValue(reply);
+                    reply = ((dynamic) reply)?.Result;
                 }
+                else if (methodInfo.ReturnParameter?.ParameterType == typeof(Task))
+                {
+                    ((Task) reply)?.Wait();
+                    reply = null;
+                }
+                Log.Debug("[Nats Response] {EventName}, {@data}", eventName, reply);
 
                 args.Message.Respond(JsonSerializer.SerializeToUtf8Bytes(reply));
             });
