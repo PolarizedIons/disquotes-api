@@ -46,9 +46,9 @@ namespace QuotesCore
                 .ConfigureAppConfiguration((hostCtx, config) =>
                 {
                     config.SetBasePath(Directory.GetCurrentDirectory())
-                        .AddEnvironmentVariables()
                         .AddJsonFile("appsettings.json", optional: true, reloadOnChange: true)
-                        .AddJsonFile("appsettings.Development.json", optional: true, reloadOnChange: true);
+                        .AddJsonFile("appsettings.Development.json", optional: true, reloadOnChange: true)
+                        .AddEnvironmentVariables();
                 })
                 .ConfigureServices((hostCtx, services) =>
                 {
