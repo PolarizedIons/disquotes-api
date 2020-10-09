@@ -1,0 +1,23 @@
+name: CI
+
+on:
+  push:
+    branches: [ master ]
+
+jobs:
+  build-docker:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Build Container & Publish to Github Registry
+        uses: elgohr/Publish-Docker-Github-Action@2.14
+        with:
+          name: polarizedions/disquotes-api/disquotes-core
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }} 
+          registry: docker.pkg.github.com
+          tags: "latest,${{ github.run_number }}"
+          workdir: QuotesCore
