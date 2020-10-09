@@ -5,23 +5,23 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using QuotesApi.Exceptions;
-using QuotesApi.Models;
 using QuotesApi.Models.Paging;
 using QuotesApi.Models.Quotes;
-using QuotesApi.Services;
+using QuotesLib.Models;
+using QuotesLib.Services;
 
 namespace QuotesApi.Controllers
 {
     [Route("quotes")]
     public class QuoteController : BaseController
     {
-        private QuoteService _quoteService;
-        private DiscordService _discordService;
+        private NatsQuotesService _natsQuoteService;
+        private NatsDiscordService _natsDiscordService;
 
-        public QuoteController(QuoteService quoteService, DiscordService discordService)
+        public QuoteController(NatsQuotesService natsQuoteService, NatsDiscordService natsDiscordService)
         {
-            _quoteService = quoteService;
-            _discordService = discordService;
+            _natsQuoteService = natsQuoteService;
+            _natsDiscordService = natsDiscordService;
         }
 
         /// <summary>
@@ -38,9 +38,9 @@ namespace QuotesApi.Controllers
         public async Task<ApiResult<PagedResponse<Quote>>> GetApprovedQuotes([FromQuery] string? guildsFilter, [FromQuery] PagingFilter pagingFilter)
         {
             ValidatePagingFilter(pagingFilter);
-            var userGuilds = (await _discordService.GetMutualGuildsFor(UserDiscordId)).Select(x => x.Id.ToString());
+            var userGuilds = (await _natsDiscordService.GetMutualGuildsFor(UserDiscordId)).Select(x => x.Id.ToString());
             var filter = guildsFilter?.Split(",").Where(x => userGuilds.Contains(x)) ?? userGuilds;
-            return Ok(_quoteService.FindApproved(filter, pagingFilter));
+            return Ok(await _natsQuoteService.FindApproved(filter, pagingFilter));
         }
 
         /// <summary>
@@ -57,12 +57,12 @@ namespace QuotesApi.Controllers
         public async Task<ApiResult<PagedResponse<Quote>>> GetUnapprovedQuotes([FromQuery] string? guildsFilter, [FromQuery] PagingFilter pagingFilter)
         {
             ValidatePagingFilter(pagingFilter);
-            var userGuilds = await _discordService.GetMutualGuildsFor(UserDiscordId);
+            var userGuilds = await _natsDiscordService.GetMutualGuildsFor(UserDiscordId);
             var filteredUserGuilds = new List<string>();
 
             foreach (var guild in userGuilds)
             {
-                var isMod = await _discordService.IsModeratorInGuild(UserDiscordId, guild.Id);
+                var isMod = await _natsDiscordService.IsModeratorInGuild(UserDiscordId, guild.Id);
                 if (isMod)
                 {
                     filteredUserGuilds.Add(guild.Id.ToString());
@@ -70,7 +70,7 @@ namespace QuotesApi.Controllers
             }
 
             var filter = guildsFilter?.Split(",").Where(x => filteredUserGuilds.Contains(x)) ?? filteredUserGuilds;
-            return Ok(_quoteService.FindUnapproved(filter, pagingFilter));
+            return Ok(await _natsQuoteService.FindUnapproved(filter, pagingFilter));
         }
 
         /// <summary>
@@ -85,13 +85,13 @@ namespace QuotesApi.Controllers
         ]
         public async Task<ApiResult<Quote>> CreateQuote([FromBody] QuoteDto quote)
         {
-            var userGuilds = (await _discordService.GetMutualGuildsFor(UserDiscordId)).Select(x => x.Id.ToString());
+            var userGuilds = (await _natsDiscordService.GetMutualGuildsFor(UserDiscordId)).Select(x => x.Id.ToString());
             if (!userGuilds.Contains(quote.GuildId))
             {
                 throw new ForbiddenException("You cannot submit a quote for a guild you and the bot are not in.");
             }
             
-            return Ok(await _quoteService.Add(quote, UserId));
+            return Ok(await _natsQuoteService.AddQuote(quote, UserId));
         }
 
         /// <summary>
@@ -105,9 +105,16 @@ namespace QuotesApi.Controllers
             ProducesResponseType(typeof(ApiResult<object>), 404),
             Authorize,
         ]
-        public ApiResult<Quote> GetQuote([FromRoute] Guid quoteId)
+        public async Task<ApiResult<Quote>> GetQuote([FromRoute] Guid quoteId)
         {
-            return Ok(_quoteService.FindById(quoteId, enrichWithUser: true));
+            var quote = await _natsQuoteService.FindById(quoteId, enrichWithUser: true);
+            
+            if (quote == null)
+            {
+                return NotFound("Quote not found.");
+            }
+            
+            return Ok(quote);
         }
         
         /// <summary>
@@ -123,15 +130,15 @@ namespace QuotesApi.Controllers
         ]
         public async Task<ApiResult<Quote>> ApproveQuote([FromRoute] Guid quoteId)
         {
-            var guildId = ulong.Parse(_quoteService.FindById(quoteId, false).GuildId);
-            var isMod = await _discordService.IsModeratorInGuild(UserDiscordId, guildId);
+            var quote = await _natsQuoteService.FindById(quoteId, false);
+            var isMod = await _natsDiscordService.IsModeratorInGuild(UserDiscordId, ulong.Parse(quote.GuildId));
 
             if (!isMod)
             {
                 throw new ForbiddenException("Only the moderators of a guild can approve quotes submitted to it.");
             }
 
-            return Ok(await _quoteService.ApproveQuote(quoteId, UserId));
+            return Ok(await _natsQuoteService.ApproveQuote(quoteId, UserId));
         }
 
         [
@@ -141,15 +148,15 @@ namespace QuotesApi.Controllers
         ]
         public async Task<ApiResult<bool>> DeleteQuote([FromRoute] Guid quoteId)
         {
-            var guildId = ulong.Parse(_quoteService.FindById(quoteId, false).GuildId);
-            var isMod = await _discordService.IsModeratorInGuild(UserDiscordId, guildId);
+            var quote = await _natsQuoteService.FindById(quoteId, false);
+            var isMod = await _natsDiscordService.IsModeratorInGuild(UserDiscordId, ulong.Parse(quote.GuildId));
 
             if (!isMod)
             {
                 throw new ForbiddenException("Only the moderators of a guild can delete quotes submitted to it.");
             }
 
-            return Ok(await _quoteService.DeleteQuote(quoteId));
+            return Ok(await _natsQuoteService.DeleteQuote(quoteId));
         }
     }
 }

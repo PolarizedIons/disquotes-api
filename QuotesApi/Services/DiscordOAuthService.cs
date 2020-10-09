@@ -6,9 +6,8 @@ using System.Text.Json;
 using System.Text.Json.Serialization;
 using System.Threading.Tasks;
 using System.Web;
-using Discord;
-using Discord.Rest;
 using Microsoft.Extensions.Configuration;
+using QuotesLib.Models;
 
 namespace QuotesApi.Services
 {
@@ -74,12 +73,7 @@ namespace QuotesApi.Services
             return responseJson.AccessToken;
         }
 
-        public async Task<RestSelfUser> GetUserFromAuthToken(string token)
-        {
-            var client = new DiscordRestClient();
-            await client.LoginAsync(TokenType.Bearer, token);
-            return client.CurrentUser;
-        }
+        
     }
 
     internal struct TokenExchangeResponse

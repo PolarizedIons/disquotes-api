@@ -2,22 +2,22 @@ using System.Collections.Generic;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using QuotesApi.Models;
 using QuotesApi.Models.Guilds;
-using QuotesApi.Services;
+using QuotesLib.Models;
+using QuotesLib.Services;
 
 namespace QuotesApi.Controllers
 {
     [Route("guilds")]
     public class GuildController : BaseController
     {
-        private readonly DiscordService _discordService;
+        private readonly NatsDiscordService _natsDiscordService;
 
-        public GuildController(DiscordService discordService)
+        public GuildController(NatsDiscordService natsDiscordService)
         {
-            _discordService = discordService;
+            _natsDiscordService = natsDiscordService;
         }
-        
+
         [
             HttpGet,
             ProducesResponseType(typeof(ApiResult<IEnumerable<Guild>>), 200),
@@ -26,12 +26,12 @@ namespace QuotesApi.Controllers
         public async Task<ApiResult<IEnumerable<Guild>>> GetGuilds()
         {
 
-            var mutualGuilds = await _discordService.GetMutualGuildsFor(UserDiscordId);
+            var mutualGuilds = await _natsDiscordService.GetMutualGuildsFor(UserDiscordId);
             var guilds = new List<Guild>();
 
             foreach (var guild in mutualGuilds)
             {
-                var isMod = await _discordService.IsModeratorInGuild(UserDiscordId, guild.Id);
+                var isMod = await _natsDiscordService.IsModeratorInGuild(UserDiscordId, guild.Id);
 
                 guilds.Add(new Guild
                 {
@@ -54,14 +54,19 @@ namespace QuotesApi.Controllers
         ]
         public async Task<ApiResult<Guild>> GetGuildById([FromRoute] ulong guildId)
         {
-            var discordGuild = await _discordService.GetGuild(guildId);
+            var discordGuild = await _natsDiscordService.GetGuild(guildId);
+            if (discordGuild == null)
+            {
+                return NotFound("The bot cannot access that guild.");
+            }
+
             var guild = new Guild
             {
                 Description = discordGuild.Description,
                 Id = discordGuild.Id.ToString(),
                 Name = discordGuild.Name,
                 IconUrl = discordGuild.IconUrl,
-                IsModerator = await _discordService.IsModeratorInGuild(UserDiscordId, guildId),
+                IsModerator = await _natsDiscordService.IsModeratorInGuild(UserDiscordId, guildId),
                 SystemChannelId = discordGuild.SystemChannelId.ToString(),
             };
 

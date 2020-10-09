@@ -1,20 +1,22 @@
 using System;
+using System.Threading.Tasks;
+using Mapster;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using QuotesApi.Models;
 using QuotesApi.Models.Users;
-using QuotesApi.Services;
+using QuotesLib.Models;
+using QuotesLib.Services;
 
 namespace QuotesApi.Controllers
 {
     [Route("user")]
     public class UserController : BaseController
     {
-        private UserService _userService;
+        private NatsUserService _natsUserService;
 
-        public UserController(UserService userService)
+        public UserController(NatsUserService natsUserService)
         {
-            _userService = userService;
+            _natsUserService = natsUserService;
         }
 
         /// <summary>
@@ -24,13 +26,18 @@ namespace QuotesApi.Controllers
         /// <returns></returns>
         [
             HttpGet("{userId:guid}"),
-            ProducesResponseType(typeof(ApiResult<User>), 200),
+            ProducesResponseType(typeof(ApiResult<UserDto>), 200),
             Authorize,
         ]
-        public ApiResult<User> GetUserById([FromRoute] Guid userId)
+        public async Task<ApiResult<UserDto>> GetUserById([FromRoute] Guid userId)
         {
-            var user = _userService.FindUser(userId);
-            return Ok(user);
+            var user = await _natsUserService.FindUser(userId);
+            if (user == null)
+            {
+                return NotFound("User not found");
+            }
+
+            return Ok(user.Adapt<UserDto>());
         }
     }
 }

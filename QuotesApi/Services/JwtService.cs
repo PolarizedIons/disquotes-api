@@ -5,13 +5,13 @@ using System.Text;
 using Microsoft.Extensions.Configuration;
 using Microsoft.IdentityModel.Tokens;
 using QuotesApi.Models.Users;
+using QuotesLib;
+using QuotesLib.Models;
 
 namespace QuotesApi.Services
 {
     public class JwtService : ISingletonDiService
     {
-        public const string Issuer = "Disquotes API";
-        public const string Audience = "Disquotes Client";
         public const string AccountIdField = "Account-ID";
         public const string DiscordIdField = "Discord-ID";
 
@@ -35,8 +35,8 @@ namespace QuotesApi.Services
                     new Claim(AccountIdField, user.Id.ToString()),
                     new Claim(DiscordIdField, user.DiscordId.ToString()), 
                 }),
-                Issuer = Issuer,
-                Audience = Audience,
+                Issuer = Constants.JwtIssuer,
+                Audience = Constants.JwtAudience,
                 Expires = DateTime.UtcNow.Add(AccessTokenValidFor),
                 SigningCredentials = new SigningCredentials(new SymmetricSecurityKey(_key), SecurityAlgorithms.HmacSha256Signature)
             };
