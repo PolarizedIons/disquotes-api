@@ -15,7 +15,25 @@ namespace QuotesLib.Models.Discord
         public IImmutableSet<ClientType> ActiveClients { get; }
         public string GetAvatarUrl(ImageFormat format = ImageFormat.Auto, ushort size = 128)
         {
-            return $"https://cdn.discordapp.com/avatars/{Id}/{AvatarId}.png?size={size}";
+            var extension = FormatToExtension(format, AvatarId);
+            return $"https://cdn.discordapp.com/avatars/{Id}/{AvatarId}.{extension}?size={size}";
+        }
+
+        private string FormatToExtension(ImageFormat format, string imageId)
+        {
+            if (format == ImageFormat.Auto)
+            {
+                format = imageId.StartsWith("a_") ? ImageFormat.Gif : ImageFormat.Png;
+            }
+
+            return format switch
+            {
+                ImageFormat.Png => "png",
+                ImageFormat.WebP => "webp",
+                ImageFormat.Jpeg => "jpeg",
+                ImageFormat.Gif => "gif",
+                _ => throw new ArgumentException($"Invalid image format {format}")
+            };
         }
 
         public string GetDefaultAvatarUrl()
