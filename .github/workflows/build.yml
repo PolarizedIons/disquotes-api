@@ -20,7 +20,7 @@ jobs:
           password: ${{ secrets.GITHUB_TOKEN }} 
           registry: docker.pkg.github.com
           tags: "latest,${{ github.run_number }}"
-          workdir: QuotesApi
+          dockerfile: ./QuotesApi/Dockerfile
 
   build-bot:
     runs-on: ubuntu-latest
@@ -37,7 +37,7 @@ jobs:
           password: ${{ secrets.GITHUB_TOKEN }}
           registry: docker.pkg.github.com
           tags: "latest,${{ github.run_number }}"
-          workdir: QuotesBot
+          dockerfile: ./QuotesBot/Dockerfile
 
   build-core:
     runs-on: ubuntu-latest
@@ -54,7 +54,7 @@ jobs:
           password: ${{ secrets.GITHUB_TOKEN }}
           registry: docker.pkg.github.com
           tags: "latest,${{ github.run_number }}"
-          workdir: QuotesCore
+          dockerfile: ./QuotesCore/Dockerfile
 
   build-scheduler:
     runs-on: ubuntu-latest
@@ -71,3 +71,4 @@ jobs:
           password: ${{ secrets.GITHUB_TOKEN }}
           registry: docker.pkg.github.com
           tags: "latest,${{ github.run_number }}"
+          dockerfile: ./QuotesScheduler/Dockerfile
