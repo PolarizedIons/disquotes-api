@@ -1,16 +1,18 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading;
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.Hosting;
 using QuotesCore.Database;
 using QuotesLib.Nats;
 using Serilog;
 
 namespace QuotesCore
 {
-    public class App
+    public class App : IHostedService
     {
         private readonly IConfiguration _config;
         private readonly DatabaseContext _databaseContext;
@@ -24,10 +26,10 @@ namespace QuotesCore
             _serviceProvider = serviceProvider;
         }
 
-        public async Task Run()
+        public async Task StartAsync(CancellationToken cancellationToken)
         {
             Log.Information("Migrating Database...");
-            _databaseContext.Database.Migrate();
+            await _databaseContext.Database.MigrateAsync(cancellationToken);
             
             Log.Information("Activating NATS responders");
             _natsResponders = NatsResponder.ActivateAll(_serviceProvider);
@@ -36,7 +38,12 @@ namespace QuotesCore
             
             Log.Information("Ready :)");
 
-            await Task.Delay(-1);
+            await Task.Delay(-1, cancellationToken);
+        }
+
+        public Task StopAsync(CancellationToken cancellationToken)
+        {
+            return Task.CompletedTask;
         }
     }
 }

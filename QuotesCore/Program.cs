@@ -4,6 +4,7 @@ using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Hosting;
 using QuotesCore.Database;
 using QuotesLib.Extentions;
 using Serilog;
@@ -24,15 +25,13 @@ namespace QuotesCore
 
             try
             {
-                var services = ConfigureServices();
-                var serviceProvider = services.BuildServiceProvider();
-
-                await serviceProvider.GetService<App>().Run();
+                using var host = CreateHostBuilder(args).Build();
+                await host.StartAsync();
                 return 0;
             }
             catch (Exception ex)
             {
-                Log.Fatal(ex, "Host terminated unexpectedly");
+                Log.Fatal(ex, "Fatal exception");
                 return 1;
             }
             finally
@@ -40,35 +39,30 @@ namespace QuotesCore
                 Log.CloseAndFlush();
             }
         }
-
-        private static IServiceCollection ConfigureServices()
+        
+        public static IHostBuilder CreateHostBuilder(string[] args)
         {
-            IServiceCollection services = new ServiceCollection();
+            return Host.CreateDefaultBuilder(args)
+                .ConfigureAppConfiguration((hostCtx, config) =>
+                {
+                    config.SetBasePath(Directory.GetCurrentDirectory())
+                        .AddEnvironmentVariables()
+                        .AddJsonFile("appsettings.json", optional: true, reloadOnChange: true)
+                        .AddJsonFile("appsettings.Development.json", optional: true, reloadOnChange: true);
+                })
+                .ConfigureServices((hostCtx, services) =>
+                {
+                    services.AddDbContext<DatabaseContext>(options =>
+                    {
+                        options.UseMySql(hostCtx.Configuration.GetConnectionString("Quotes"));
+                    });
 
-            var config = LoadConfiguration();
-            services.AddSingleton(config);
-            
-            services.AddDbContext<DatabaseContext>(options =>
-            {
-                options.UseMySql(config.GetConnectionString("Quotes"));
-            });
+                    services.DiscoverAndMakeDiServicesAvailable();
 
-            services.DiscoverAndMakeDiServicesAvailable();
-
-            services.AddTransient<App>();
-
-            return services;
-        }
-
-        public static IConfiguration LoadConfiguration()
-        {
-            var builder = new ConfigurationBuilder()
-                .SetBasePath(Directory.GetCurrentDirectory())
-                .AddEnvironmentVariables()
-                .AddJsonFile("appsettings.json", optional: true, reloadOnChange: true)
-                .AddJsonFile("appsettings.Development.json", optional: true, reloadOnChange: true);
-
-            return builder.Build();
+                    services.AddHostedService<App>();
+                })
+                .UseSerilog()
+                .UseConsoleLifetime();
         }
     }
 }

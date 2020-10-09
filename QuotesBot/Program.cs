@@ -3,6 +3,7 @@ using System.IO;
 using System.Threading.Tasks;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Hosting;
 using QuotesLib.Extentions;
 using Serilog;
 using Serilog.Events;
@@ -11,27 +12,25 @@ namespace QuotesBot
 {
     class Program
     {
-        static async Task<int> Main(string[] args)
+        public static async Task<int> Main(string[] args)
         {
             Log.Logger = new LoggerConfiguration()
                 .MinimumLevel.Debug()
                 .MinimumLevel.Override("Microsoft", LogEventLevel.Information)
+                .MinimumLevel.Override("Quartz", LogEventLevel.Information)
                 .Enrich.FromLogContext()
                 .WriteTo.Console()
                 .CreateLogger();
 
             try
             {
-                Log.Information("Starting QuotesBot v" + typeof(Program).Assembly.GetName().Version);
-                var services = ConfigureServices();
-                var serviceProvider = services.BuildServiceProvider();
-
-                await serviceProvider.GetService<App>().Run();
+                using var host = CreateHostBuilder(args).Build();
+                await host.StartAsync();
                 return 0;
             }
             catch (Exception ex)
             {
-                Log.Fatal(ex, "Host terminated unexpectedly");
+                Log.Fatal(ex, "Fatal exception");
                 return 1;
             }
             finally
@@ -39,30 +38,25 @@ namespace QuotesBot
                 Log.CloseAndFlush();
             }
         }
-
-        private static IServiceCollection ConfigureServices()
+        
+        public static IHostBuilder CreateHostBuilder(string[] args)
         {
-            IServiceCollection services = new ServiceCollection();
+            return Host.CreateDefaultBuilder(args)
+                .ConfigureAppConfiguration((hostCtx, config) =>
+                {
+                    config.SetBasePath(Directory.GetCurrentDirectory())
+                        .AddJsonFile("appsettings.json", optional: true, reloadOnChange: true)
+                        .AddJsonFile("appsettings.Development.json", optional: true, reloadOnChange: true)
+                        .AddEnvironmentVariables();
+                })
+                .ConfigureServices((hostCtx, services) =>
+                {
+                    services.DiscoverAndMakeDiServicesAvailable();
 
-            var config = LoadConfiguration();
-            services.AddSingleton(config);
-
-            services.DiscoverAndMakeDiServicesAvailable();
-
-            services.AddTransient<App>();
-
-            return services;
-        }
-
-        public static IConfiguration LoadConfiguration()
-        {
-            var builder = new ConfigurationBuilder()
-                .SetBasePath(Directory.GetCurrentDirectory())
-                .AddEnvironmentVariables()
-                .AddJsonFile("appsettings.json", optional: true, reloadOnChange: true)
-                .AddJsonFile("appsettings.Development.json", optional: true, reloadOnChange: true);
-
-            return builder.Build();
+                    services.AddHostedService<App>();
+                })
+                .UseSerilog()
+                .UseConsoleLifetime();
         }
     }
 }

@@ -24,7 +24,10 @@ namespace QuotesCore.Services
 
         public Task<IEnumerable<User>> FindAllUsers()
         {
-            return Task.FromResult<IEnumerable<User>>(_db.Users.AsQueryable().Where(x => x.DeletedAt == null));
+            var result = _db.Users.AsQueryable()
+                .Where(x => x.DeletedAt == null)
+                .ToList();
+            return Task.FromResult<IEnumerable<User>>(result);
         }
 
         public Task<User> FindUser(Guid userId)

@@ -10,7 +10,7 @@ namespace QuotesLib.Models.Discord
         public ulong Id { get; set; }
         public DateTimeOffset CreatedAt { get; set; }
         public string Mention { get; set; }
-        public IActivity Activity { get; set; }
+        public IActivity Activity { get;  }
         public UserStatus Status { get; set; }
         public IImmutableSet<ClientType> ActiveClients { get; }
         public string GetAvatarUrl(ImageFormat format = ImageFormat.Auto, ushort size = 128)

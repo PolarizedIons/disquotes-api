@@ -1,41 +1,22 @@
+using System.Threading;
+using System.Threading.Tasks;
+using Microsoft.Extensions.Hosting;
+using Serilog;
+
 namespace QuotesScheduler
 {
-    public class App
+    public class App : IHostedService
     {
-        public void Run()
+        public async Task StartAsync(CancellationToken cancellationToken)
         {
-            services.AddQuartz(q =>
-            {
-                q.SchedulerName = "QuotesApi - Quartz Scheduler";
-                
-                q.UseMicrosoftDependencyInjectionScopedJobFactory(options =>
-                {
-                    // if we don't have the job in DI, allow fallback to configure via default constructor
-                    options.AllowDefaultConstructor = true;
-                });
+            Log.Information("Running!");
+            await Task.Delay(-1, cancellationToken);
+        }
 
-                q.UseSimpleTypeLoader();
-                q.UseInMemoryStore();
-                q.UseDefaultThreadPool(tp =>
-                {
-                    tp.MaxConcurrency = 10;
-                });
-                
-                var updateDiscordUserJobKey = new JobKey("UpdateDiscordUsers", "discord");
-                q.AddJob<UpdateDiscordUsers>(j => j
-                    .WithIdentity(updateDiscordUserJobKey)
-                    .WithDescription("Updates Discord users in the database")
-                );
-
-                q.AddTrigger(t => t
-                    .WithIdentity("Discord user update trigger")    
-                    .ForJob(updateDiscordUserJobKey)
-                    .StartNow()
-                    .WithSimpleSchedule(x => x.WithInterval(TimeSpan.FromMinutes(int.Parse(Configuration["Scheduler:DiscordUserUpdateInterval"]))).RepeatForever())
-                    .WithDescription("Trigger for Discord user updates")
-                );
-            });
-
+        public Task StopAsync(CancellationToken cancellationToken)
+        {
+            Log.Information("Shutting down");
+            return Task.CompletedTask;
         }
     }
 }
