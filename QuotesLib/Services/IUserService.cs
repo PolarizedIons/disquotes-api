@@ -13,6 +13,6 @@ namespace QuotesLib.Services
         Task<User> LoginDiscordUser(MyIUser discordUser);
         Task<RefreshTokenStatus> ValidateRefreshToken(Guid accountId, Guid refreshToken);
         Task<User> UpdateRefreshToken(Guid userId);
-        Task UpdateUser(User platformUser, MyIUser discordUser);
+        Task UpdateUser(Guid userId, MyIUser discordUser);
     }
 }

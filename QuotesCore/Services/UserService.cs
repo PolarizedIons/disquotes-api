@@ -100,8 +100,9 @@ namespace QuotesCore.Services
             return user;
         }
 
-        public async Task UpdateUser(User user, MyIUser discordUser)
+        public async Task UpdateUser(Guid userId, MyIUser discordUser)
         {
+            var user = await FindUser(userId);
             user.Username = discordUser.Username;
             user.Discriminator = discordUser.Discriminator;
             user.ProfileUrl = discordUser.GetAvatarUrl();

@@ -51,7 +51,7 @@ namespace QuotesCore.NatsResponders
 
         public Task OnUpdateUser(UpdateUserRequest req)
         {
-            return _userService.UpdateUser(req.PlatformUser, req.DiscordUser);
+            return _userService.UpdateUser(req.PlatformUserId, req.DiscordUser);
         }
     }
 }

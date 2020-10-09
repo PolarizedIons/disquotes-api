@@ -55,9 +55,9 @@ namespace QuotesLib.Services
             return msg.GetData<User>();
         }
 
-        public async Task UpdateUser(User platformUser, MyIUser discordUser)
+        public async Task UpdateUser(Guid platformUserId, MyIUser discordUser)
         {
-            await _natsService.RequestAsync(new UpdateUserRequest { PlatformUser = platformUser, DiscordUser = discordUser });
+            await _natsService.RequestAsync(new UpdateUserRequest { PlatformUserId = platformUserId, DiscordUser = discordUser });
         }
     }
 }
