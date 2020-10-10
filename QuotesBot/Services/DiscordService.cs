@@ -19,16 +19,47 @@ namespace QuotesBot.Services
         private IConfiguration _config;
         private DiscordSocketClient _client;
 
-        public DiscordService(IConfiguration config)
+        public DiscordService(IConfiguration config, DiscordSocketClient client)
         {
             _config = config;
-            _client = new DiscordSocketClient();
+            _client = client;
         }
 
         public async Task LoginAndStart()
         {
             await _client.LoginAsync(TokenType.Bot, _config["Discord:BotToken"]);
             await _client.StartAsync();
+            
+            _client.Log += log =>
+            {
+                if (log.Exception != null)
+                {
+                    Log.Debug(log.Exception, $"[Discord] {log.Source} {log.Message}");
+                }
+                else
+                {
+                    Log.Debug($"[Discord] {log.Source} {log.Message}");
+                }
+
+                return Task.CompletedTask;
+            };
+
+            _client.Ready += () =>
+            {
+                Log.Information("Discord bot ready!");
+                return Task.CompletedTask;
+            };
+
+            _client.MessageReceived += message =>
+            {
+                if (message is SocketUserMessage msg)
+                {
+                    var guild = (msg.Author as SocketGuildUser)?.Guild;
+                    Log.Debug($"[Message] [{msg.Author.Username}#{msg.Author.Discriminator} ({msg.Author.Id})] in ['{guild?.Name}'/#{msg.Channel.Name} ({guild?.Id}/{msg.Channel.Id})]: {msg.Content}");
+                }
+
+                return Task.CompletedTask;
+            };
         }
 
         public Task<bool> IsLoggedIn()

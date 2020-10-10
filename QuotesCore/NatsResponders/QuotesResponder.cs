@@ -22,11 +22,17 @@ namespace QuotesCore.NatsResponders
         {
             return _quoteService.FindById(req.QuoteId, req.OnlyApproved, req.EnrichWithUser);
         }
+        
+        public Task<Quote> OnFindByQuoteNumber(FindByQuoteNumberRequest req)
+        {
+            return _quoteService.FindByQuoteNumber(req.GuildId, req.QuoteNumber, req.OnlyApproved, req.EnrichWithUser);
+        }
 
         public Task<PagedResponse<Quote>> OnFindApproved(FindApprovedRequest req)
         {
             return _quoteService.FindApproved(req.GuildFilter, req.PagingFilter);
         }
+        
 
         public Task<PagedResponse<Quote>> OnFindUnapproved(FindUnapprovedRequest req)
         {

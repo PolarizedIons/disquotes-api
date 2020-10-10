@@ -47,6 +47,32 @@ namespace QuotesCore.Services
             return Task.FromResult(query.FirstOrDefault());
         }
 
+        public Task<Quote> FindByQuoteNumber(ulong guildId, int quoteNumber, bool onlyApproved = true, bool enrichWithUser = false)
+        {
+            var query = _db.Quotes.AsQueryable()
+                .Where(x => x.QuoteNumber == quoteNumber &&
+                            x.GuildId == guildId.ToString() &&
+                            x.DeletedAt == null
+                );
+
+            if (onlyApproved)
+            {
+                query = query.Where(x => x.Approved);
+            }
+
+            if (enrichWithUser)
+            {
+                query = query
+                    .Join(_db.Users, 
+                        q => q.UserId, 
+                        u => u.Id, 
+                        (q, u) => Quote.Merge(q, u.Adapt<UserDto>())
+                    );
+            }
+
+            return Task.FromResult(query.FirstOrDefault());
+        }
+
         public Task<PagedResponse<Quote>> FindApproved(IEnumerable<string> guildFilter, PagingFilter pagingFilter)
         {
             var query = _db.Quotes.AsQueryable()

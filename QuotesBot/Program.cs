@@ -1,6 +1,9 @@
 ﻿using System;
 using System.IO;
 using System.Threading.Tasks;
+using Discord;
+using Discord.Commands;
+using Discord.WebSocket;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
@@ -51,8 +54,19 @@ namespace QuotesBot
                 })
                 .ConfigureServices((hostCtx, services) =>
                 {
-                    services.DiscoverAndMakeDiServicesAvailable();
+                    services.AddSingleton(new DiscordSocketClient(new DiscordSocketConfig
+                    {
+                        MessageCacheSize = 100,
+                        LogLevel = LogSeverity.Info
+                    }));
 
+                    services.AddSingleton(new CommandService(new CommandServiceConfig
+                    {
+                        DefaultRunMode = RunMode.Async,
+                        LogLevel = LogSeverity.Info,
+                    }));
+
+                    services.DiscoverAndMakeDiServicesAvailable();
                     services.AddHostedService<App>();
                 })
                 .UseSerilog()

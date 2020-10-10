@@ -30,6 +30,19 @@ namespace QuotesLib.Services
             return msg.GetData<Quote>();
         }
 
+        public async Task<Quote> FindByQuoteNumber(ulong guildId, int quoteNumber, bool onlyApproved = true, bool enrichWithUser = false)
+        {
+            var data = new FindByQuoteNumberRequest
+            {
+                GuildId = guildId,
+                QuoteNumber = quoteNumber,
+                OnlyApproved = onlyApproved,
+                EnrichWithUser = enrichWithUser,
+            };
+            var msg = await _natsService.RequestAsync(data);
+            return msg.GetData<Quote>();
+        }
+
         public async Task<PagedResponse<Quote>> FindApproved(IEnumerable<string> guildFilter, PagingFilter pagingFilter)
         {
             var data = new FindApprovedRequest
