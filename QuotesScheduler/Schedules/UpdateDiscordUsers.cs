@@ -27,8 +27,15 @@ namespace QuotesApi.Schedules
 
             foreach (var user in await _natsUserService.FindAllUsers())
             {
+                var discordUser = await _natsDiscordService.GetUser(ulong.Parse(user.DiscordId));
+                if (discordUser == null)
+                {
+                    Log.Debug("Couldn't update {DiscordUser} ({Id} - {DiscordId})", user.Username + "#" + user.Discriminator, user.Id, user.DiscordId);
+                    continue;
+                }
+
                 Log.Debug("Updating {DiscordUser} ({Id} - {DiscordId})", user.Username + "#" + user.Discriminator, user.Id, user.DiscordId);
-                await _natsUserService.UpdateUser(user.Id, await _natsDiscordService.GetUser(ulong.Parse(user.DiscordId)));
+                await _natsUserService.UpdateUser(user.Id, discordUser);
             }
         }
     }
