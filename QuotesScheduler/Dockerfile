@@ -4,6 +4,7 @@ WORKDIR /app/QuotesScheduler
 COPY ./QuotesLib ../QuotesLib
 
 COPY ./QuotesScheduler/*.csproj .
+COPY ./NuGet.Config .
 RUN dotnet restore
 
 COPY ./QuotesScheduler .
