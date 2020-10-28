@@ -57,7 +57,8 @@ namespace QuotesBot
                     services.AddSingleton(new DiscordSocketClient(new DiscordSocketConfig
                     {
                         MessageCacheSize = 100,
-                        LogLevel = LogSeverity.Info
+                        LogLevel = LogSeverity.Info,
+                        GatewayIntents = GatewayIntents.GuildMembers,
                     }));
 
                     services.AddSingleton(new CommandService(new CommandServiceConfig

@@ -12,7 +12,19 @@ namespace QuotesLib.Models.Discord
         public string Mention { get; set; }
         public IActivity Activity { get; set; }
         public UserStatus Status { get; set; }
-        public IImmutableSet<ClientType> ActiveClients { get; }
+        public IImmutableSet<ClientType> ActiveClients { get; set; }
+        public IImmutableList<IActivity> Activities { get; set; }
+        public Task ModifyAsync(Action<SelfUserProperties> func, RequestOptions options = null)
+        {
+            throw new NotImplementedException();
+        }
+
+        public string Email { get; set; }
+        public bool IsVerified { get; set; }
+        public bool IsMfaEnabled { get; set; }
+        public UserProperties Flags { get; }
+        public PremiumType PremiumType { get; set; }
+        public string Locale { get; set; }
         public string GetAvatarUrl(ImageFormat format = ImageFormat.Auto, ushort size = 128)
         {
             throw new NotImplementedException();
@@ -34,16 +46,5 @@ namespace QuotesLib.Models.Discord
         public bool IsBot { get; set; }
         public bool IsWebhook { get; set; }
         public string Username { get; set; }
-        public Task ModifyAsync(Action<SelfUserProperties> func, RequestOptions options = null)
-        {
-            throw new NotImplementedException();
-        }
-
-        public string Email { get; set; }
-        public bool IsVerified { get; set; }
-        public bool IsMfaEnabled { get; set; }
-        public UserProperties Flags { get; }
-        public PremiumType PremiumType { get; set; }
-        public string Locale { get; set; }
     }
 }

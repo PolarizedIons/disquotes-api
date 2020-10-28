@@ -9,13 +9,6 @@ namespace QuotesLib.Models.Discord
 {
     public class MyIGuild : IGuild
     {
-        public Task DeleteAsync(RequestOptions options = null)
-        {
-            throw new NotImplementedException();
-        }
-
-        public ulong Id { get; set; }
-        public DateTimeOffset CreatedAt { get; set;  } 
         public Task ModifyAsync(Action<GuildProperties> func, RequestOptions options = null)
         {
             throw new NotImplementedException();
@@ -223,6 +216,11 @@ namespace QuotesLib.Models.Discord
             throw new NotImplementedException();
         }
 
+        public Task<IReadOnlyCollection<IGuildUser>> SearchUsersAsync(string query, int limit = 1000, CacheMode mode = CacheMode.AllowDownload, RequestOptions options = null)
+        {
+            throw new NotImplementedException();
+        }
+
         public Task<IReadOnlyCollection<IAuditLogEntry>> GetAuditLogsAsync(int limit = 100, CacheMode mode = CacheMode.AllowDownload, RequestOptions options = null,
             ulong? beforeId = null, ulong? userId = null, ActionType? actionType = null)
         {
@@ -292,5 +290,13 @@ namespace QuotesLib.Models.Discord
         public int PremiumSubscriptionCount { get; }
         public string PreferredLocale { get; }
         public CultureInfo PreferredCulture { get; }
+
+        public Task DeleteAsync(RequestOptions options = null)
+        {
+            throw new NotImplementedException();
+        }
+
+        public ulong Id { get; set; }
+        public DateTimeOffset CreatedAt { get; set; }
     }
 }
