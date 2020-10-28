@@ -10,10 +10,10 @@ namespace QuotesLib.Models.Discord
         public ulong Id { get; set; }
         public DateTimeOffset CreatedAt { get; set; }
         public string Mention { get; set; }
-        public IActivity Activity { get; set; }
-        public UserStatus Status { get; set; }
-        public IImmutableSet<ClientType> ActiveClients { get; set; }
-        public IImmutableList<IActivity> Activities { get; set; }
+        public IActivity Activity { get; }
+        public UserStatus Status { get; }
+        public IImmutableSet<ClientType> ActiveClients { get; }
+        public IImmutableList<IActivity> Activities { get; }
         public Task ModifyAsync(Action<SelfUserProperties> func, RequestOptions options = null)
         {
             throw new NotImplementedException();
