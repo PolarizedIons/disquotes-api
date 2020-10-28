@@ -4,7 +4,7 @@ WORKDIR /app/QuotesBot
 COPY ./QuotesLib ../QuotesLib
 
 COPY ./QuotesBot/*.csproj .
-COPY ./NuGet.Config .
+COPY ./NuGet.Config ../
 RUN dotnet restore
 
 COPY ./QuotesBot .

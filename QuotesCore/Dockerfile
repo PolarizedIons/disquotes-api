@@ -4,7 +4,7 @@ WORKDIR /app/QuotesCore
 COPY ./QuotesLib ../QuotesLib
 
 COPY ./QuotesCore/*.csproj .
-COPY ./NuGet.Config .
+COPY ./NuGet.Config ../
 RUN dotnet restore
 
 COPY ./QuotesCore .
