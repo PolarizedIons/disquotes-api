@@ -7,6 +7,7 @@ using Discord.WebSocket;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using QuotesApi.Models.Guilds;
 using QuotesLib.Extentions;
 using Serilog;
 using Serilog.Events;
@@ -58,7 +59,7 @@ namespace QuotesBot
                     {
                         MessageCacheSize = 100,
                         LogLevel = LogSeverity.Info,
-                        GatewayIntents = GatewayIntents.GuildMembers,
+                        GatewayIntents = GatewayIntents.Guilds | GatewayIntents.GuildMembers | GatewayIntents.GuildMessages,
                     }));
 
                     services.AddSingleton(new CommandService(new CommandServiceConfig
