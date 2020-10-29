@@ -30,6 +30,8 @@ namespace QuotesBot
             {
                 using var host = CreateHostBuilder(args).Build();
                 await host.StartAsync();
+                await host.WaitForShutdownAsync();
+                await host.StopAsync();
                 return 0;
             }
             catch (Exception ex)
@@ -58,8 +60,9 @@ namespace QuotesBot
                     services.AddSingleton(new DiscordSocketClient(new DiscordSocketConfig
                     {
                         MessageCacheSize = 100,
-                        LogLevel = LogSeverity.Info,
+                        LogLevel = LogSeverity.Verbose,
                         GatewayIntents = GatewayIntents.Guilds | GatewayIntents.GuildMembers | GatewayIntents.GuildMessages,
+                        AlwaysDownloadUsers = true,
                     }));
 
                     services.AddSingleton(new CommandService(new CommandServiceConfig

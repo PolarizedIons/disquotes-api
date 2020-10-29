@@ -39,7 +39,6 @@ namespace QuotesBot
             Log.Information("Logging in...");
             await _discordService.LoginAndStart();
             Log.Information("Bot started");
-            await Task.Delay(-1, cancellationToken);
         }
 
         public async Task StopAsync(CancellationToken cancellationToken)
