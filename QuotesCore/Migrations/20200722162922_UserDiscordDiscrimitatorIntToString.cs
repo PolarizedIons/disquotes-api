@@ -1,6 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore.Migrations;
 
-namespace QuotesApi.Migrations
+namespace QuotesCore.Migrations
 {
     public partial class UserDiscordDiscrimitatorIntToString : Migration
     {

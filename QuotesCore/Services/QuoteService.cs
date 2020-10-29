@@ -141,7 +141,11 @@ namespace QuotesCore.Services
             }
 
             var maxQuoteNumber = _db.Quotes.AsQueryable()
-                                     .Where(x => x.Approved && x.DeletedAt == null)
+                                     .Where(x => 
+                                         x.Approved &&
+                                         x.GuildId == quote.GuildId &&
+                                         x.DeletedAt == null
+                                        )
                                      .OrderByDescending(x => x.QuoteNumber)
                                      .Select(x => x.QuoteNumber)
                                      .FirstOrDefault() ?? 0;

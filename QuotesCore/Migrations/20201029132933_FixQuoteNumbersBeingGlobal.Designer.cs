@@ -9,8 +9,8 @@ using QuotesCore.Database;
 namespace QuotesCore.Migrations
 {
     [DbContext(typeof(DatabaseContext))]
-    [Migration("20200720175435_AddRefreshTokenToUser")]
-    partial class AddRefreshTokenToUser
+    [Migration("20201029132933_FixQuoteNumbersBeingGlobal")]
+    partial class FixQuoteNumbersBeingGlobal
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -46,6 +46,9 @@ namespace QuotesCore.Migrations
                     b.Property<string>("Text")
                         .HasColumnType("longtext CHARACTER SET utf8mb4");
 
+                    b.Property<string>("Title")
+                        .HasColumnType("longtext CHARACTER SET utf8mb4");
+
                     b.Property<Guid>("UserId")
                         .HasColumnType("char(36)");
 
@@ -66,11 +69,11 @@ namespace QuotesCore.Migrations
                     b.Property<DateTime?>("DeletedAt")
                         .HasColumnType("datetime(6)");
 
-                    b.Property<ulong>("DiscordId")
-                        .HasColumnType("bigint unsigned");
+                    b.Property<string>("DiscordId")
+                        .HasColumnType("longtext CHARACTER SET utf8mb4");
 
-                    b.Property<int>("Discriminator")
-                        .HasColumnType("int");
+                    b.Property<string>("Discriminator")
+                        .HasColumnType("longtext CHARACTER SET utf8mb4");
 
                     b.Property<DateTime>("LastModifiedAt")
                         .HasColumnType("datetime(6)");
