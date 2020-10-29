@@ -6,11 +6,11 @@ namespace QuotesCore.Migrations
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
-            migrationBuilder.Sql(@"
-                SET CHARACTER SET utf8mb4, NAMES utf8mb4, collation_connection = 'utf8mb4_general_ci', lc_messages = 'en_US', time_zone = '+00:00';
+            migrationBuilder.Sql(
+                @"SET CHARACTER SET utf8mb4, NAMES utf8mb4, collation_connection = 'utf8mb4_general_ci', lc_messages = 'en_US', time_zone = '+00:00';
                 DROP PROCEDURE IF EXISTS FIXQUOTENUMBERS;
-                DELIMITER ;;
-
+            ");
+            migrationBuilder.Sql(@"
                 CREATE PROCEDURE FIXQUOTENUMBERS()
                 BEGIN
                     DECLARE COUNTER INT DEFAULT 0;
@@ -28,7 +28,7 @@ namespace QuotesCore.Migrations
                         INNER_BLOCK: BEGIN
                             DECLARE cursor_QUOTE_ID VARCHAR(36);
                             DECLARE quotes_done INT DEFAULT FALSE;
-                            DECLARE cursor_j CURSOR FOR SELECT Id FROM Quotes WHERE DeletedAt is NULL AND GuildId = cursor_GUILD_ID COLLATE utf8mb4_unicode_ci ORDER BY QuoteNumber ASC ;
+                            DECLARE cursor_j CURSOR FOR SELECT Id FROM Quotes WHERE DeletedAt is NULL AND GuildId = cursor_GUILD_ID COLLATE utf8mb4_unicode_ci ORDER BY QuoteNumber ASC;
                             DECLARE CONTINUE HANDLER FOR NOT FOUND SET quotes_done = TRUE;
 
                             OPEN cursor_j;
@@ -47,10 +47,9 @@ namespace QuotesCore.Migrations
                     END LOOP guild_loop;
                     CLOSE cursor_i;
                 End;
-                ;;
+            ");
 
-                DELIMITER ;
-
+            migrationBuilder.Sql(@"
                 CALL FIXQUOTENUMBERS();
                 DROP PROCEDURE IF EXISTS FIXQUOTENUMBERS;
             ");
