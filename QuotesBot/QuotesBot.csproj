@@ -10,7 +10,7 @@
     </ItemGroup>
 
     <ItemGroup>
-      <PackageReference Include="Discord.Net" Version="2.3.0-dev-20201028.4" />
+      <PackageReference Include="Discord.Net" Version="2.3.0" />
       <PackageReference Include="Mapster" Version="6.5.0" />
       <PackageReference Include="Serilog" Version="2.9.0" />
       <PackageReference Include="Serilog.Sinks.Console" Version="3.1.1" />

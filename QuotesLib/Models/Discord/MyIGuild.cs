@@ -19,6 +19,11 @@ namespace QuotesLib.Models.Discord
             throw new NotImplementedException();
         }
 
+        public async Task ModifyWidgetAsync(Action<GuildWidgetProperties> func, RequestOptions options = null)
+        {
+            throw new NotImplementedException();
+        }
+
         public Task ReorderChannelsAsync(IEnumerable<ReorderChannelProperties> args, RequestOptions options = null)
         {
             throw new NotImplementedException();
@@ -124,6 +129,21 @@ namespace QuotesLib.Models.Discord
             throw new NotImplementedException();
         }
 
+        public async Task<IGuildChannel> GetWidgetChannelAsync(CacheMode mode = CacheMode.AllowDownload, RequestOptions options = null)
+        {
+            throw new NotImplementedException();
+        }
+
+        public async Task<ITextChannel> GetRulesChannelAsync(CacheMode mode = CacheMode.AllowDownload, RequestOptions options = null)
+        {
+            throw new NotImplementedException();
+        }
+
+        public async Task<ITextChannel> GetPublicUpdatesChannelAsync(CacheMode mode = CacheMode.AllowDownload, RequestOptions options = null)
+        {
+            throw new NotImplementedException();
+        }
+
         public Task<ITextChannel> CreateTextChannelAsync(string name, Action<TextChannelProperties> func = null, RequestOptions options = null)
         {
             throw new NotImplementedException();
@@ -211,6 +231,12 @@ namespace QuotesLib.Models.Discord
             throw new NotImplementedException();
         }
 
+        public async Task<int> PruneUsersAsync(int days = 30, bool simulate = false, RequestOptions options = null,
+            IEnumerable<ulong> includeRoleIds = null)
+        {
+            throw new NotImplementedException();
+        }
+
         public Task<int> PruneUsersAsync(int days = 30, bool simulate = false, RequestOptions options = null)
         {
             throw new NotImplementedException();
@@ -260,6 +286,7 @@ namespace QuotesLib.Models.Discord
         public string Name { get; set; }
         public int AFKTimeout { get; }
         public bool IsEmbeddable { get; }
+        public bool IsWidgetEnabled { get; }
         public DefaultMessageNotifications DefaultMessageNotifications { get; }
         public MfaLevel MfaLevel { get; }
         public VerificationLevel VerificationLevel { get; }
@@ -268,11 +295,16 @@ namespace QuotesLib.Models.Discord
         public string IconUrl { get; set; }
         public string SplashId { get; }
         public string SplashUrl { get; }
+        public string DiscoverySplashId { get; }
+        public string DiscoverySplashUrl { get; }
         public bool Available { get; }
         public ulong? AFKChannelId { get; }
         public ulong DefaultChannelId { get; set; }
         public ulong? EmbedChannelId { get; }
+        public ulong? WidgetChannelId { get; }
         public ulong? SystemChannelId { get; set; }
+        public ulong? RulesChannelId { get; }
+        public ulong? PublicUpdatesChannelId { get; }
         public ulong OwnerId { get; set; }
         public ulong? ApplicationId { get; }
         public string VoiceRegionId { get; }
@@ -288,6 +320,11 @@ namespace QuotesLib.Models.Discord
         public SystemChannelMessageDeny SystemChannelFlags { get; }
         public string Description { get; set; }
         public int PremiumSubscriptionCount { get; }
+        public int? MaxPresences { get; }
+        public int? MaxMembers { get; }
+        public int? MaxVideoChannelUsers { get; }
+        public int? ApproximateMemberCount { get; }
+        public int? ApproximatePresenceCount { get; }
         public string PreferredLocale { get; }
         public CultureInfo PreferredCulture { get; }
 

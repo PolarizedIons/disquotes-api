@@ -46,5 +46,6 @@ namespace QuotesLib.Models.Discord
         public bool IsBot { get; set; }
         public bool IsWebhook { get; set; }
         public string Username { get; set; }
+        public UserProperties? PublicFlags { get; }
     }
 }
