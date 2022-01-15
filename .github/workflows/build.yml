@@ -15,10 +15,10 @@ jobs:
       - name: Build Container & Publish to Github Registry
         uses: elgohr/Publish-Docker-Github-Action@2.14
         with:
-          name: polarizedions/disquotes-api/disquotes-api
+          name: polarizedions/disquotes-api
           username: ${{ github.actor }}
           password: ${{ secrets.GITHUB_TOKEN }} 
-          registry: docker.pkg.github.com
+          registry: ghcr.io
           tags: "latest,v2,v2.${{ github.run_number }}"
           dockerfile: ./QuotesApi/Dockerfile
 
@@ -32,10 +32,10 @@ jobs:
       - name: Build Container & Publish to Github Registry
         uses: elgohr/Publish-Docker-Github-Action@2.14
         with:
-          name: polarizedions/disquotes-api/disquotes-bot
+          name: polarizedions/disquotes-bot
           username: ${{ github.actor }}
           password: ${{ secrets.GITHUB_TOKEN }}
-          registry: docker.pkg.github.com
+          registry: ghcr.io
           tags: "latest,v2,v2.${{ github.run_number }}"
           dockerfile: ./QuotesBot/Dockerfile
 
@@ -49,10 +49,10 @@ jobs:
       - name: Build Container & Publish to Github Registry
         uses: elgohr/Publish-Docker-Github-Action@2.14
         with:
-          name: polarizedions/disquotes-api/disquotes-core
+          name: polarizedions/disquotes-core
           username: ${{ github.actor }}
           password: ${{ secrets.GITHUB_TOKEN }}
-          registry: docker.pkg.github.com
+          registry: ghcr.io
           tags: "latest,v2,v2.${{ github.run_number }}"
           dockerfile: ./QuotesCore/Dockerfile
 
@@ -66,9 +66,9 @@ jobs:
       - name: Build Container & Publish to Github Registry
         uses: elgohr/Publish-Docker-Github-Action@2.14
         with:
-          name: polarizedions/disquotes-api/disquotes-scheduler
+          name: polarizedions/disquotes-scheduler
           username: ${{ github.actor }}
           password: ${{ secrets.GITHUB_TOKEN }}
-          registry: docker.pkg.github.com
+          registry: ghcr.io
           tags: "latest,v2,v2.${{ github.run_number }}"
           dockerfile: ./QuotesScheduler/Dockerfile
